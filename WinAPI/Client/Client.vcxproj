@@ -151,6 +151,7 @@
     <ClInclude Include="kwSlime.h" />
     <ClInclude Include="kwTime.h" />
     <ClInclude Include="kwTitleScene.h" />
+    <ClInclude Include="kwTransform.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -173,6 +174,7 @@
     <ClCompile Include="kwSlime.cpp" />
     <ClCompile Include="kwTime.cpp" />
     <ClCompile Include="kwTitleScene.cpp" />
+    <ClCompile Include="kwTransform.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>

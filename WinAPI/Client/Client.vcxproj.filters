@@ -44,11 +44,11 @@
     <Filter Include="Engine\Time">
       <UniqueIdentifier>{f3a7c490-da33-486f-ac0f-9ed25e70f7b7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource">
-      <UniqueIdentifier>{e1f79ee1-c042-405b-9473-6a8d6cdcf5e4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\Enemy">
       <UniqueIdentifier>{e50a42a4-ad1f-4a83-a178-cacc9d94d81a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Resource">
+      <UniqueIdentifier>{e1f79ee1-c042-405b-9473-6a8d6cdcf5e4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -110,12 +110,11 @@
       <Filter>Engine\Time</Filter>
     </ClInclude>
     <ClInclude Include="kwResource.h">
-      <Filter>Resource</Filter>
+      <Filter>Engine\Resource</Filter>
     </ClInclude>
     <ClInclude Include="kwResources.h">
-      <Filter>Resource</Filter>
+      <Filter>Engine\Resource</Filter>
     </ClInclude>
-    <ClInclude Include="kwImage.h" />
     <ClInclude Include="kwTitleScene.h">
       <Filter>Contents\Scene</Filter>
     </ClInclude>
@@ -124,6 +123,12 @@
     </ClInclude>
     <ClInclude Include="kwEndingScene.h">
       <Filter>Contents\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="kwImage.h">
+      <Filter>Engine\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="kwTransform.h">
+      <Filter>Engine\Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -180,12 +185,11 @@
       <Filter>Engine\Time</Filter>
     </ClCompile>
     <ClCompile Include="kwResource.cpp">
-      <Filter>Resource</Filter>
+      <Filter>Engine\Resource</Filter>
     </ClCompile>
     <ClCompile Include="kwResources.cpp">
-      <Filter>Resource</Filter>
+      <Filter>Engine\Resource</Filter>
     </ClCompile>
-    <ClCompile Include="kwImage.cpp" />
     <ClCompile Include="kwTitleScene.cpp">
       <Filter>Contents\Scene</Filter>
     </ClCompile>
@@ -194,6 +198,12 @@
     </ClCompile>
     <ClCompile Include="kwEndingScene.cpp">
       <Filter>Contents\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="kwImage.cpp">
+      <Filter>Engine\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="kwTransform.cpp">
+      <Filter>Engine\Component</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
