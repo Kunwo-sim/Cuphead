@@ -1,6 +1,7 @@
 #include "kwSceneManager.h"
 #include "kwPlayScene.h"
 #include "kwTitleScene.h"
+#include "kwEndingScene.h"
 
 namespace kw
 {
@@ -13,6 +14,7 @@ namespace kw
 
 		mScenes[(UINT)eSceneType::Title] = new TitleScene();
 		mScenes[(UINT)eSceneType::Play] = new PlayScene();
+		mScenes[(UINT)eSceneType::Ending] = new EndingScene();
 
 		mActiveScene = mScenes[(UINT)eSceneType::Title];
 
