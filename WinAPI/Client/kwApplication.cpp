@@ -24,8 +24,8 @@ namespace kw
 	{
 		mHwnd = hWnd;
 		mHdc = GetDC(hWnd);
-		mWidth = 1600;
-		mHeight = 900;
+		mWidth = 1280;
+		mHeight = 720;
 
 		// 비트맵 해상도를 설정하기 위한 실제 윈도우 크기를 계산해준다.
 		RECT rect = { 0,0, mWidth, mHeight };
@@ -67,7 +67,7 @@ namespace kw
 	void Application::Render()
 	{
 		// 새로 그리기
-		Rectangle(mBackHdc, -1, -1, 1602, 902);
+		Rectangle(mBackHdc, -1, -1, 1282, 722);
 
 		Time::Render(mBackHdc);
 		Input::Render(mBackHdc);
