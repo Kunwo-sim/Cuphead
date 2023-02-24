@@ -1,14 +1,21 @@
 #include "kwGameObject.h"
+#include "kwTransform.h"
 
 namespace kw
 {
 	GameObject::GameObject()
 	{
-
+		mComponents.resize((UINT)eComponentType::End);
+		AddComponent<Transform>();
 	}
 
 	GameObject::~GameObject()
 	{
+		for (Component* comp : mComponents)
+		{
+			delete comp;
+			comp = nullptr;
+		}
 	}
 
 	void GameObject::Initialize()

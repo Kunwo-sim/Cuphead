@@ -3,6 +3,7 @@
 #include "kwTime.h"
 #include "kwSceneManager.h"
 #include "kwResources.h"
+#include "kwTransform.h"
 
 namespace kw
 {
@@ -14,9 +15,9 @@ namespace kw
 	}
 	void Slime::Initialize()
 	{
+		Transform* tr = GetComponent<Transform>();
+		tr->SetPos({ 800,450 });
 		mImage = Resources::Load<Image>(L"Slime", L"..\\Resources\\Slime_Idle.bmp");
-		mPos.x = 800;
-		mPos.y = 450;
 
 		GameObject::Initialize();
 	}
@@ -27,8 +28,9 @@ namespace kw
 	void Slime::Render(HDC hdc)
 	{
 		GameObject::Render(hdc);
-
-		BitBlt(hdc, mPos.x, mPos.y, mImage->GetWidth(), mImage->GetHeight(), mImage->GetHdc(), 0, 0, SRCCOPY);
+		Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();
+		BitBlt(hdc, pos.x, pos.y, mImage->GetWidth(), mImage->GetHeight(), mImage->GetHdc(), 0, 0, SRCCOPY);
 	}
 	void Slime::Release()
 	{
