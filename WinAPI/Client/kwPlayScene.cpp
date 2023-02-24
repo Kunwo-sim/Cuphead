@@ -2,6 +2,8 @@
 #include "kwCuphead.h"
 #include "kwInput.h"
 #include "kwSceneManager.h"
+#include "kwSlime.h"
+#include "kwResources.h"
 
 namespace kw
 {
@@ -15,12 +17,15 @@ namespace kw
 
 	void PlayScene::Initialize()
 	{
-		for (size_t i = 0; i < 100; i++)
-		{
-			Cuphead* cuphead = new Cuphead();
-			cuphead->SetName(L"Player");
-			AddGameObeject(cuphead, eLayerType::Player);
-		}
+		mBackGround = Resources::Load<Image>(L"Slime_BackGroud", L"..\\Resources\\Slime_BackGroud.bmp");
+
+		Cuphead* cuphead = new Cuphead();
+		cuphead->SetName(L"Player");
+		AddGameObeject(cuphead, eLayerType::Player);
+
+		Slime* slime = new Slime();
+		slime->SetName(L"Slime");
+		AddGameObeject(slime, eLayerType::Monster);
 
 		Scene::Initialize();
 	}
@@ -31,13 +36,13 @@ namespace kw
 
 		if (Input::GetKeyState(eKeyCode::Q) == eKeyState::Down)
 		{
-			SceneManager::LoadScene(eSceneType::Title);
+			SceneManager::LoadScene(eSceneType::Ending);
 		}
 	}
 
 	void PlayScene::Render(HDC hdc)
 	{
-		//Super::Tick();
+		BitBlt(hdc, 0, 0, mBackGround->GetWidth(), mBackGround->GetHeight(), mBackGround->GetHdc(), 0, 0, SRCCOPY);
 		Scene::Render(hdc);
 	}
 

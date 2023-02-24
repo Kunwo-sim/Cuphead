@@ -14,6 +14,8 @@ namespace kw
 	}
 	void Cuphead::Initialize()
 	{
+		mPos.x = 300;
+		mPos.y = 500;
 		mImage = Resources::Load<Image>(L"Cuphead", L"..\\Resources\\Idle.bmp");
 
 		GameObject::Initialize();
@@ -33,12 +35,12 @@ namespace kw
 
 		if (Input::GetKeyState(eKeyCode::W) == eKeyState::Pressed)
 		{
-			mPos.y -= 100.0f * Time::DeltaTime();
+			//mPos.y -= 100.0f * Time::DeltaTime();
 		}
 
 		if (Input::GetKeyState(eKeyCode::S) == eKeyState::Pressed)
 		{
-			mPos.y += 100.0f * Time::DeltaTime();
+			//mPos.y += 100.0f * Time::DeltaTime();
 		}
 	}
 	void Cuphead::Render(HDC hdc)

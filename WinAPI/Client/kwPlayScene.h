@@ -1,5 +1,6 @@
 #pragma once
 #include "kwScene.h"
+#include "kwImage.h"
 
 namespace kw
 {
@@ -7,7 +8,7 @@ namespace kw
 	{
 	public:
 		PlayScene();
-		~PlayScene();
+		virtual ~PlayScene() override;
 
 		virtual void Initialize() override;
 		virtual void Update() override;
@@ -15,6 +16,6 @@ namespace kw
 		virtual void Release() override;
 
 	private:
-
+		Image* mBackGround;
 	};
 }

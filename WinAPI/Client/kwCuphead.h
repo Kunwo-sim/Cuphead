@@ -17,6 +17,10 @@ namespace kw
 
 	private:
 		Image* mImage;
+		Image* mLeft;
+		Image* mRight;
+		Image* mUp;
+		Image* mDown;
 	};
 }
 
