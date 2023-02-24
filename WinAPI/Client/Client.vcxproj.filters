@@ -47,6 +47,9 @@
     <Filter Include="Resource">
       <UniqueIdentifier>{e1f79ee1-c042-405b-9473-6a8d6cdcf5e4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Enemy">
+      <UniqueIdentifier>{e50a42a4-ad1f-4a83-a178-cacc9d94d81a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -116,6 +119,12 @@
     <ClInclude Include="kwTitleScene.h">
       <Filter>Contents\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="kwSlime.h">
+      <Filter>Contents\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="kwEndingScene.h">
+      <Filter>Contents\Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc">
@@ -178,6 +187,12 @@
     </ClCompile>
     <ClCompile Include="kwImage.cpp" />
     <ClCompile Include="kwTitleScene.cpp">
+      <Filter>Contents\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="kwSlime.cpp">
+      <Filter>Contents\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="kwEndingScene.cpp">
       <Filter>Contents\Scene</Filter>
     </ClCompile>
   </ItemGroup>

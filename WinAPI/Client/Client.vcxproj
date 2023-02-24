@@ -134,6 +134,7 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="kwComponent.h" />
     <ClInclude Include="kwCuphead.h" />
+    <ClInclude Include="kwEndingScene.h" />
     <ClInclude Include="kwEngine.h" />
     <ClInclude Include="kwEntity.h" />
     <ClInclude Include="kwEnums.h" />
@@ -147,6 +148,7 @@
     <ClInclude Include="kwResources.h" />
     <ClInclude Include="kwScene.h" />
     <ClInclude Include="kwSceneManager.h" />
+    <ClInclude Include="kwSlime.h" />
     <ClInclude Include="kwTime.h" />
     <ClInclude Include="kwTitleScene.h" />
     <ClInclude Include="Resource.h" />
@@ -156,6 +158,7 @@
     <ClCompile Include="kwApplication.cpp" />
     <ClCompile Include="kwComponent.cpp" />
     <ClCompile Include="kwCuphead.cpp" />
+    <ClCompile Include="kwEndingScene.cpp" />
     <ClCompile Include="kwEntity.cpp" />
     <ClCompile Include="kwGameObject.cpp" />
     <ClCompile Include="kwImage.cpp" />
@@ -167,6 +170,7 @@
     <ClCompile Include="kwResources.cpp" />
     <ClCompile Include="kwScene.cpp" />
     <ClCompile Include="kwSceneManager.cpp" />
+    <ClCompile Include="kwSlime.cpp" />
     <ClCompile Include="kwTime.cpp" />
     <ClCompile Include="kwTitleScene.cpp" />
     <ClCompile Include="main.cpp" />
