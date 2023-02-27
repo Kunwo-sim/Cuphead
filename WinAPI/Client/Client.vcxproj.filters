@@ -130,6 +130,12 @@
     <ClInclude Include="kwTransform.h">
       <Filter>Engine\Component</Filter>
     </ClInclude>
+    <ClInclude Include="kwAnimation.h">
+      <Filter>Engine\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="kwAnimator.h">
+      <Filter>Engine\Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc">
@@ -203,6 +209,12 @@
       <Filter>Engine\Resource</Filter>
     </ClCompile>
     <ClCompile Include="kwTransform.cpp">
+      <Filter>Engine\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="kwAnimation.cpp">
+      <Filter>Engine\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="kwAnimator.cpp">
       <Filter>Engine\Component</Filter>
     </ClCompile>
   </ItemGroup>
