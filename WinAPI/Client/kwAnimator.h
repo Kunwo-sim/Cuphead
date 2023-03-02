@@ -1,6 +1,7 @@
 #pragma once
 #include "kwComponent.h"
 #include "kwAnimation.h"
+#include "kwImage.h"
 
 namespace kw
 {
@@ -37,9 +38,25 @@ namespace kw
 		virtual void Render(HDC hdc) override;
 		virtual void Release() override;
 
+		void CreateAnimation(const std::wstring& name
+			, Image* sheet
+			, Vector2 leftTop
+			, UINT coulmn, UINT row, UINT spriteLength
+			, Vector2 offset, float duration);
+
+		void CreateAnimations(const std::wstring& path, Vector2 offset, float duration);
+
+		Animation* FindAnimation(const std::wstring& name);
+		void Play(const std::wstring& name, bool loop);
+
+		Events* FindEvents(const std::wstring& name);
+
 	private:
 		std::map<std::wstring, Animation*> mAnimations;
 		std::map<std::wstring, Event*> mEvents;
+		Animation* mActiveAnimation;
+		Image* mSpriteSheet;
+		bool mbLoop;
 	};
 }
 

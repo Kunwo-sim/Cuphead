@@ -2,6 +2,11 @@
 
 struct Vector2
 {
+	static Vector2 Up;
+	static Vector2 Right;
+	static Vector2 One;
+	static Vector2 Zero;
+
 	float x;
 	float y;
 
@@ -23,11 +28,9 @@ struct Vector2
 	{
 
 	}
+	Vector2(const Vector2&) = default;
+	Vector2& operator=(const Vector2&) = default;
 
-	Vector2(Vector2& other)
-		: x(other.x)
-		, y(other.y)
-	{
-
-	}
+	Vector2(Vector2&&) = default;
+	Vector2& operator=(Vector2&&) = default;
 };

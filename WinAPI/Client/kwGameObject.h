@@ -1,5 +1,4 @@
 #pragma once
-#include "kwEntity.h"
 #include "kwComponent.h"
 namespace kw
 {
@@ -20,6 +19,7 @@ namespace kw
 			T* comp = new T();
 			UINT compType = (UINT)comp->GetType();
 			mComponents[compType] = comp;
+			comp->SetOwner(this);
 
 			return comp;
 		}

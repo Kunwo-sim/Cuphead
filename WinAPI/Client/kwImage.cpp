@@ -1,10 +1,37 @@
 #include "kwImage.h"
 #include "kwApplication.h"
+#include "kwResources.h"
 
 extern kw::Application application;
 
 namespace kw
 {
+	Image* Image::Create(const std::wstring& name, UINT widht, UINT height)
+	{
+		if (widht == 0 || height == 0)
+			return nullptr;
+
+		Image* image = Resources::Find<Image>(name);
+		if (image != nullptr)
+			return image;
+
+		image = new Image();
+		HDC mainHdc = application.GetHdc();
+
+		image->mBitmap = CreateCompatibleBitmap(mainHdc, widht, height);
+		image->mHdc = CreateCompatibleDC(mainHdc);
+
+		HBITMAP oldBitmap = (HBITMAP)SelectObject(image->mHdc, image->mBitmap);
+		DeleteObject(oldBitmap);
+
+		image->mWidth = widht;
+		image->mHeight = height;
+
+		image->SetKey(name);
+		Resources::Insert<Image>(name, image);
+
+		return image;
+	}
 	Image::Image()
 		: mBitmap(NULL)
 		, mHdc(NULL)

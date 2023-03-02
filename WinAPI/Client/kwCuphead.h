@@ -1,12 +1,21 @@
 #pragma once
 #include "kwGameObject.h"
 #include "kwImage.h"
+#include "kwAnimator.h"
 
 namespace kw
 {
 	class Cuphead : public GameObject
 	{
 	public:
+		enum class eCupheadState
+		{
+			Move,
+			Shoot,
+			Death,
+			Idle,
+		};
+
 		Cuphead();
 		~Cuphead();
 
@@ -16,11 +25,13 @@ namespace kw
 		virtual void Release() override;
 
 	private:
-		Image* mImage;
-		Image* mLeft;
-		Image* mRight;
-		Image* mUp;
-		Image* mDown;
+		void move();
+		void shoot();
+		void death();
+		void idle();
+
+		eCupheadState mState;
+		Animator* mAnimator;
 	};
 }
 
