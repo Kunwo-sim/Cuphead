@@ -53,8 +53,12 @@ namespace kw
             = mAnimator->GetOwner()->GetComponent<Transform>();
         Vector2 scale = tr->GetScale();
 
-        TransparentBlt(hdc, tr->GetPos().x + mSpriteSheet[mSpriteIndex].offset.x
-            , tr->GetPos().y + mSpriteSheet[mSpriteIndex].offset.y
+        Vector2 pos = tr->GetPos();
+        pos += mSpriteSheet[mSpriteIndex].offset;
+        pos.x -= mSpriteSheet[mSpriteIndex].size.x / 2.0f;
+        pos.y -= mSpriteSheet[mSpriteIndex].size.y;
+
+        TransparentBlt(hdc, pos.x, pos.y
             , mSpriteSheet[mSpriteIndex].size.x * scale.x
             , mSpriteSheet[mSpriteIndex].size.y * scale.y
             , mSheetImage->GetHdc()

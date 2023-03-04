@@ -4,6 +4,7 @@
 #include "kwSceneManager.h"
 #include "kwResources.h"
 #include "kwTransform.h"
+#include "kwCollider.h"
 
 namespace kw
 {
@@ -18,6 +19,9 @@ namespace kw
 		Transform* tr = GetComponent<Transform>();
 		tr->SetPos({ 800,450 });
 		mImage = Resources::Load<Image>(L"Slime", L"..\\Resources\\Slime_Idle.bmp");
+
+		Collider* collider = AddComponent<Collider>();
+		collider->SetCenter(Vector2(-60.0f, -80.0f));
 
 		GameObject::Initialize();
 	}

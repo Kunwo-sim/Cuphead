@@ -136,6 +136,9 @@
     <ClInclude Include="kwAnimator.h">
       <Filter>Engine\Component</Filter>
     </ClInclude>
+    <ClInclude Include="kwCollider.h">
+      <Filter>Engine\Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc">
@@ -215,6 +218,9 @@
       <Filter>Engine\Component</Filter>
     </ClCompile>
     <ClCompile Include="kwAnimator.cpp">
+      <Filter>Engine\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="kwCollider.cpp">
       <Filter>Engine\Component</Filter>
     </ClCompile>
   </ItemGroup>

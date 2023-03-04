@@ -4,6 +4,7 @@
 #include "kwInput.h"
 #include "kwResources.h"
 #include "kwTransform.h"
+#include "kwCollider.h"
 
 namespace kw
 {
@@ -20,10 +21,12 @@ namespace kw
 		mAnimator->CreateAnimation(L"FowardRun", mImage, Vector2::Zero, 16, 8, 16, Vector2::Zero, 0.1);
 		mAnimator->CreateAnimation(L"FowardRight", mImage, Vector2(0.0f, 113.0f), 16, 8, 15, Vector2::Zero, 0.1);
 		mAnimator->CreateAnimation(L"Idle", mImage, Vector2(0.0f, 113.0f * 5), 16, 8, 9, Vector2(-50.0f, -50.0f), 0.1);
-
 		mAnimator->CreateAnimations(L"..\\Resources\\Chalise\\Idle", Vector2::Zero, 0.1f);
 
-		mAnimator->Play(L"Idle", true);
+		mAnimator->Play(L"ChaliseIdle", true);
+
+		Collider* collider = AddComponent<Collider>();
+		collider->SetCenter(Vector2(-60.0f, -80.0f));
 
 		mState = eCupheadState::Idle;
 
@@ -53,31 +56,7 @@ namespace kw
 	}
 	void Cuphead::Render(HDC hdc)
 	{
-		if (Input::GetKeyUp(eKeyCode::A)
-			|| Input::GetKeyUp(eKeyCode::D)
-			|| Input::GetKeyUp(eKeyCode::S)
-			|| Input::GetKeyUp(eKeyCode::W))
-		{
-			mState = eCupheadState::Idle;
-			mAnimator->Play(L"Idle", true);
-		}
-
-		Transform* tr = GetComponent<Transform>();
-		Vector2 pos = tr->GetPos();
-
-		if (Input::GetKey(eKeyCode::A))
-			pos.x -= 100.0f * Time::DeltaTime();
-
-		if (Input::GetKey(eKeyCode::D))
-			pos.x += 100.0f * Time::DeltaTime();
-
-		if (Input::GetKey(eKeyCode::W))
-			pos.y -= 100.0f * Time::DeltaTime();
-
-		if (Input::GetKey(eKeyCode::S))
-			pos.y += 100.0f * Time::DeltaTime();
-
-		tr->SetPos(pos);
+		GameObject::Render(hdc);
 	}
 	void Cuphead::Release()
 	{
@@ -91,7 +70,6 @@ namespace kw
 			|| Input::GetKeyUp(eKeyCode::W))
 		{
 			mState = eCupheadState::Idle;
-			mAnimator->Play(L"Idle", true);
 		}
 
 		Transform* tr = GetComponent<Transform>();
@@ -125,7 +103,6 @@ namespace kw
 			|| Input::GetKeyDown(eKeyCode::W))
 		{
 			mState = eCupheadState::Move;
-			mAnimator->Play(L"FowardRun", true);
 		}
 	}
 }

@@ -134,6 +134,7 @@
     <ClInclude Include="Client.h" />
     <ClInclude Include="CommonInclude.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="kwCollider.h" />
     <ClInclude Include="kwComponent.h" />
     <ClInclude Include="kwCuphead.h" />
     <ClInclude Include="kwEndingScene.h" />
@@ -161,6 +162,7 @@
     <ClCompile Include="kwAnimation.cpp" />
     <ClCompile Include="kwAnimator.cpp" />
     <ClCompile Include="kwApplication.cpp" />
+    <ClCompile Include="kwCollider.cpp" />
     <ClCompile Include="kwComponent.cpp" />
     <ClCompile Include="kwCuphead.cpp" />
     <ClCompile Include="kwEndingScene.cpp" />

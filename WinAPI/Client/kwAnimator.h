@@ -38,12 +38,14 @@ namespace kw
 		virtual void Render(HDC hdc) override;
 		virtual void Release() override;
 
+		// 완성된 스프라이트 시트를 지정해서 애니메이션 제작
 		void CreateAnimation(const std::wstring& name
 			, Image* sheet
 			, Vector2 leftTop
 			, UINT coulmn, UINT row, UINT spriteLength
 			, Vector2 offset, float duration);
 
+		// 폴더에 들어있는 스프라이트를 이용해서 애니메이션을 제작
 		void CreateAnimations(const std::wstring& path, Vector2 offset, float duration);
 
 		Animation* FindAnimation(const std::wstring& name);
