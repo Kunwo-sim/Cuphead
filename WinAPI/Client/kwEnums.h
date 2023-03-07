@@ -13,6 +13,7 @@ enum class eLayerType
 	BG,
 	Monster,
 	Player,
+	Bullet,
 	Effect,
 	UI,
 	End,

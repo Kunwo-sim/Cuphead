@@ -2,6 +2,7 @@
 #include "kwSceneManager.h"
 #include "kwTime.h"
 #include "kwInput.h"
+#include "kwCollisionManager.h"
 
 namespace kw
 {
@@ -62,10 +63,12 @@ namespace kw
 		Time::Update();
 		Input::Update();
 		SceneManager::Update();
+		CollisionManager::Update();
 	}
 
 	void Application::Render()
 	{
+		clear();
 		// 새로 그리기
 		Rectangle(mBackHdc, -1, -1, 1282, 722);
 
@@ -75,5 +78,14 @@ namespace kw
 		
 		// 백버퍼에 있는 그림을 원본 버퍼에 다시 그리기
 		BitBlt(mHdc, 0, 0, mWidth, mHeight, mBackHdc, 0, 0, SRCCOPY);
+	}
+
+	void Application::clear()
+	{
+		HBRUSH grayBrush = CreateSolidBrush(RGB(121, 121, 121));
+		HBRUSH oldBrush = (HBRUSH)SelectObject(mBackHdc, grayBrush);
+		Rectangle(mBackHdc, -1, -1, 1282, 722);
+		SelectObject(mBackHdc, oldBrush);
+		DeleteObject(grayBrush);
 	}
 }

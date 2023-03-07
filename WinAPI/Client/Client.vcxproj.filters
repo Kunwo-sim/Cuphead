@@ -50,6 +50,12 @@
     <Filter Include="Engine\Resource">
       <UniqueIdentifier>{e1f79ee1-c042-405b-9473-6a8d6cdcf5e4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Component\Colider">
+      <UniqueIdentifier>{dabb66c1-c877-4294-9a43-fb10107114dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Bullet">
+      <UniqueIdentifier>{c60f98c2-f947-4e36-8101-34e40b856362}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -137,7 +143,13 @@
       <Filter>Engine\Component</Filter>
     </ClInclude>
     <ClInclude Include="kwCollider.h">
-      <Filter>Engine\Component</Filter>
+      <Filter>Engine\Component\Colider</Filter>
+    </ClInclude>
+    <ClInclude Include="kwCollisionManager.h">
+      <Filter>Engine\Component\Colider</Filter>
+    </ClInclude>
+    <ClInclude Include="kwBaseBullet.h">
+      <Filter>Contents\Bullet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -221,7 +233,13 @@
       <Filter>Engine\Component</Filter>
     </ClCompile>
     <ClCompile Include="kwCollider.cpp">
-      <Filter>Engine\Component</Filter>
+      <Filter>Engine\Component\Colider</Filter>
+    </ClCompile>
+    <ClCompile Include="kwCollisionManager.cpp">
+      <Filter>Engine\Component\Colider</Filter>
+    </ClCompile>
+    <ClCompile Include="kwBaseBullet.cpp">
+      <Filter>Contents\Bullet</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

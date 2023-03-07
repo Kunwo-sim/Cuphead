@@ -5,6 +5,7 @@
 #include "kwResources.h"
 #include "kwTransform.h"
 #include "kwCollider.h"
+#include "kwBaseBullet.h"
 
 namespace kw
 {
@@ -16,6 +17,9 @@ namespace kw
 	}
 	void Cuphead::Initialize()
 	{
+		Transform* tr = GetComponent<Transform>();
+		tr->SetPos(Vector2(400.0f, 400.0f));
+
 		Image* mImage = Resources::Load<Image>(L"Cuphead", L"..\\Resources\\Cuphead_Stage.bmp");
 		mAnimator = AddComponent<Animator>();
 		mAnimator->CreateAnimation(L"FowardRun", mImage, Vector2::Zero, 16, 8, 16, Vector2::Zero, 0.1);
@@ -91,6 +95,14 @@ namespace kw
 	}
 	void Cuphead::shoot()
 	{
+		Transform* tr = GetComponent<Transform>();
+		if (Input::GetKey(eKeyCode::K))
+		{
+			Scene* curScene = SceneManager::GetActiveScene();
+			BaseBullet* bullet = new BaseBullet();
+			bullet->GetComponent<Transform>()->SetPos(tr->GetPos());
+			curScene->AddGameObeject(bullet, eLayerType::Bullet);
+		}
 	}
 	void Cuphead::death()
 	{
@@ -103,6 +115,12 @@ namespace kw
 			|| Input::GetKeyDown(eKeyCode::W))
 		{
 			mState = eCupheadState::Move;
+		}
+
+		if (Input::GetKeyDown(eKeyCode::K))
+		{
+			mState = eCupheadState::Shoot;
+			//mAnimator->Play(L"AimStraight", true);
 		}
 	}
 }

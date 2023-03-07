@@ -10,7 +10,7 @@ namespace kw
 		static void Update();
 		static void Render(HDC hdc);
 
-		static double DeltaTime() { return mDeltaTime; }
+		__forceinline static double DeltaTime() { return mDeltaTime; }
 
 	private:
 		static double mDeltaTime;

@@ -4,6 +4,8 @@
 #include "framework.h"
 #include "Client.h"
 #include "kwApplication.h"
+#include "kwSceneManager.h"
+#include "kwResources.h"
 
 #define MAX_LOADSTRING 100
 
@@ -27,6 +29,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 {
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
+    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
     // 1. 윈도우의 정보를 담고 있는 클래스를 정의(메모리에 등록)해주어야함.
     // 2. CreateWindow 함수를 통해서 메모리상에 윈도우를 할당해준다.
@@ -68,10 +71,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         }
     }
 
-    if (WM_QUIT == msg.message)
-    {
-
-    }
+    kw::SceneManager::Release();
+    kw::Resources::Release();
 
     return (int) msg.wParam;
 }

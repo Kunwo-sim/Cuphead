@@ -4,6 +4,7 @@
 #include "kwSceneManager.h"
 #include "kwSlime.h"
 #include "kwResources.h"
+#include "kwCollisionManager.h"
 
 namespace kw
 {
@@ -27,6 +28,7 @@ namespace kw
 		slime->SetName(L"Slime");
 		AddGameObeject(slime, eLayerType::Monster);
 
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
 		Scene::Initialize();
 	}
 

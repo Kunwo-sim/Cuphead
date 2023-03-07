@@ -25,7 +25,7 @@ namespace kw
 	}
 	void Collider::Render(HDC hdc)
 	{
-		HPEN pen = CreatePen(BS_SOLID, 2, RGB(0, 1, 0));
+		HPEN pen = CreatePen(BS_SOLID, 2, RGB(0, 255, 0));
 		HPEN oldPen = (HPEN)SelectObject(hdc, pen);
 		HBRUSH brush = (HBRUSH)GetStockObject(NULL_BRUSH);
 		HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, brush);

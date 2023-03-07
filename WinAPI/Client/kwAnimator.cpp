@@ -44,6 +44,7 @@ namespace kw
 	void Animator::Release()
 	{
 	}
+
 	void Animator::CreateAnimation(const std::wstring& name
 		, Image* sheet, Vector2 leftTop
 		, UINT coulmn, UINT row, UINT spriteLength
@@ -60,7 +61,10 @@ namespace kw
 		animation->SetAnimator(this);
 
 		mAnimations.insert(std::make_pair(name, animation));
+		Events* event = new Events();
+		// mEvents.insert(std::make_pair(name, event));
 	}
+
 	void Animator::CreateAnimations(const std::wstring& path, Vector2 offset, float duration)
 	{
 		UINT width = 0;
@@ -114,6 +118,7 @@ namespace kw
 
 		CreateAnimation(key, mSpriteSheet, Vector2::Zero, index, 1, index, offset, duration);
 	}
+
 	Animation* Animator::FindAnimation(const std::wstring& name)
 	{
 		std::map<std::wstring, Animation*>::iterator iter
