@@ -1,10 +1,19 @@
 #pragma once
+#include "kwEntity.h"
 #include "kwComponent.h"
+
 namespace kw
 {
 	class GameObject : public Entity
 	{
 	public:
+		enum class eState
+		{
+			Active,
+			Pause,
+			Death,
+		};
+
 		GameObject();
 		virtual ~GameObject();
 

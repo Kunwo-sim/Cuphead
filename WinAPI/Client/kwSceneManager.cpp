@@ -29,18 +29,12 @@ namespace kw
 
 	void SceneManager::Update()
 	{
-		for (Scene* scene : mScenes)
-		{
-			mActiveScene->Update();
-		}
+		mActiveScene->Update();
 	}
 
 	void SceneManager::Render(HDC hdc)
 	{
-		for (Scene* scene : mScenes)
-		{
-			mActiveScene->Render(hdc);
-		}
+		mActiveScene->Render(hdc);
 	}
 
 	void SceneManager::Release()
