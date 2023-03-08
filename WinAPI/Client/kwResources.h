@@ -68,5 +68,3 @@ namespace kw
 		static std::map<std::wstring, Resource*> mResources;
 	};
 }
-
-

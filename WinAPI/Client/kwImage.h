@@ -13,8 +13,8 @@ namespace kw
 
 		virtual HRESULT Load(const std::wstring& path) override;
 
-		HDC GetHdc() { return mHdc; }
 		HBITMAP GetBitmap() { return mBitmap; }
+		HDC GetHdc() { return mHdc; }
 		UINT GetWidth() { return mWidth; }
 		UINT GetHeight() { return mHeight; }
 
