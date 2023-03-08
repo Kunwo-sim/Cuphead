@@ -20,14 +20,4 @@ namespace kw
 		std::wstring mKey;
 		std::wstring mPath;
 	};
-
-	//class Image
-	//{
-
-	//};
-
-	//class Sound
-	//{
-
-	//};
 }

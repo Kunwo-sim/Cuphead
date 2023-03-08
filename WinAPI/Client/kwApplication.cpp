@@ -11,8 +11,8 @@ namespace kw
 		, mHdc(NULL)
 		, mBackBuffer(NULL)
 		, mBackHdc(NULL)
-		, mWidth(1600)
-		, mHeight(900)
+		, mWidth(1280)
+		, mHeight(720)
 	{
 	}
 
@@ -29,7 +29,7 @@ namespace kw
 		mHeight = 720;
 
 		// 비트맵 해상도를 설정하기 위한 실제 윈도우 크기를 계산해준다.
-		RECT rect = { 0,0, mWidth, mHeight };
+		RECT rect = { 0, 0, mWidth, mHeight };
 		AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, false);
 
 		// 윈도우 크기 변경 및 출력 설정
@@ -69,8 +69,6 @@ namespace kw
 	void Application::Render()
 	{
 		clear();
-		// 새로 그리기
-		Rectangle(mBackHdc, -1, -1, 1282, 722);
 
 		Time::Render(mBackHdc);
 		Input::Render(mBackHdc);

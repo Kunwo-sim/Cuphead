@@ -5,10 +5,18 @@ namespace kw
 {
 	Layer::Layer()
 	{
+
 	}
+
 	Layer::~Layer()
 	{
+		for (GameObject* gameObj : mGameObjects)
+		{
+			delete gameObj;
+			gameObj = nullptr;
+		}
 	}
+
 	void Layer::Initialize()
 	{
 		for (GameObject* gameObj : mGameObjects)
@@ -19,6 +27,7 @@ namespace kw
 			gameObj->Initialize();
 		}
 	}
+
 	void Layer::Update()
 	{
 		for (GameObject* gameObj : mGameObjects)
@@ -29,6 +38,7 @@ namespace kw
 			gameObj->Update();
 		}
 	}
+
 	void Layer::Render(HDC hdc)
 	{
 		for (GameObject* gameObj : mGameObjects)
@@ -39,16 +49,12 @@ namespace kw
 			gameObj->Render(hdc);
 		}
 	}
+
 	void Layer::Release()
 	{
-		for (GameObject* gameObj : mGameObjects)
-		{
-			if (gameObj == nullptr)
-				continue;
 
-			gameObj->Release();
-		}
 	}
+
 	void Layer::AddGameObject(GameObject* gameObj)
 	{
 		if (gameObj == nullptr)

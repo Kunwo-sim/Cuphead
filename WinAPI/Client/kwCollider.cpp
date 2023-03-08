@@ -4,25 +4,35 @@
 
 namespace kw
 {
+	UINT Collider::ColliderNumber = 0;
+
 	Collider::Collider()
 		: Component(eComponentType::Collider)
 		, mCenter(Vector2::Zero)
 		, mSize(100, 100)
 		, mScale(Vector2::One)
 		, mPos(Vector2::Zero)
+		, mID(ColliderNumber++)
 	{
+
 	}
+
 	Collider::~Collider()
 	{
+
 	}
+
 	void Collider::Initialize()
 	{
+
 	}
+
 	void Collider::Update()
 	{
 		Transform* tr = GetOwner()->GetComponent<Transform>();
 		mPos = tr->GetPos() + mCenter;
 	}
+
 	void Collider::Render(HDC hdc)
 	{
 		HPEN pen = CreatePen(BS_SOLID, 2, RGB(0, 255, 0));
@@ -36,7 +46,24 @@ namespace kw
 		DeleteObject(pen);
 		DeleteObject(brush);
 	}
+
 	void Collider::Release()
 	{
+
+	}
+
+	void Collider::OnCollisionEnter(Collider* other)
+	{
+		GetOwner()->OnCollisionEnter(other);
+	}
+
+	void Collider::OnCollisionStay(Collider* other)
+	{
+		GetOwner()->OnCollisionStay(other);
+	}
+
+	void Collider::OnCollisionExit(Collider* other)
+	{
+		GetOwner()->OnCollisionExit(other);
 	}
 }

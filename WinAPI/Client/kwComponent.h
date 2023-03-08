@@ -22,6 +22,5 @@ namespace kw
 	private:
 		const eComponentType mType;
 		GameObject* mOwner;
-
 	};
 }

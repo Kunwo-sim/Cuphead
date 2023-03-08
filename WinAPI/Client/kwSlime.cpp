@@ -31,10 +31,11 @@ namespace kw
 	}
 	void Slime::Render(HDC hdc)
 	{
-		GameObject::Render(hdc);
 		Transform* tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPos();
 		BitBlt(hdc, pos.x, pos.y, mImage->GetWidth(), mImage->GetHeight(), mImage->GetHdc(), 0, 0, SRCCOPY);
+
+		GameObject::Render(hdc);
 	}
 	void Slime::Release()
 	{

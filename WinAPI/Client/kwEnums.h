@@ -23,8 +23,8 @@ enum class eComponentType
 {
 	Transform,
 	SpriteRenderer,
-	Collider,
 	Animator,
+	Collider,
 	Audio,
 	End,
 };

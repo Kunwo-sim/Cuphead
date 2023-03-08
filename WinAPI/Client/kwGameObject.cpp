@@ -53,13 +53,21 @@ namespace kw
 
 	void GameObject::Release()
 	{
-		for (Component* comp : mComponents)
-		{
-			if (comp == nullptr)
-				continue;
 
-			comp->Release();
-		}
 	}
 
+	void GameObject::OnCollisionEnter(Collider* other)
+	{
+
+	}
+
+	void GameObject::OnCollisionStay(Collider* other)
+	{
+
+	}
+
+	void GameObject::OnCollisionExit(Collider* other)
+	{
+
+	}
 }

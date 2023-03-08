@@ -2,6 +2,7 @@
 #include "kwPlayScene.h"
 #include "kwTitleScene.h"
 #include "kwEndingScene.h"
+#include "kwCollisionManager.h"
 
 namespace kw
 {
@@ -12,6 +13,7 @@ namespace kw
 	{
 		mScenes.resize((UINT)eSceneType::Max);
 
+		// 새로운 씬 추가하려면 아래에 작성 및 헤더 추가
 		mScenes[(UINT)eSceneType::Title] = new TitleScene();
 		mScenes[(UINT)eSceneType::Play] = new PlayScene();
 		mScenes[(UINT)eSceneType::Ending] = new EndingScene();
@@ -45,12 +47,15 @@ namespace kw
 				continue;
 
 			scene->Release();
+			delete scene;
 		}
 	}
 
 	void SceneManager::LoadScene(eSceneType type)
 	{
+		// 현재 씬 Exit 호출
 		mActiveScene->OnExit();
+		CollisionManager::Clear();
 		mActiveScene = mScenes[(UINT)type];
 		mActiveScene->OnEnter();
 	}
