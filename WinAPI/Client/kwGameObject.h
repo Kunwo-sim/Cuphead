@@ -22,6 +22,10 @@ namespace kw
 		virtual void Render(HDC hdc);
 		virtual void Release();
 
+		virtual void OnCollisionEnter(class Collider* other);
+		virtual void OnCollisionStay(class Collider* other);
+		virtual void OnCollisionExit(class Collider* other);
+
 		template <typename T>
 		T* AddComponent()
 		{

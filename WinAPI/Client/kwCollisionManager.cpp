@@ -1,10 +1,11 @@
-#include "kwCollisionManager.h"
+ï»¿#include "kwCollisionManager.h"
 #include "kwScene.h"
 #include "kwSceneManager.h"
 
 namespace kw
 {
 	WORD CollisionManager::mMatrix[(UINT)eLayerType::End] = {};
+	std::map<UINT64, bool> CollisionManager::mCollisionMap;
 
 	void CollisionManager::Update()
 	{
@@ -18,7 +19,6 @@ namespace kw
 				{
 					LayerCollision(scene, (eLayerType)row, (eLayerType)col);
 				}
-
 			}
 		}
 	}
@@ -43,14 +43,7 @@ namespace kw
 				if (leftObject == rightObject)
 					continue;
 
-				if (Intersect(leftCollider, rightCollider))
-				{
-					// Ãæµ¹ O
-				}
-				else
-				{
-					// Ãæµ¹ X
-				}
+				ColliderCollision(leftCollider, rightCollider);
 			}
 		}
 
@@ -61,8 +54,8 @@ namespace kw
 		Vector2 leftPos = left->GetPos();
 		Vector2 rightPos = right->GetPos();
 
-		// µÎ Ãæµ¹Ã¼ °£ÀÇ °Å¸®¿Í, °¢¸éÀûÀÇ Àý¹Ý³¢¸®ÀÇ ÇÕÀ» ºñ±³ÇØ¼­
-		// °Å¸®°¡ ´õ ±æ´Ù¸é Ãæµ¹ X, °Å¸®°¡ ´õ Âª´Ù¸é Ãæµ¹ O
+		// ë‘ ì¶©ëŒì²´ ê°„ì˜ ê±°ë¦¬ì™€, ê°ë©´ì ì˜ ì ˆë°˜ë¼ë¦¬ì˜ í•©ì„ ë¹„êµí•´ì„œ
+		// ê±°ë¦¬ê°€ ë” ê¸¸ë‹¤ë©´ ì¶©ëŒ X, ê±°ë¦¬ê°€ ë” ì§§ë‹¤ë©´ ì¶©ëŒ O
 		Vector2 leftSize = left->GetSize();
 		Vector2 rightSize = right->GetSize();
 
@@ -73,6 +66,52 @@ namespace kw
 		}
 
 		return false;
+	}
+
+	void CollisionManager::ColliderCollision(Collider* leftCol, Collider* rightCol)
+	{
+		ColliderID colliderID = {};
+		colliderID.left = (UINT)leftCol->GetID();
+		colliderID.right = (UINT)rightCol->GetID();
+
+		std::map<UINT64, bool>::iterator iter
+			= mCollisionMap.find(colliderID.id);
+
+		if (iter == mCollisionMap.end())
+		{
+			mCollisionMap.insert(std::make_pair(colliderID.id, false));
+			iter = mCollisionMap.find(colliderID.id);
+		}
+
+		if (Intersect(leftCol, rightCol))
+		{
+			// ìµœì´ˆ ì¶©ëŒ ì‹œìž‘í–ˆì„ë•Œ enter
+			if (iter->second == false)
+			{
+				leftCol->OnCollisionEnter(rightCol);
+				rightCol->OnCollisionEnter(leftCol);
+
+				iter->second = true;
+			}
+			else // ì¶©ëŒ ì¤‘ì¸ìƒíƒœ stay
+			{
+				leftCol->OnCollisionStay(rightCol);
+				rightCol->OnCollisionStay(leftCol);
+			}
+		}
+		else
+		{
+			// Exit
+			// ì´ì „í”„ë ˆìž„ ì¶©ëŒ O
+			// í˜„ìž¬ëŠ” ì¶©ëŒ X 
+			if (iter->second == true)
+			{
+				leftCol->OnCollisionExit(rightCol);
+				rightCol->OnCollisionExit(leftCol);
+
+				iter->second = false;
+			}
+		}
 	}
 
 	void CollisionManager::SetLayer(eLayerType left, eLayerType right, bool value)
@@ -102,7 +141,8 @@ namespace kw
 
 	void CollisionManager::Clear()
 	{
-
+		memset(mMatrix, 0, sizeof(WORD) * (UINT)eLayerType::End);
+		mCollisionMap.clear();
 	}
 }
 
