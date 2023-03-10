@@ -19,5 +19,8 @@ namespace kw
 		virtual void OnExit() override;
 	private:
 		Image* mBackGround;
+		Image* mBackGround1;
+		Image* mBackGround2;
+		Image* mBackGround3;
 	};
 }
