@@ -41,7 +41,7 @@ namespace kw
 			if (mActiveAnimation->IsComplete())
 			{
 				Animator::Events* events
-					= FindEvents(mActiveAnimation->GetName());
+					= FindEvents(mActiveAnimation->GetAnimationName());
 
 				if (events != nullptr)
 					events->mCompleteEvent();
@@ -172,7 +172,7 @@ namespace kw
 		mbLoop = loop;
 
 		Animator::Events* events
-			= FindEvents(mActiveAnimation->GetName());
+			= FindEvents(mActiveAnimation->GetAnimationName());
 
 		if (events != nullptr)
 			events->mStartEvent();
