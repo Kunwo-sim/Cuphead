@@ -3,6 +3,7 @@
 #include "kwTime.h"
 #include "kwInput.h"
 #include "kwCollisionManager.h"
+#include "kwCamera.h"
 
 namespace kw
 {
@@ -18,7 +19,7 @@ namespace kw
 
 	Application::~Application()
 	{
-		SceneManager::Release();
+		
 	}
 
 	void Application::Initialize(HWND hWnd)
@@ -50,18 +51,22 @@ namespace kw
 		Time::Initiailize();
 		Input::Initialize();
 		SceneManager::Initialize();
+		Camera::Initiailize();
 	}
 
 	void Application::Run()
 	{
 		Update();
 		Render();
+		SceneManager::Destroy();
 	}
 
 	void Application::Update()
 	{
 		Time::Update();
 		Input::Update();
+		Camera::Update();
+
 		SceneManager::Update();
 		CollisionManager::Update();
 	}

@@ -38,7 +38,7 @@ namespace kw
 		{
 			mActiveAnimation->Update();
 
-			if (mbLoop && mActiveAnimation->IsComplete())
+			if (mActiveAnimation->IsComplete())
 			{
 				Animator::Events* events
 					= FindEvents(mActiveAnimation->GetName());
@@ -48,6 +48,9 @@ namespace kw
 
 				mActiveAnimation->Reset();
 			}
+
+			if (mbLoop && mActiveAnimation->IsComplete())
+				mActiveAnimation->Reset();
 		}
 	}
 
@@ -153,8 +156,12 @@ namespace kw
 	{
 		if (mActiveAnimation != nullptr)
 		{
+			std::wstring& AnimName = mActiveAnimation->GetName();
+			if (AnimName == name)
+				return;
+
 			Animator::Events* prevEvents
-				= FindEvents(mActiveAnimation->GetName());
+				= FindEvents(AnimName);
 
 			if (prevEvents != nullptr)
 				prevEvents->mEndEvent();
@@ -187,7 +194,7 @@ namespace kw
 		Animation* animation = FindAnimation(name);
 
 		Animator::Events* events
-			= FindEvents(animation->GetName());
+			= FindEvents(animation->GetAnimationName());
 
 		return events->mStartEvent.mEvent;
 	}
@@ -197,7 +204,7 @@ namespace kw
 		Animation* animation = FindAnimation(name);
 
 		Animator::Events* events
-			= FindEvents(animation->GetName());
+			= FindEvents(animation->GetAnimationName());
 
 		return events->mCompleteEvent.mEvent;
 	}
@@ -207,7 +214,7 @@ namespace kw
 		Animation* animation = FindAnimation(name);
 
 		Animator::Events* events
-			= FindEvents(animation->GetName());
+			= FindEvents(animation->GetAnimationName());
 
 		return events->mEndEvent.mEvent;
 	}

@@ -10,33 +10,32 @@ namespace kw
 {
 	Slime::Slime()
 	{
+
 	}
+
 	Slime::~Slime()
 	{
+
 	}
+
 	void Slime::Initialize()
 	{
-		Transform* tr = GetComponent<Transform>();
-		tr->SetPos({ 800,450 });
-		mImage = Resources::Load<Image>(L"Slime", L"..\\Resources\\Slime_Idle.bmp");
-
-		Collider* collider = AddComponent<Collider>();
-		collider->SetCenter(Vector2(-60.0f, -80.0f));
-
 		GameObject::Initialize();
+		SetPivot(ePivot::LowCenter);
+
+		mTransform = GetComponent<Transform>();
+		mAnimator = AddComponent<Animator>();
 	}
 	void Slime::Update()
 	{
 		GameObject::Update();
 	}
+
 	void Slime::Render(HDC hdc)
 	{
-		Transform* tr = GetComponent<Transform>();
-		Vector2 pos = tr->GetPos();
-		BitBlt(hdc, pos.x, pos.y, mImage->GetWidth(), mImage->GetHeight(), mImage->GetHdc(), 0, 0, SRCCOPY);
-
 		GameObject::Render(hdc);
 	}
+
 	void Slime::Release()
 	{
 		GameObject::Release();

@@ -2,6 +2,7 @@
 #include "kwGameObject.h"
 #include "kwImage.h"
 #include "kwAnimator.h"
+#include "kwTransform.h"
 
 namespace kw
 {
@@ -10,7 +11,7 @@ namespace kw
 	public:
 		enum class eCupheadState
 		{
-			Move,
+			Run,
 			Shoot,
 			Death,
 			Idle,
@@ -25,13 +26,20 @@ namespace kw
 		virtual void Release() override;
 
 	private:
-		void move();
+		void run();
 		void shoot();
 		void death();
 		void idle();
+		Vector2 DirectionToVector2(eDirection direction);
 
 		eCupheadState mState;
 		Animator* mAnimator;
+		Transform* mTransform;
+		Vector2 mBulletOffset;
+
+		float mSpeed;
+		float mAttackCoolTime;
+		float mAttackCoolChecker;
 	};
 }
 

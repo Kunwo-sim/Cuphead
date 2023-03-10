@@ -26,7 +26,7 @@ namespace kw
 	{
 		Scene::Update();
 
-		if (Input::GetKeyState(eKeyCode::E) == eKeyState::Down)
+		if (Input::GetKeyState(eKeyCode::N) == eKeyState::Down)
 		{
 			SceneManager::LoadScene(eSceneType::Title);
 		}

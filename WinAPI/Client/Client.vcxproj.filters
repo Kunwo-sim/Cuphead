@@ -56,6 +56,27 @@
     <Filter Include="Contents\Bullet">
       <UniqueIdentifier>{c60f98c2-f947-4e36-8101-34e40b856362}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\UI">
+      <UniqueIdentifier>{1244c9e2-7645-420d-a69c-7c974601bd71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\UI\Title">
+      <UniqueIdentifier>{839b2472-1aa6-446c-84fb-16b7ce38bbdd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\UI\Title\TitleCharacter">
+      <UniqueIdentifier>{4c9d44ec-0d85-4cbc-a434-2787696c0015}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Camera">
+      <UniqueIdentifier>{f8eedec1-2610-44b6-98c6-1d1797caa103}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Component\Anim">
+      <UniqueIdentifier>{af07320a-dbf3-4dde-ab62-c39616a9983d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Component\Transform">
+      <UniqueIdentifier>{aba375cc-79db-441c-b851-efc1ae4ae789}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Component\SpriteRenderer">
+      <UniqueIdentifier>{eddcf757-34da-4180-968b-e151acc60d32}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -133,15 +154,6 @@
     <ClInclude Include="kwImage.h">
       <Filter>Engine\Resource</Filter>
     </ClInclude>
-    <ClInclude Include="kwTransform.h">
-      <Filter>Engine\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="kwAnimation.h">
-      <Filter>Engine\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="kwAnimator.h">
-      <Filter>Engine\Component</Filter>
-    </ClInclude>
     <ClInclude Include="kwCollider.h">
       <Filter>Engine\Component\Colider</Filter>
     </ClInclude>
@@ -150,6 +162,30 @@
     </ClInclude>
     <ClInclude Include="kwBaseBullet.h">
       <Filter>Contents\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="kwTitleCharacter.h">
+      <Filter>Contents\UI\Title\TitleCharacter</Filter>
+    </ClInclude>
+    <ClInclude Include="kwCamera.h">
+      <Filter>Engine\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="kwObject.h">
+      <Filter>Engine\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="kwAnimator.h">
+      <Filter>Engine\Component\Anim</Filter>
+    </ClInclude>
+    <ClInclude Include="kwAnimation.h">
+      <Filter>Engine\Component\Anim</Filter>
+    </ClInclude>
+    <ClInclude Include="kwTransform.h">
+      <Filter>Engine\Component\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="kwSpriteRenderer.h">
+      <Filter>Engine\Component\SpriteRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="kwCarnation.h">
+      <Filter>Contents\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -223,15 +259,6 @@
     <ClCompile Include="kwImage.cpp">
       <Filter>Engine\Resource</Filter>
     </ClCompile>
-    <ClCompile Include="kwTransform.cpp">
-      <Filter>Engine\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="kwAnimation.cpp">
-      <Filter>Engine\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="kwAnimator.cpp">
-      <Filter>Engine\Component</Filter>
-    </ClCompile>
     <ClCompile Include="kwCollider.cpp">
       <Filter>Engine\Component\Colider</Filter>
     </ClCompile>
@@ -240,6 +267,27 @@
     </ClCompile>
     <ClCompile Include="kwBaseBullet.cpp">
       <Filter>Contents\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="kwTitleCharacter.cpp">
+      <Filter>Contents\UI\Title\TitleCharacter</Filter>
+    </ClCompile>
+    <ClCompile Include="kwCamera.cpp">
+      <Filter>Engine\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="kwAnimation.cpp">
+      <Filter>Engine\Component\Anim</Filter>
+    </ClCompile>
+    <ClCompile Include="kwAnimator.cpp">
+      <Filter>Engine\Component\Anim</Filter>
+    </ClCompile>
+    <ClCompile Include="kwTransform.cpp">
+      <Filter>Engine\Component\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="kwSpriteRenderer.cpp">
+      <Filter>Engine\Component\SpriteRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="kwCarnation.cpp">
+      <Filter>Contents\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

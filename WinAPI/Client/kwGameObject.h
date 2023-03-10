@@ -14,6 +14,21 @@ namespace kw
 			Death,
 		};
 
+		enum class ePivot
+		{
+			MiddleCenter,
+			LowCenter,
+		};
+
+		enum class eDirection
+		{
+			Front,
+			Up,
+			Down,
+			Left,
+			Right
+		};
+
 		GameObject();
 		virtual ~GameObject();
 
@@ -49,8 +64,18 @@ namespace kw
 			return nullptr;
 		}
 
+		eState GetState() { return mState; }
+		void SetState(eState state) { mState = state; }
+		ePivot GetPivot() { return mPivot; }
+		void SetPivot(ePivot pivot) { mPivot = pivot; }
+		eDirection GetDirection() { return mDirection; }
+		void SetDirection(eDirection direction) { mDirection = direction; }
+
 	private:
 		std::vector<Component*> mComponents;
+		eState mState;
+		ePivot mPivot;
+		eDirection mDirection;
 	};
 }
 

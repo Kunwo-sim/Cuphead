@@ -2,6 +2,8 @@
 
 #include "kwGameObject.h"
 #include "kwImage.h"
+#include "kwAnimator.h"
+#include "kwTransform.h"
 
 namespace kw
 {
@@ -17,6 +19,7 @@ namespace kw
 		virtual void Release() override;
 
 	private:
-		Image* mImage;
+		Animator* mAnimator;
+		Transform* mTransform;
 	};
 }

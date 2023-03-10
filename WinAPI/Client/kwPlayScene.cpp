@@ -2,9 +2,10 @@
 #include "kwCuphead.h"
 #include "kwInput.h"
 #include "kwSceneManager.h"
-#include "kwSlime.h"
+#include "kwCarnation.h"
 #include "kwResources.h"
 #include "kwCollisionManager.h"
+#include "kwObject.h"
 
 namespace kw
 {
@@ -18,28 +19,22 @@ namespace kw
 
 	void PlayScene::Initialize()
 	{
+		Scene::Initialize();
+
 		mBackGround = Resources::Load<Image>(L"Slime_BackGroud", L"..\\Resources\\Slime_BackGroud.bmp");
 
-		Cuphead* cuphead = new Cuphead();
-		cuphead->SetName(L"Player");
-		AddGameObeject(cuphead, eLayerType::Player);
-
-		Slime* slime = new Slime();
-		slime->SetName(L"Slime");
-		AddGameObeject(slime, eLayerType::Monster);
-
-		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
-		Scene::Initialize();
+		object::Instantiate<Cuphead>(eLayerType::Player, Vector2(400, 650));
+		object::Instantiate<Carnation>(eLayerType::Monster, Vector2(1050, 650));
 	}
 
 	void PlayScene::Update()
 	{
-		Scene::Update();
-
-		if (Input::GetKeyState(eKeyCode::Q) == eKeyState::Down)
+		if (Input::GetKeyState(eKeyCode::N) == eKeyState::Down)
 		{
 			SceneManager::LoadScene(eSceneType::Ending);
 		}
+
+		Scene::Update();
 	}
 
 	void PlayScene::Render(HDC hdc)
@@ -51,5 +46,16 @@ namespace kw
 	void PlayScene::Release()
 	{
 		Scene::Release();
+	}
+
+	void PlayScene::OnEnter()
+	{
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
+		CollisionManager::SetLayer(eLayerType::Bullet, eLayerType::Monster, true);
+	}
+
+	void PlayScene::OnExit()
+	{
+
 	}
 }

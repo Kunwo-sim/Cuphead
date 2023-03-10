@@ -30,7 +30,12 @@ namespace kw
 		image->SetKey(name);
 		Resources::Insert<Image>(name, image);
 		
+		HBRUSH brush = (HBRUSH)CreateSolidBrush(RGB(255, 0, 255));
+		HBRUSH oldBrush = (HBRUSH)SelectObject(image->mHdc, brush);
 		Rectangle(image->GetHdc(), -1, -1, image->mWidth + 1, image->mHeight + 1);
+		(HBRUSH)SelectObject(image->mHdc, oldBrush);
+		DeleteObject(brush);
+
 		return image;
 	}
 	Image::Image()

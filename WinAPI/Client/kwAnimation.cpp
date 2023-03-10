@@ -4,6 +4,7 @@
 #include "kwAnimator.h"
 #include "kwGameObject.h"
 #include "kwImage.h"
+#include "kwCamera.h"
 
 namespace kw
 {
@@ -13,6 +14,7 @@ namespace kw
         , mTime(0.0f)
         , mbComplete(false)
         , mSpriteIndex(0)
+        , mAnimationName(L"")
     {
 
     }
@@ -48,17 +50,27 @@ namespace kw
 
     void Animation::Render(HDC hdc)
     {
-        Transform* tr
-            = mAnimator->GetOwner()->GetComponent<Transform>();
+        GameObject* obj = mAnimator->GetOwner();
+        Transform* tr = obj->GetComponent<Transform>();
         Vector2 scale = tr->GetScale();
 
-        // 이미지가 그려질 좌표는 오브젝트 좌표의 위쪽 중간에 그려진다.
-        // 캐릭터의 발을 기준으로 포지션을 계산
         Vector2 pos = tr->GetPos();
+        pos = Camera::CalculatePos(pos);
         pos += mSpriteSheet[mSpriteIndex].offset;
-        pos.x -= mSpriteSheet[mSpriteIndex].size.x / 2.0f;
-        pos.y -= mSpriteSheet[mSpriteIndex].size.y;
 
+        // 피벗이 중하단인경우
+        if (obj->GetPivot() == GameObject::ePivot::LowCenter)
+        {
+            pos.x -= mSpriteSheet[mSpriteIndex].size.x / 2.0f;
+            pos.y -= mSpriteSheet[mSpriteIndex].size.y;
+        }
+        // 피벗이 정중앙인경우
+        else if (obj->GetPivot() == GameObject::ePivot::MiddleCenter)
+        {
+            pos.x -= mSpriteSheet[mSpriteIndex].size.x / 2.0f;
+            pos.y -= mSpriteSheet[mSpriteIndex].size.y / 2.0f;
+        }
+        
         TransparentBlt(hdc, pos.x, pos.y
             , mSpriteSheet[mSpriteIndex].size.x * scale.x
             , mSpriteSheet[mSpriteIndex].size.y * scale.y

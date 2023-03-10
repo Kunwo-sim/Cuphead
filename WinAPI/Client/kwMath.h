@@ -64,6 +64,15 @@ struct Vector2
 		return temp;
 	}
 
+	Vector2 operator/(float ratio)
+	{
+		Vector2 temp;
+		temp.x = x / ratio;
+		temp.y = y / ratio;
+
+		return temp;
+	}
+
 	void operator+=(const Vector2& other)
 	{
 		x += other.x;
@@ -91,7 +100,7 @@ struct Vector2
 	}
 };
 
-namespace ya::math
+namespace kw::math
 {
 	//float x = dir.x * cosf(PI / 5.0f) - dir.y * sinf(PI / 5.0f);
 	//float y = dir.x * sinf(PI / 5.0f) + dir.y * cosf(PI / 5.0f);

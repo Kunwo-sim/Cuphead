@@ -1,6 +1,7 @@
 #include "kwCollider.h"
 #include "kwTransform.h"
 #include "kwGameObject.h"
+#include "kwCamera.h"
 
 namespace kw
 {
@@ -8,11 +9,13 @@ namespace kw
 
 	Collider::Collider()
 		: Component(eComponentType::Collider)
+		, mID(ColliderNumber++)
+		, mTransform(nullptr)
 		, mCenter(Vector2::Zero)
+		, mOffset(Vector2::Zero)
 		, mSize(100, 100)
 		, mScale(Vector2::One)
 		, mPos(Vector2::Zero)
-		, mID(ColliderNumber++)
 	{
 
 	}
@@ -24,13 +27,17 @@ namespace kw
 
 	void Collider::Initialize()
 	{
-
+		mTransform = GetOwner()->GetComponent<Transform>();
 	}
 
 	void Collider::Update()
 	{
-		Transform* tr = GetOwner()->GetComponent<Transform>();
-		mPos = tr->GetPos() + mCenter;
+		mCenter = Camera::CalculatePos(mTransform->GetPos() + mOffset);
+
+		if (GetOwner()->GetPivot() == GameObject::ePivot::LowCenter)
+		{
+			mCenter.y -= (mSize.y / 2.0f);
+		}
 	}
 
 	void Collider::Render(HDC hdc)
@@ -40,7 +47,9 @@ namespace kw
 		HBRUSH brush = (HBRUSH)GetStockObject(NULL_BRUSH);
 		HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, brush);
 
-		Rectangle(hdc, mPos.x, mPos.y, mPos.x + mSize.x, mPos.y + mSize.y);
+		Vector2 LT = Vector2(mCenter.x - (mSize.x / 2.0f), mCenter.y - (mSize.y / 2.0f));
+		Vector2 RB = Vector2(mCenter.x + (mSize.x / 2.0f), mCenter.y + (mSize.y / 2.0f));
+		Rectangle(hdc, LT.x, LT.y, RB.x, RB.y);
 		(HPEN)SelectObject(hdc, oldPen);
 		(HBRUSH)SelectObject(hdc, oldBrush);
 		DeleteObject(pen);

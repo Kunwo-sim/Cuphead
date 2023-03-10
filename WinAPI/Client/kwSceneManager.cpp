@@ -3,6 +3,7 @@
 #include "kwTitleScene.h"
 #include "kwEndingScene.h"
 #include "kwCollisionManager.h"
+#include "kwCamera.h"
 
 namespace kw
 {
@@ -18,8 +19,6 @@ namespace kw
 		mScenes[(UINT)eSceneType::Play] = new PlayScene();
 		mScenes[(UINT)eSceneType::Ending] = new EndingScene();
 
-		mActiveScene = mScenes[(UINT)eSceneType::Title];
-
 		for (Scene* scene : mScenes)
 		{
 			if (scene == nullptr)
@@ -27,6 +26,8 @@ namespace kw
 
 			scene->Initialize();
 		}
+
+		mActiveScene = mScenes[(UINT)eSceneType::Title];
 	}
 
 	void SceneManager::Update()
@@ -39,6 +40,11 @@ namespace kw
 		mActiveScene->Render(hdc);
 	}
 
+	void SceneManager::Destroy()
+	{
+		mActiveScene->Destroy();
+	}
+
 	void SceneManager::Release()
 	{
 		for (Scene* scene : mScenes)
@@ -46,14 +52,15 @@ namespace kw
 			if (scene == nullptr)
 				continue;
 
-			scene->Release();
 			delete scene;
+			scene = nullptr;
 		}
 	}
 
 	void SceneManager::LoadScene(eSceneType type)
 	{
-		// ÇöÀç ¾À Exit È£Ãâ
+		Camera::Clear();
+
 		mActiveScene->OnExit();
 		CollisionManager::Clear();
 		mActiveScene = mScenes[(UINT)type];

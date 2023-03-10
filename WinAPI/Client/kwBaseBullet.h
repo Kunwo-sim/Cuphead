@@ -1,5 +1,6 @@
 #pragma once
 #include "kwGameObject.h"
+#include "kwAnimator.h"
 
 namespace kw
 {
@@ -14,8 +15,14 @@ namespace kw
 		virtual void Render(HDC hdc) override;
 		virtual void Release() override;
 
-	private:
+		virtual void OnCollisionEnter(class Collider* other);
+		//virtual void OnCollisionStay(class Collider* other);
+		//virtual void OnCollisionExit(class Collider* other);
 
+	private:
+		Animator* mAnimator;
+
+		float mTime;
+		float mSpeed;
 	};
 };
-

@@ -25,8 +25,8 @@ namespace kw
 
 	void CollisionManager::LayerCollision(Scene* scene, eLayerType left, eLayerType right)
 	{
-		const std::vector<GameObject*>& lefts = scene->GetGameObjects(left);
-		const std::vector<GameObject*>& rights = scene->GetGameObjects(right);
+		std::vector<GameObject*>& lefts = scene->GetGameObjects(left);
+		std::vector<GameObject*>& rights = scene->GetGameObjects(right);
 
 		for (auto leftObject : lefts)
 		{
@@ -51,16 +51,16 @@ namespace kw
 
 	bool CollisionManager::Intersect(Collider* left, Collider* right)
 	{
-		Vector2 leftPos = left->GetPos();
-		Vector2 rightPos = right->GetPos();
+		Vector2 leftCenter = left->GetCenter();
+		Vector2 rightCenter = right->GetCenter();
 
 		// 두 충돌체 간의 거리와, 각면적의 절반끼리의 합을 비교해서
 		// 거리가 더 길다면 충돌 X, 거리가 더 짧다면 충돌 O
 		Vector2 leftSize = left->GetSize();
 		Vector2 rightSize = right->GetSize();
 
-		if (fabs(leftPos.x - rightPos.x) < (leftSize.x / 2.0f) + (rightSize.x / 2.0f)
-			&& fabs(leftPos.y - rightPos.y) < (leftSize.y / 2.0f) + (rightSize.y / 2.0f))
+		if (fabs(leftCenter.x - rightCenter.x) < (leftSize.x / 2.0f) + (rightSize.x / 2.0f)
+			&& fabs(leftCenter.y - rightCenter.y) < (leftSize.y / 2.0f) + (rightSize.y / 2.0f))
 		{
 			return true;
 		}

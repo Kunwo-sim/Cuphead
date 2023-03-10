@@ -135,6 +135,8 @@
     <ClInclude Include="CommonInclude.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="kwBaseBullet.h" />
+    <ClInclude Include="kwCamera.h" />
+    <ClInclude Include="kwCarnation.h" />
     <ClInclude Include="kwCollider.h" />
     <ClInclude Include="kwCollisionManager.h" />
     <ClInclude Include="kwComponent.h" />
@@ -148,13 +150,16 @@
     <ClInclude Include="kwInput.h" />
     <ClInclude Include="kwLayer.h" />
     <ClInclude Include="kwMath.h" />
+    <ClInclude Include="kwObject.h" />
     <ClInclude Include="kwPlayScene.h" />
     <ClInclude Include="kwResource.h" />
     <ClInclude Include="kwResources.h" />
     <ClInclude Include="kwScene.h" />
     <ClInclude Include="kwSceneManager.h" />
     <ClInclude Include="kwSlime.h" />
+    <ClInclude Include="kwSpriteRenderer.h" />
     <ClInclude Include="kwTime.h" />
+    <ClInclude Include="kwTitleCharacter.h" />
     <ClInclude Include="kwTitleScene.h" />
     <ClInclude Include="kwTransform.h" />
     <ClInclude Include="Resource.h" />
@@ -165,6 +170,8 @@
     <ClCompile Include="kwAnimator.cpp" />
     <ClCompile Include="kwApplication.cpp" />
     <ClCompile Include="kwBaseBullet.cpp" />
+    <ClCompile Include="kwCamera.cpp" />
+    <ClCompile Include="kwCarnation.cpp" />
     <ClCompile Include="kwCollider.cpp" />
     <ClCompile Include="kwCollisionManager.cpp" />
     <ClCompile Include="kwComponent.cpp" />
@@ -182,7 +189,9 @@
     <ClCompile Include="kwScene.cpp" />
     <ClCompile Include="kwSceneManager.cpp" />
     <ClCompile Include="kwSlime.cpp" />
+    <ClCompile Include="kwSpriteRenderer.cpp" />
     <ClCompile Include="kwTime.cpp" />
+    <ClCompile Include="kwTitleCharacter.cpp" />
     <ClCompile Include="kwTitleScene.cpp" />
     <ClCompile Include="kwTransform.cpp" />
     <ClCompile Include="main.cpp" />

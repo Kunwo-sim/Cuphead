@@ -4,6 +4,9 @@
 namespace kw
 {
 	GameObject::GameObject()
+		: mState(eState::Active)
+		, mPivot(ePivot::MiddleCenter)
+		, mDirection(eDirection::Front)
 	{
 		mComponents.resize((UINT)eComponentType::End);
 		AddComponent<Transform>();

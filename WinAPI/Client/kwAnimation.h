@@ -36,11 +36,14 @@ namespace kw
 
 		bool IsComplete() { return mbComplete; }
 		void SetAnimator(Animator* animator) { mAnimator = animator; };
+		void SetAnimationName(const std::wstring& name) { mAnimationName = name; }
+		std::wstring& GetAnimationName() { return mAnimationName; }
 
 	private:
 		Animator* mAnimator;
 		Image* mSheetImage;
 		std::vector<Sprite> mSpriteSheet;
+		std::wstring mAnimationName;
 		float mTime;
 		bool mbComplete;
 		int mSpriteIndex;

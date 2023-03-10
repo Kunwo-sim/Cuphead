@@ -1,43 +1,74 @@
 #include "kwBaseBullet.h"
 #include "kwTransform.h"
 #include "kwTime.h"
+#include "kwObject.h"
+#include "kwCollider.h"
 
 namespace kw
 {
 	BaseBullet::BaseBullet()
+		: mTime(0.0f)
+		, mSpeed(1500.0f)
 	{
+
 	}
+
 	BaseBullet::~BaseBullet()
 	{
+
 	}
+
 	void BaseBullet::Initialize()
 	{
+		mAnimator = AddComponent<Animator>();
+		//mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Bullet\\Create", Vector2::Zero, 0.08f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Bullet\\LoopLeft", Vector2::Zero, 0.08f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Bullet\\LoopRight", Vector2::Zero, 0.08f);
+
+		Collider* collider = AddComponent<Collider>();
+		collider->SetSize(Vector2(40, 20));
+
+		GameObject::Initialize();
 	}
+
 	void BaseBullet::Update()
 	{
 		Transform* tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPos();
-		pos.x += 100.0f * Time::DeltaTime();
+
+		if (GetDirection() == eDirection::Left)
+		{
+			pos.x -= mSpeed * Time::DeltaTime();
+			mAnimator->Play(L"BulletLoopLeft", true);
+		}
+		else if (GetDirection() == eDirection::Right)
+		{
+			pos.x += mSpeed * Time::DeltaTime();
+			mAnimator->Play(L"BulletLoopRight", false);
+		}
+
 		tr->SetPos(pos);
 
+		mTime += Time::DeltaTime();
+		if (mTime > 5.0f)
+		{
+			object::Destory(this);
+		}
+
+		GameObject::Update();
 	}
 	void BaseBullet::Render(HDC hdc)
 	{
-		Transform* tr = GetComponent<Transform>();
-		Vector2 pos = tr->GetPos();
-		HPEN pen = CreatePen(BS_SOLID, 2, RGB(255, 0, 255));
-
-		HPEN oldPen = (HPEN)SelectObject(hdc, pen);
-		HBRUSH brush = (HBRUSH)GetStockObject(NULL_BRUSH);
-		HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, brush);
-
-		Ellipse(hdc, pos.x, pos.y, pos.x + 50, pos.y + 50);
-
-		(HPEN)SelectObject(hdc, oldPen);
-		(HBRUSH)SelectObject(hdc, oldBrush);
-		DeleteObject(pen);
+		GameObject::Render(hdc);
 	}
+
 	void BaseBullet::Release()
 	{
+		GameObject::Release();
+	}
+
+	void BaseBullet::OnCollisionEnter(Collider* other)
+	{
+		object::Destory(this);
 	}
 }
