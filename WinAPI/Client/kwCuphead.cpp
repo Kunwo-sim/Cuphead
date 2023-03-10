@@ -37,10 +37,10 @@ namespace kw
 		mAnimator->CreateAnimation(L"Idle", mImage, Vector2(0.0f, 113.0f * 5), 16, 8, 9, Vector2(0.0f, 0.0f), 0.1);
 		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\StageCuphead\\IdleLeft", Vector2::Zero, 0.08f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\StageCuphead\\IdleRight", Vector2::Zero, 0.08f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\StageCuphead\\RunLeft", Vector2::Zero, 0.1f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\StageCuphead\\RunRight", Vector2::Zero, 0.1f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\StageCuphead\\ShootLeft", Vector2(-14.0f, 0.0f), 0.1f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\StageCuphead\\ShootRight", Vector2(14.0f, 0.0f), 0.1f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\StageCuphead\\RunLeft", Vector2::Zero, 0.05f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\StageCuphead\\RunRight", Vector2::Zero, 0.05f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\StageCuphead\\ShootLeft", Vector2(-14.0f, 0.0f), 0.07f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\StageCuphead\\ShootRight", Vector2(14.0f, 0.0f), 0.07f);
 
 		mState = eCupheadState::Idle;
 		mAnimator->Play(L"StageCupheadIdleRight", true);
