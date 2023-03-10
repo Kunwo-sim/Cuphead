@@ -79,7 +79,7 @@ namespace kw
 
 		animation = new Animation();
 		animation->Create(sheet, leftTop, coulmn, row, spriteLength, offset, duration);
-		animation->SetName(name);
+		animation->SetAnimationName(name);
 		animation->SetAnimator(this);
 
 		mAnimations.insert(std::make_pair(name, animation));
@@ -156,7 +156,7 @@ namespace kw
 	{
 		if (mActiveAnimation != nullptr)
 		{
-			std::wstring& AnimName = mActiveAnimation->GetName();
+			std::wstring& AnimName = mActiveAnimation->GetAnimationName();
 			if (AnimName == name)
 				return;
 
