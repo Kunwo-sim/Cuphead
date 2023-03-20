@@ -6,7 +6,7 @@ extern kw::Application application;
 
 namespace kw
 {
-	Image* Image::Create(const std::wstring& name, UINT widht, UINT height)
+	Image* Image::Create(const std::wstring& name, UINT widht, UINT height, COLORREF rgb)
 	{
 		if (widht == 0 || height == 0)
 			return nullptr;
@@ -30,11 +30,11 @@ namespace kw
 		image->SetKey(name);
 		Resources::Insert<Image>(name, image);
 		
-		HBRUSH brush = (HBRUSH)CreateSolidBrush(RGB(255, 0, 255));
-		HBRUSH oldBrush = (HBRUSH)SelectObject(image->mHdc, brush);
+		HBRUSH brush = CreateSolidBrush(rgb);
+		HBRUSH oldBrush = (HBRUSH)SelectObject(image->GetHdc(), brush);
 		Rectangle(image->GetHdc(), -1, -1, image->mWidth + 1, image->mHeight + 1);
-		(HBRUSH)SelectObject(image->mHdc, oldBrush);
-		DeleteObject(brush);
+		SelectObject(image->GetHdc(), oldBrush);
+		DeleteObject(oldBrush);
 
 		return image;
 	}

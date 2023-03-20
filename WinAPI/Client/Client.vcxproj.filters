@@ -77,6 +77,12 @@
     <Filter Include="Engine\Component\SpriteRenderer">
       <UniqueIdentifier>{eddcf757-34da-4180-968b-e151acc60d32}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Component\Rigidbody">
+      <UniqueIdentifier>{99260b7d-f31d-4f30-ba3d-77a16986bb6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object">
+      <UniqueIdentifier>{381e5b64-d80d-4770-bc57-e491d885d353}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -187,6 +193,16 @@
     <ClInclude Include="kwCarnation.h">
       <Filter>Contents\Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="kwRigidbody.h">
+      <Filter>Engine\Component\Rigidbody</Filter>
+    </ClInclude>
+    <ClInclude Include="kwToolScene.h">
+      <Filter>Contents\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="kwGround.h">
+      <Filter>Contents\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="kwTile.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc">
@@ -289,5 +305,15 @@
     <ClCompile Include="kwCarnation.cpp">
       <Filter>Contents\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="kwRigidbody.cpp">
+      <Filter>Engine\Component\Rigidbody</Filter>
+    </ClCompile>
+    <ClCompile Include="kwToolScene.cpp">
+      <Filter>Contents\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="kwGround.cpp">
+      <Filter>Contents\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="kwTile.cpp" />
   </ItemGroup>
 </Project>

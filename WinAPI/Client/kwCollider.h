@@ -33,6 +33,7 @@ namespace kw
 
 	private:
 		static UINT ColliderNumber;
+		UINT mCollisionCount;
 		UINT mID;
 
 		Transform* mTransform;

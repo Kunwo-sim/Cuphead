@@ -78,6 +78,8 @@ namespace kw
             , mSpriteSheet[mSpriteIndex].leftTop.x, mSpriteSheet[mSpriteIndex].leftTop.y
             , mSpriteSheet[mSpriteIndex].size.x, mSpriteSheet[mSpriteIndex].size.y,
             RGB(255, 0, 255));
+
+        // 알파 블렌드 코드.
     }
 
     void Animation::Create(Image* sheet, Vector2 leftTop

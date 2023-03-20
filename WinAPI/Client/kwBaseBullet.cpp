@@ -24,9 +24,20 @@ namespace kw
 		//mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Bullet\\Create", Vector2::Zero, 0.08f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Bullet\\LoopLeft", Vector2::Zero, 0.08f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Bullet\\LoopRight", Vector2::Zero, 0.08f);
+		//mAnimator->GetEndEvent(L"BulletLoopRight") = std::bind(&BaseBullet::BulletTest, this);
+		mAnimator->GetEndEvent(L"BulletLoopLeft") = std::bind(&BaseBullet::BulletTest, this);
 
 		Collider* collider = AddComponent<Collider>();
 		collider->SetSize(Vector2(40, 20));
+
+		if (GetDirection() == eDirection::Left)
+		{
+			mAnimator->Play(L"BulletLoopLeft", true);
+		}
+		else if (GetDirection() == eDirection::Right)
+		{
+			mAnimator->Play(L"BulletLoopRight", true);
+		}
 
 		GameObject::Initialize();
 	}
@@ -39,18 +50,16 @@ namespace kw
 		if (GetDirection() == eDirection::Left)
 		{
 			pos.x -= mSpeed * Time::DeltaTime();
-			mAnimator->Play(L"BulletLoopLeft", true);
 		}
 		else if (GetDirection() == eDirection::Right)
 		{
 			pos.x += mSpeed * Time::DeltaTime();
-			mAnimator->Play(L"BulletLoopRight", false);
 		}
 
 		tr->SetPos(pos);
 
 		mTime += Time::DeltaTime();
-		if (mTime > 5.0f)
+		if (mTime > 3.0f)
 		{
 			object::Destory(this);
 		}
@@ -68,6 +77,11 @@ namespace kw
 	}
 
 	void BaseBullet::OnCollisionEnter(Collider* other)
+	{
+		object::Destory(this);
+	}
+
+	void BaseBullet::BulletTest()
 	{
 		object::Destory(this);
 	}

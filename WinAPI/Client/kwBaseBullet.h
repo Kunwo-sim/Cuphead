@@ -18,6 +18,7 @@ namespace kw
 		virtual void OnCollisionEnter(class Collider* other);
 		//virtual void OnCollisionStay(class Collider* other);
 		//virtual void OnCollisionExit(class Collider* other);
+		void BulletTest();
 
 	private:
 		Animator* mAnimator;

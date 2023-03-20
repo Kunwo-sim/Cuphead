@@ -13,6 +13,7 @@ namespace kw
 		void Run();
 		void Update();
 		void Render();
+		void SetMenuBar(bool power);
 
 		HWND GetHwnd() { return mHwnd; }
 		HDC GetHdc() { return mHdc; }
@@ -25,6 +26,7 @@ namespace kw
 	private:
 		HWND mHwnd;
 		HDC mHdc;
+		HMENU mMenubar;
 
 		// ¹é¹öÆÛ
 		HBITMAP mBackBuffer;

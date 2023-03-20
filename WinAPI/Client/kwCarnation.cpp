@@ -29,6 +29,7 @@ namespace kw
 		mAnimator = AddComponent<Animator>();
 
 		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Carnation\\Idle", Vector2::Zero, 0.08f);
+		mAnimator->Play(L"CarnationIdle", true);
 
 		Collider* collider = AddComponent<Collider>();
 		collider->SetSize(Vector2(200, 600));
@@ -40,7 +41,6 @@ namespace kw
 		switch (mState)
 		{
 		case kw::Carnation::eCarnationState::Idle:
-			mAnimator->Play(L"CarnationIdle", true);
 			break;
 		default:
 			break;

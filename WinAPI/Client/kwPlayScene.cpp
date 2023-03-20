@@ -6,6 +6,8 @@
 #include "kwResources.h"
 #include "kwCollisionManager.h"
 #include "kwObject.h"
+#include "kwGameObject.h"
+#include "kwGround.h"
 
 namespace kw
 {
@@ -28,6 +30,8 @@ namespace kw
 
 		object::Instantiate<Cuphead>(eLayerType::Player, Vector2(400, 650));
 		object::Instantiate<Carnation>(eLayerType::Monster, Vector2(1050, 650));
+		GameObject* obj = object::Instantiate<Ground>(eLayerType::Ground, Vector2(640, 700));
+		// obj->SetPivot(GameObject::ePivot::LowCenter);
 	}
 
 	void PlayScene::Update()
@@ -44,7 +48,7 @@ namespace kw
 	{
 		// BitBlt(hdc, 0, 0, mBackGround->GetWidth(), mBackGround->GetHeight(), mBackGround->GetHdc(), 0, 0, SRCCOPY);
 
-		TransparentBlt(hdc, 0, 0
+		TransparentBlt(hdc, -50, 0
 			, mBackGround1->GetWidth()
 			, mBackGround1->GetHeight()
 			, mBackGround1->GetHdc()
@@ -54,7 +58,7 @@ namespace kw
 			, mBackGround1->GetHeight()
 			, RGB(255, 0, 255));
 
-		TransparentBlt(hdc, 0, 0
+		TransparentBlt(hdc, -50, 0
 			, mBackGround2->GetWidth()
 			, mBackGround2->GetHeight()
 			, mBackGround2->GetHdc()
@@ -64,7 +68,7 @@ namespace kw
 			, mBackGround2->GetHeight()
 			, RGB(255, 0, 255));
 
-		TransparentBlt(hdc, 0, 0
+		TransparentBlt(hdc, -50, -50
 			, mBackGround3->GetWidth()
 			, mBackGround3->GetHeight()
 			, mBackGround3->GetHdc()
@@ -85,6 +89,7 @@ namespace kw
 	void PlayScene::OnEnter()
 	{
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);
 		CollisionManager::SetLayer(eLayerType::Bullet, eLayerType::Monster, true);
 	}
 

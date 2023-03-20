@@ -10,6 +10,7 @@ namespace kw
 	Collider::Collider()
 		: Component(eComponentType::Collider)
 		, mID(ColliderNumber++)
+		, mCollisionCount(0)
 		, mTransform(nullptr)
 		, mCenter(Vector2::Zero)
 		, mOffset(Vector2::Zero)
@@ -28,6 +29,12 @@ namespace kw
 	void Collider::Initialize()
 	{
 		mTransform = GetOwner()->GetComponent<Transform>();
+		mCenter = Camera::CalculatePos(mTransform->GetPos() + mOffset);
+
+		if (GetOwner()->GetPivot() == GameObject::ePivot::LowCenter)
+		{
+			mCenter.y -= (mSize.y / 2.0f);
+		}
 	}
 
 	void Collider::Update()
@@ -42,7 +49,16 @@ namespace kw
 
 	void Collider::Render(HDC hdc)
 	{
-		HPEN pen = CreatePen(BS_SOLID, 2, RGB(0, 255, 0));
+		HPEN pen = NULL;
+		if (mCollisionCount > 0)
+		{
+			pen = CreatePen(BS_SOLID, 2, RGB(255, 0, 0));
+		}
+		else
+		{
+			pen = CreatePen(BS_SOLID, 2, RGB(0, 255, 0));
+		}
+
 		HPEN oldPen = (HPEN)SelectObject(hdc, pen);
 		HBRUSH brush = (HBRUSH)GetStockObject(NULL_BRUSH);
 		HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, brush);
@@ -54,6 +70,8 @@ namespace kw
 		(HBRUSH)SelectObject(hdc, oldBrush);
 		DeleteObject(pen);
 		DeleteObject(brush);
+
+		mCollisionCount = 0;
 	}
 
 	void Collider::Release()
@@ -68,6 +86,7 @@ namespace kw
 
 	void Collider::OnCollisionStay(Collider* other)
 	{
+		mCollisionCount = 1;
 		GetOwner()->OnCollisionStay(other);
 	}
 

@@ -120,7 +120,7 @@ namespace kw
 
 		std::wstring key = fs.parent_path().filename();
 		key += fs.filename();
-		mSpriteSheet = Image::Create(key, width * fileCount, height);
+		mSpriteSheet = Image::Create(key, width * fileCount, height, RGB(255, 0, 255));
 
 		//
 		int index = 0;
@@ -157,8 +157,6 @@ namespace kw
 		if (mActiveAnimation != nullptr)
 		{
 			std::wstring& AnimName = mActiveAnimation->GetAnimationName();
-			if (AnimName == name)
-				return;
 
 			Animator::Events* prevEvents
 				= FindEvents(AnimName);

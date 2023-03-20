@@ -5,12 +5,15 @@ enum class eSceneType
 	Title,
 	Play,
 	Ending,
+	Tool,
 	Max,
 };
 
 enum class eLayerType
 {
 	BG,
+	Tile,
+	Ground,
 	Monster,
 	Player,
 	Bullet,
@@ -22,6 +25,7 @@ enum class eLayerType
 enum class eComponentType
 {
 	Transform,
+	Rigidbody,
 	SpriteRenderer,
 	Animator,
 	Collider,

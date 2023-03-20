@@ -3,6 +3,7 @@
 #include "kwImage.h"
 #include "kwAnimator.h"
 #include "kwTransform.h"
+#include "kwRigidbody.h"
 
 namespace kw
 {
@@ -11,10 +12,15 @@ namespace kw
 	public:
 		enum class eCupheadState
 		{
-			Run,
-			Shoot,
-			Death,
 			Idle,
+			Shoot,
+			Run,
+			RunShoot,
+			Duck,
+			DuckShoot,
+			Jump,
+			JumpShoot,
+			Death,
 		};
 
 		Cuphead();
@@ -26,15 +32,28 @@ namespace kw
 		virtual void Release() override;
 
 	private:
-		void run();
-		void shoot();
-		void death();
 		void idle();
+		void shoot();
+		void run();
+		void runShoot();
+		void duck();
+		void duckShoot();
+		void jump();
+		void death();
+		
+		void playCupheadAnim(std::wstring State, bool loop = true);
+		void CupheadMove();
+		void CreateBullet();
+		void SetStateJump();
+
 		Vector2 DirectionToVector2(eDirection direction);
 
 		eCupheadState mState;
-		Animator* mAnimator;
 		Transform* mTransform;
+		Collider* mCollider;
+		Rigidbody* mRigidbody;
+		Animator* mAnimator;
+
 		Vector2 mBulletOffset;
 
 		float mSpeed;

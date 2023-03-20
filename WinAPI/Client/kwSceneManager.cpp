@@ -4,6 +4,7 @@
 #include "kwEndingScene.h"
 #include "kwCollisionManager.h"
 #include "kwCamera.h"
+#include "kwToolScene.h"
 
 namespace kw
 {
@@ -18,6 +19,7 @@ namespace kw
 		mScenes[(UINT)eSceneType::Title] = new TitleScene();
 		mScenes[(UINT)eSceneType::Play] = new PlayScene();
 		mScenes[(UINT)eSceneType::Ending] = new EndingScene();
+		mScenes[(UINT)eSceneType::Tool] = new ToolScene();
 
 		for (Scene* scene : mScenes)
 		{
