@@ -7,6 +7,7 @@
 #include "kwCollider.h"
 #include "kwBaseBullet.h"
 #include "kwObject.h"
+#include "kwBulletFireEffect.h"
 
 namespace kw
 {
@@ -14,7 +15,7 @@ namespace kw
 		: mState(eCupheadState::Idle)
 		, mSpeed(500.0f)
 		, mBulletOffset(Vector2(50.0f, -80.0f))
-		, mAttackCoolTime(0.1f)
+		, mAttackCoolTime(0.2f)
 		, mAttackCoolChecker(0.0f)
 		, mTransform(nullptr)
 		, mCollider(nullptr)
@@ -403,7 +404,8 @@ namespace kw
 				bulletPos.y += mBulletOffset.y;
 			}
 
-			BaseBullet* bullet = object::Instantiate<BaseBullet>(eLayerType::Bullet, bulletPos, bulletDir);
+			BaseBullet* Bullet = object::Instantiate<BaseBullet>(eLayerType::Bullet, bulletPos, bulletDir);
+			BulletFireEffect* FireEffect = object::Instantiate<BulletFireEffect>(eLayerType::Effect, bulletPos);
 		}
 	}
 

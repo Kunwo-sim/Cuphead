@@ -135,6 +135,7 @@
     <ClInclude Include="CommonInclude.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="kwBaseBullet.h" />
+    <ClInclude Include="kwBulletFireEffect.h" />
     <ClInclude Include="kwCamera.h" />
     <ClInclude Include="kwCarnation.h" />
     <ClInclude Include="kwCollider.h" />
@@ -174,6 +175,7 @@
     <ClCompile Include="kwAnimator.cpp" />
     <ClCompile Include="kwApplication.cpp" />
     <ClCompile Include="kwBaseBullet.cpp" />
+    <ClCompile Include="kwBulletFireEffect.cpp" />
     <ClCompile Include="kwCamera.cpp" />
     <ClCompile Include="kwCarnation.cpp" />
     <ClCompile Include="kwCollider.cpp" />

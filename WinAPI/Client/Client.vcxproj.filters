@@ -83,6 +83,9 @@
     <Filter Include="Contents\Object">
       <UniqueIdentifier>{381e5b64-d80d-4770-bc57-e491d885d353}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Effect">
+      <UniqueIdentifier>{a9cfa14a-44c6-43ec-b298-76f7610f3af3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -203,6 +206,9 @@
       <Filter>Contents\Object</Filter>
     </ClInclude>
     <ClInclude Include="kwTile.h" />
+    <ClInclude Include="kwBulletFireEffect.h">
+      <Filter>Contents\Effect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc">
@@ -315,5 +321,8 @@
       <Filter>Contents\Object</Filter>
     </ClCompile>
     <ClCompile Include="kwTile.cpp" />
+    <ClCompile Include="kwBulletFireEffect.cpp">
+      <Filter>Contents\Effect</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
