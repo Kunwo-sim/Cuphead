@@ -209,6 +209,7 @@
     <ClInclude Include="kwBulletFireEffect.h">
       <Filter>Contents\Effect</Filter>
     </ClInclude>
+    <ClInclude Include="kwTilePalette.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc">
@@ -324,5 +325,6 @@
     <ClCompile Include="kwBulletFireEffect.cpp">
       <Filter>Contents\Effect</Filter>
     </ClCompile>
+    <ClCompile Include="kwTilePalette.cpp" />
   </ItemGroup>
 </Project>

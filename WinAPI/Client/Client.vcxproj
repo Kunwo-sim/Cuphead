@@ -44,6 +44,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
+    <EnableUnitySupport>true</EnableUnitySupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -162,6 +163,7 @@
     <ClInclude Include="kwSlime.h" />
     <ClInclude Include="kwSpriteRenderer.h" />
     <ClInclude Include="kwTile.h" />
+    <ClInclude Include="kwTilePalette.h" />
     <ClInclude Include="kwTime.h" />
     <ClInclude Include="kwTitleCharacter.h" />
     <ClInclude Include="kwTitleScene.h" />
@@ -199,6 +201,7 @@
     <ClCompile Include="kwSlime.cpp" />
     <ClCompile Include="kwSpriteRenderer.cpp" />
     <ClCompile Include="kwTile.cpp" />
+    <ClCompile Include="kwTilePalette.cpp" />
     <ClCompile Include="kwTime.cpp" />
     <ClCompile Include="kwTitleCharacter.cpp" />
     <ClCompile Include="kwTitleScene.cpp" />

@@ -95,7 +95,7 @@ ATOM MyRegisterClass(HINSTANCE hInstance, LPCWSTR name, WNDPROC proc)
     wcex.cbSize = sizeof(WNDCLASSEX);
 
     wcex.style          = CS_HREDRAW | CS_VREDRAW;
-    wcex.lpfnWndProc    = WndProc;
+    wcex.lpfnWndProc    = proc;
     wcex.cbClsExtra     = 0;
     wcex.cbWndExtra     = 0;
     wcex.hInstance      = hInstance;
@@ -143,6 +143,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    UpdateWindow(hWnd2);
 
    application.Initialize(hWnd);
+   application.SetToolHwnd(hWnd2);
 
    return TRUE;
 }

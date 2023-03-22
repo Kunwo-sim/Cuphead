@@ -1,3 +1,4 @@
+#include "Resource.h"
 #include "kwToolScene.h"
 #include "kwApplication.h"
 #include "kwImage.h"
@@ -5,6 +6,8 @@
 #include "kwTile.h"
 #include "kwObject.h"
 #include "kwInput.h"
+#include "kwTilePalette.h"
+#include "Resource.h"
 
 extern kw::Application application;
 
@@ -22,15 +25,24 @@ namespace kw
     void ToolScene::Initialize()
     {
         Scene::Initialize();
-
-        kw::Image* tile = kw::Resources::Find<kw::Image>(L"TileAtlas");
-        Tile* test = object::Instantiate<Tile>(eLayerType::Tile);
-        test->InitializeTile(tile, 0);
+        TilePalette::Initiailize();
     }
 
     void ToolScene::Update()
     {
         Scene::Update();
+
+        Vector2  temp = Input::GetMousePos();
+
+
+        if (Input::GetKey(eKeyCode::LBUTTON))
+        {
+            Vector2 pos = Input::GetMousePos();
+            pos = TilePalette::GetTilePos(pos);
+
+            UINT tileIndex = TilePalette::GetIndex();
+            TilePalette::CreateTile(tileIndex, pos);
+        }
     }
 
     void ToolScene::Render(HDC hdc)
@@ -77,11 +89,41 @@ LRESULT CALLBACK AtlasWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPa
 {
     switch (message)
     {
-        //case WM_KEYDOWN:
-        //{
+    case WM_CREATE:
+    {
+        //512 384
+        //HMENU mMenubar = LoadMenu(nullptr, MAKEINTRESOURCE(IDC_CLIENT));
+        //SetMenu(hWnd, mMenubar);
+        kw::Image* tile = kw::Resources::Load<kw::Image>(L"TileAtlas", L"..\\Resources\\Tile.bmp");
+        RECT rect = { 0, 0, tile->GetWidth(), tile->GetHeight() };
+        AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, false);
 
-        //}
+        // 윈도우 크기 변경및 출력 설정
+        SetWindowPos(hWnd
+            , nullptr, 1600, 0
+            , rect.right - rect.left
+            , rect.bottom - rect.top
+            , 0);
+        ShowWindow(hWnd, true);
+    }
+    case WM_LBUTTONDOWN:
+    {
 
+        if (GetFocus())
+        {
+            ::POINT mousePos = {};
+            ::GetCursorPos(&mousePos);
+            ::ScreenToClient(application.GetToolHwnd(), &mousePos);
+
+            int x = mousePos.x / TILE_SIZE_X;
+            int y = mousePos.y / TILE_SIZE_Y;
+
+            int index = (y * 8) + (x % 8);
+
+            kw::TilePalette::SetIndex(index);
+        }
+    }
+    break;
     case WM_COMMAND:
     {
         int wmId = LOWORD(wParam);
@@ -104,11 +146,9 @@ LRESULT CALLBACK AtlasWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPa
         PAINTSTRUCT ps;
         HDC hdc = BeginPaint(hWnd, &ps);
 
+        kw::Image* tile = kw::Resources::Find<kw::Image>(L"TileAtlas");
+        BitBlt(hdc, 0, 0, tile->GetWidth(), tile->GetHeight(), tile->GetHdc(), 0, 0, SRCCOPY);
 
-        //Ellipse(hdc, 500, 500, 600, 700);
-        //RoundRect(hdc, 200, 200, 300, 300, 500, 500);
-
-        // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
         EndPaint(hWnd, &ps);
     }
     break;
