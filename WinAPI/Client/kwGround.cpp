@@ -3,6 +3,9 @@
 #include "kwCuphead.h"
 #include "kwRigidbody.h"
 #include "kwTransform.h"
+#include "kwResources.h"
+#include "kwImage.h"
+#include "kwCuphead.h"
 
 namespace kw
 {
@@ -57,22 +60,6 @@ namespace kw
 			cuphead->GetComponent<Transform>()->SetPos(cupheadPos);
 			rb->SetGround(true);
 		}
-		
-		//float fLen = fabs(cupheadPos.y - groundPos.y);
-		//float fSize = (cupheadCol->GetSize().y / 2.0f) + (groundCol->GetSize().y / 2.0f);
-
-		//if (fLen < fSize)
-		//{
-		//	Transform* cupTr = cuphead->GetComponent<Transform>();
-		//	Transform* grTr = this->GetComponent<Transform>();
-
-		//	Vector2 cupPos = cupTr->GetPos();
-		//	Vector2 grPos = grTr->GetPos();
-
-		//	cupPos.x -= (fSize - fLen) - 1.0f;
-		//	cupPos.y -= (fSize - fLen) - 1.0f;
-		//	cupTr->SetPos(cupPos);
-		//}
 	}
 
 	void Ground::OnCollisionStay(Collider* other)

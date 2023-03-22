@@ -13,6 +13,9 @@ namespace kw
 
 		virtual HRESULT Load(const std::wstring& path) override;
 
+		COLORREF GetPixel(int x, int y);
+		void SetPixel(int x, int y, COLORREF color);
+
 		HBITMAP GetBitmap() { return mBitmap; }
 		HDC GetHdc() { return mHdc; }
 		UINT GetWidth() { return mWidth; }
