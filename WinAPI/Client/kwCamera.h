@@ -22,6 +22,7 @@ namespace kw
 		static void Clear();
 
 		static void SetTarget(GameObject* target) { mTarget = target; }
+		static void SetLookPosition(Vector2 pos) { mLookPosition = pos; }
 		static Vector2 CalculatePos(Vector2 pos) { return pos - mDistance; }
 
 	private:

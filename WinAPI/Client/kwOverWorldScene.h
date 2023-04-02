@@ -3,11 +3,11 @@
 
 namespace kw
 {
-	class PlayScene : public Scene
+	class OverWorldScene : public Scene
 	{
 	public:
-		PlayScene();
-		virtual ~PlayScene() override;
+		OverWorldScene();
+		~OverWorldScene();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
@@ -16,11 +16,11 @@ namespace kw
 
 		virtual void OnEnter() override;
 		virtual void OnExit() override;
+
 	private:
 		class Image* mBackGround;
-		class Image* mBackGround2;
-		class Image* mBackGround3;
-		class Image* mBackGround1;
-		class Sound* mFloralFuryBGM;
+		class Sound* mOverWorldBGM;
+
+		Vector2 mStartPos;
 	};
 }

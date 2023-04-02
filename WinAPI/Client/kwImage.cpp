@@ -38,6 +38,7 @@ namespace kw
 
 		return image;
 	}
+
 	Image::Image()
 		: mBitmap(NULL)
 		, mHdc(NULL)

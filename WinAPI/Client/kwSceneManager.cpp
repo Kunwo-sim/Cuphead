@@ -1,6 +1,7 @@
 #include "kwSceneManager.h"
-#include "kwPlayScene.h"
 #include "kwTitleScene.h"
+#include "kwOverWorldScene.h"
+#include "kwPlayScene.h"
 #include "kwEndingScene.h"
 #include "kwCollisionManager.h"
 #include "kwCamera.h"
@@ -17,6 +18,7 @@ namespace kw
 
 		// 새로운 씬 추가하려면 아래에 작성 및 헤더 추가
 		mScenes[(UINT)eSceneType::Title] = new TitleScene();
+		mScenes[(UINT)eSceneType::OverWorld] = new OverWorldScene();
 		mScenes[(UINT)eSceneType::Play] = new PlayScene();
 		mScenes[(UINT)eSceneType::Ending] = new EndingScene();
 		mScenes[(UINT)eSceneType::Tool] = new ToolScene();
@@ -29,7 +31,8 @@ namespace kw
 			scene->Initialize();
 		}
 
-		mActiveScene = mScenes[(UINT)eSceneType::Tool];
+		mActiveScene = mScenes[(UINT)eSceneType::Title];
+		SceneManager::LoadScene(eSceneType::Title);
 	}
 
 	void SceneManager::Update()

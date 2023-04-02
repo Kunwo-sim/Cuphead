@@ -21,5 +21,6 @@ namespace kw
 	private:
 		Image* mBackGround;
 		Image* mBackCharacter;
+		class Sound* mTitleBGM;
 	};
 }

@@ -32,8 +32,7 @@ namespace kw
 	}
 
 	void Camera::Update()
-	{
-
+	{		
 		if (Input::GetKey(eKeyCode::LEFT))
 			mLookPosition.x -= 100.0f * Time::DeltaTime();
 

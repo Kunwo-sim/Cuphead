@@ -5,9 +5,11 @@
 #include "kwCarnation.h"
 #include "kwResources.h"
 #include "kwCollisionManager.h"
+#include "kwImage.h"
 #include "kwObject.h"
 #include "kwGameObject.h"
 #include "kwGround.h"
+#include "kwSound.h"
 
 namespace kw
 {
@@ -28,10 +30,12 @@ namespace kw
 		mBackGround2 = Resources::Load<Image>(L"Carnation_Back_02", L"..\\Resources\\Stage\\Carnation\\BackGround\\Carnation_Back_02.bmp");
 		mBackGround3 = Resources::Load<Image>(L"Carnation_Back_03", L"..\\Resources\\Stage\\Carnation\\BackGround\\Carnation_Back_03.bmp");
 
+		object::Instantiate<Ground>(eLayerType::Ground, Vector2(640, 700));
 		object::Instantiate<Cuphead>(eLayerType::Player, Vector2(400, 650));
-		object::Instantiate<Carnation>(eLayerType::Monster, Vector2(1050, 650));
-		GameObject* obj = object::Instantiate<Ground>(eLayerType::Ground, Vector2(640, 700));
+		object::Instantiate<Carnation>(eLayerType::Monster, Vector2(500, 650));
 		// obj->SetPivot(GameObject::ePivot::LowCenter);
+
+		mFloralFuryBGM = Resources::Load<Sound>(L"FlowerFuryBGM", L"..\\Resources\\Sound\\BGM\\FloralFuryBGM.wav");
 	}
 
 	void PlayScene::Update()
@@ -91,10 +95,12 @@ namespace kw
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);
 		CollisionManager::SetLayer(eLayerType::Bullet, eLayerType::Monster, true);
+
+		mFloralFuryBGM->Play(true);
 	}
 
 	void PlayScene::OnExit()
 	{
-
+		mFloralFuryBGM->Stop(true);
 	}
 }

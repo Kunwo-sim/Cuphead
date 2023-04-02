@@ -210,6 +210,17 @@
       <Filter>Contents\Effect</Filter>
     </ClInclude>
     <ClInclude Include="kwTilePalette.h" />
+    <ClInclude Include="kwOverWorldScene.h">
+      <Filter>Contents\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="kwOverWorldCuphead.h">
+      <Filter>Contents\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="kwPixelMap.h">
+      <Filter>Contents\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="kwSound.h" />
+    <ClInclude Include="kwSoundManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc">
@@ -326,5 +337,16 @@
       <Filter>Contents\Effect</Filter>
     </ClCompile>
     <ClCompile Include="kwTilePalette.cpp" />
+    <ClCompile Include="kwOverWorldScene.cpp">
+      <Filter>Contents\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="kwOverWorldCuphead.cpp">
+      <Filter>Contents\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="kwPixelMap.cpp">
+      <Filter>Contents\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="kwSound.cpp" />
+    <ClCompile Include="kwSoundManager.cpp" />
   </ItemGroup>
 </Project>

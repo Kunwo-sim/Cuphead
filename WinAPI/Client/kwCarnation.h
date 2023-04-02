@@ -12,6 +12,12 @@ namespace kw
 		enum class eCarnationState
 		{
 			Idle,
+			Intro,
+			FaceAttack,
+			FiringSeed,
+
+			// Acorn, ºÎ¸Þ¶û
+			SpawnSeed,
 		};
 
 		Carnation();
@@ -21,6 +27,12 @@ namespace kw
 		virtual void Update() override;
 		virtual void Render(HDC hdc) override;
 		virtual void Release() override;
+
+		void idle();
+		void intro();
+		void faceAttack();
+		void firingSeed();
+		void SpawnSeed();
 
 		eCarnationState mState;
 		Animator* mAnimator;

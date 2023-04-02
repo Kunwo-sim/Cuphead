@@ -136,6 +136,10 @@ struct Vector2
 	Vector2& Normalize()
 	{
 		float length = Length();
+
+		if (Length() == 0.0f)
+			return *this;
+
 		x /= length;
 		y /= length;
 

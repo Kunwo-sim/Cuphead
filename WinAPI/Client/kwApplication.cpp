@@ -1,10 +1,13 @@
 #include "Resource.h"
 #include "kwApplication.h"
-#include "kwSceneManager.h"
+
 #include "kwTime.h"
 #include "kwInput.h"
-#include "kwCollisionManager.h"
 #include "kwCamera.h"
+
+#include "kwSoundManager.h"
+#include "kwSceneManager.h"
+#include "kwCollisionManager.h"
 
 namespace kw
 {
@@ -52,6 +55,7 @@ namespace kw
 
 		Time::Initiailize();
 		Input::Initialize();
+		SoundManager::Initialize();
 		SceneManager::Initialize();
 		Camera::Initiailize();
 

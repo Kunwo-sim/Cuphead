@@ -7,6 +7,8 @@ namespace kw
 		: mState(eState::Active)
 		, mPivot(ePivot::MiddleCenter)
 		, mDirection(eDirection::Front)
+		, mFlipX(false)
+		, mFlipY(false)
 	{
 		mComponents.resize((UINT)eComponentType::End);
 		AddComponent<Transform>();

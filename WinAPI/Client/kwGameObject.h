@@ -24,9 +24,13 @@ namespace kw
 		{
 			Front,
 			Up,
+			UpDiagnal,
 			Down,
+			DownDiagnal,
 			Left,
-			Right
+			Right,
+			Side,
+			None
 		};
 
 		GameObject();
@@ -71,11 +75,17 @@ namespace kw
 		eDirection GetDirection() { return mDirection; }
 		void SetDirection(eDirection direction) { mDirection = direction; }
 
+		bool GetFlipX() { return mFlipX; }
+		void SetFlipX(bool value) { mFlipX = value; }
+
 	private:
 		std::vector<Component*> mComponents;
 		eState mState;
 		ePivot mPivot;
 		eDirection mDirection;
+
+		bool mFlipX;
+		bool mFlipY;
 	};
 }
 

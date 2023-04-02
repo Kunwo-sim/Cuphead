@@ -3,6 +3,7 @@
 
 namespace kw
 {
+	class Image;
 	class SpriteRenderer : public Component
 	{
 	public:
@@ -14,6 +15,9 @@ namespace kw
 		virtual void Render(HDC hdc) override;
 		virtual void Release() override;
 
+		std::vector<Image*> mSprites;
+
 	private:
+		
 	};
 }

@@ -53,6 +53,7 @@ namespace kw
         GameObject* obj = mAnimator->GetOwner();
         Transform* tr = obj->GetComponent<Transform>();
         Vector2 scale = tr->GetScale();
+        bool isFlip = obj->GetFlipX();
 
         Vector2 pos = tr->GetPos();
         pos = Camera::CalculatePos(pos);
@@ -71,11 +72,38 @@ namespace kw
             pos.y -= mSpriteSheet[mSpriteIndex].size.y / 2.0f;
         }
         
+        std::wstring playAnimName = mAnimationName + std::to_wstring(mSpriteIndex);
+
+        if (isFlip)
+        {
+            playAnimName += L"Flip";
+        }
+
+        Image* playAnimImage = Image::Create(playAnimName, mSpriteSheet[mSpriteIndex].size.x, mSpriteSheet[mSpriteIndex].size.y);
+        Vector2 LeftTop = mSpriteSheet[mSpriteIndex].leftTop;
+
+        if (isFlip)
+        {
+            StretchBlt(
+                playAnimImage->GetHdc(),
+                playAnimImage->GetWidth(), 0, -1 * playAnimImage->GetWidth() -1, playAnimImage->GetHeight(),
+                mSheetImage->GetHdc(),
+                LeftTop.x, LeftTop.y, playAnimImage->GetWidth(), playAnimImage->GetHeight(),
+                SRCCOPY);
+        }
+        else
+        {
+            BitBlt(playAnimImage->GetHdc()
+                , 0, 0
+                , playAnimImage->GetWidth(), playAnimImage->GetHeight()
+                , mSheetImage->GetHdc(), LeftTop.x, LeftTop.y, SRCCOPY);
+        }
+
         TransparentBlt(hdc, pos.x, pos.y
             , mSpriteSheet[mSpriteIndex].size.x * scale.x
             , mSpriteSheet[mSpriteIndex].size.y * scale.y
-            , mSheetImage->GetHdc()
-            , mSpriteSheet[mSpriteIndex].leftTop.x, mSpriteSheet[mSpriteIndex].leftTop.y
+            , playAnimImage->GetHdc()
+            , 0, 0
             , mSpriteSheet[mSpriteIndex].size.x, mSpriteSheet[mSpriteIndex].size.y,
             RGB(255, 0, 255));
 

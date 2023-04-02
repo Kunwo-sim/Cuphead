@@ -154,6 +154,9 @@
     <ClInclude Include="kwLayer.h" />
     <ClInclude Include="kwMath.h" />
     <ClInclude Include="kwObject.h" />
+    <ClInclude Include="kwOverWorldCuphead.h" />
+    <ClInclude Include="kwOverWorldScene.h" />
+    <ClInclude Include="kwPixelMap.h" />
     <ClInclude Include="kwPlayScene.h" />
     <ClInclude Include="kwResource.h" />
     <ClInclude Include="kwResources.h" />
@@ -161,6 +164,8 @@
     <ClInclude Include="kwScene.h" />
     <ClInclude Include="kwSceneManager.h" />
     <ClInclude Include="kwSlime.h" />
+    <ClInclude Include="kwSound.h" />
+    <ClInclude Include="kwSoundManager.h" />
     <ClInclude Include="kwSpriteRenderer.h" />
     <ClInclude Include="kwTile.h" />
     <ClInclude Include="kwTilePalette.h" />
@@ -192,6 +197,9 @@
     <ClCompile Include="kwInput.cpp" />
     <ClCompile Include="kwLayer.cpp" />
     <ClCompile Include="kwMath.cpp" />
+    <ClCompile Include="kwOverWorldCuphead.cpp" />
+    <ClCompile Include="kwOverWorldScene.cpp" />
+    <ClCompile Include="kwPixelMap.cpp" />
     <ClCompile Include="kwPlayScene.cpp" />
     <ClCompile Include="kwResource.cpp" />
     <ClCompile Include="kwResources.cpp" />
@@ -199,6 +207,8 @@
     <ClCompile Include="kwScene.cpp" />
     <ClCompile Include="kwSceneManager.cpp" />
     <ClCompile Include="kwSlime.cpp" />
+    <ClCompile Include="kwSound.cpp" />
+    <ClCompile Include="kwSoundManager.cpp" />
     <ClCompile Include="kwSpriteRenderer.cpp" />
     <ClCompile Include="kwTile.cpp" />
     <ClCompile Include="kwTilePalette.cpp" />

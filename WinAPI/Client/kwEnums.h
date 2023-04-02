@@ -3,6 +3,7 @@
 enum class eSceneType
 {
 	Title,
+	OverWorld,
 	Play,
 	Ending,
 	Tool,
@@ -11,6 +12,7 @@ enum class eSceneType
 
 enum class eLayerType
 {
+	PixelMap,
 	BG,
 	Tile,
 	Ground,

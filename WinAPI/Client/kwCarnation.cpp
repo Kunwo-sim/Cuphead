@@ -29,7 +29,11 @@ namespace kw
 		mAnimator = AddComponent<Animator>();
 
 		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Carnation\\Idle", Vector2::Zero, 0.08f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Carnation\\FaceAttack\\High", Vector2::Zero, 0.08f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Carnation\\Firing", Vector2::Zero, 0.08f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Carnation\\Creating", Vector2::Zero, 0.08f);
 		mAnimator->Play(L"CarnationIdle", true);
+		mAnimator->Play(L"FaceAttackHigh", true);
 
 		Collider* collider = AddComponent<Collider>();
 		collider->SetSize(Vector2(200, 600));
