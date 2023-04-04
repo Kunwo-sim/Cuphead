@@ -84,23 +84,22 @@ namespace kw
 		if (mTime > 3.0f)
 		{
 			mTime = 0.0f;
-			int type = math::GetRandomNumber(0, 2);
 
-			faceAttack();
-			//switch (type)
-			//{
-			//	case 0:
-			//		faceAttack();
-			//		break;
-			//	case 1:
-			//		firing();
-			//		break;
-			//	case 2:
-			//		creating();
-			//		break;
-			//default:
-			//	break;
-			//}
+			int type = math::GetRandomNumber(0, 2);
+			switch (type)
+			{
+				case 0:
+					faceAttack();
+					break;
+				case 1:
+					firing();
+					break;
+				case 2:
+					creating();
+					break;
+			default:
+				break;
+			}
 		}
 	}
 
