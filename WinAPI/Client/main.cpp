@@ -46,7 +46,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     MyRegisterClass(hInstance, szWindowClass, WndProc);
     
     // tilemap
-    MyRegisterClass(hInstance, L"AtlasWindow", AtlasWndProc);
+    // MyRegisterClass(hInstance, L"AtlasWindow", AtlasWndProc);
 
     // 애플리케이션 초기화를 수행합니다:
     if (!InitInstance (hInstance, nCmdShow))

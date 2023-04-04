@@ -143,10 +143,12 @@
     <ClInclude Include="kwCollisionManager.h" />
     <ClInclude Include="kwComponent.h" />
     <ClInclude Include="kwCuphead.h" />
+    <ClInclude Include="kwDefaultGameObject.h" />
     <ClInclude Include="kwEndingScene.h" />
     <ClInclude Include="kwEngine.h" />
     <ClInclude Include="kwEntity.h" />
     <ClInclude Include="kwEnums.h" />
+    <ClInclude Include="kwFlowerPlatform.h" />
     <ClInclude Include="kwGameObject.h" />
     <ClInclude Include="kwGround.h" />
     <ClInclude Include="kwImage.h" />
@@ -189,8 +191,10 @@
     <ClCompile Include="kwCollisionManager.cpp" />
     <ClCompile Include="kwComponent.cpp" />
     <ClCompile Include="kwCuphead.cpp" />
+    <ClCompile Include="kwDefaultGameObject.cpp" />
     <ClCompile Include="kwEndingScene.cpp" />
     <ClCompile Include="kwEntity.cpp" />
+    <ClCompile Include="kwFlowerPlatform.cpp" />
     <ClCompile Include="kwGameObject.cpp" />
     <ClCompile Include="kwGround.cpp" />
     <ClCompile Include="kwImage.cpp" />

@@ -4,6 +4,7 @@
 #include "kwInput.h"
 #include "kwTime.h"
 #include "kwPixelMap.h"
+#include "kwCollider.h"
 
 namespace kw
 {
@@ -11,7 +12,6 @@ namespace kw
 		: mAnimator(nullptr)
 		, mTransform(nullptr)
 		, mCollider(nullptr)
-		, mRigidbody(nullptr)
 		, mSheetImage(nullptr)
 		, mState(eOverWorldCupheadState::Idle)
 		, mPixelMap(nullptr)
@@ -29,19 +29,23 @@ namespace kw
 	{
 		SetPivot(ePivot::LowCenter);
 		mTransform = GetComponent<Transform>();
-		mAnimator = AddComponent<Animator>();
+		
+		mCollider = AddComponent<Collider>();
+		mCollider->SetSize(Vector2(70.0f, 90.0f));
 
-		mSheetImage = Resources::Load<Image>(L"OverWorldCuphead", L"..\\Resources\\OverWorldCuphead.bmp");
-		mAnimator->CreateAnimation(L"OverWorldCupheadIdleUp", mSheetImage, Vector2(0.0f, 0.0f), 16, 8, 4, Vector2::Zero, 0.1f);
-		mAnimator->CreateAnimation(L"OverWorldCupheadRunUp", mSheetImage, Vector2(103.0f * 4.0f, 0.0f), 16, 8, 12, Vector2::Zero, 0.07f);
-		mAnimator->CreateAnimation(L"OverWorldCupheadIdleUpDiagnal", mSheetImage, Vector2(0.0f, 113.0f * 1.0f), 16, 8, 3, Vector2::Zero, 0.1f);
-		mAnimator->CreateAnimation(L"OverWorldCupheadRunUpDiagnal", mSheetImage, Vector2(103.0f * 4.0f, 113.0f * 1.0f), 16, 8, 10, Vector2::Zero, 0.07f);
-		mAnimator->CreateAnimation(L"OverWorldCupheadIdleSide", mSheetImage, Vector2(0.0f, 113.0f * 2.0f), 16, 8, 4, Vector2::Zero, 0.1f);
-		mAnimator->CreateAnimation(L"OverWorldCupheadRunSide", mSheetImage, Vector2(103.0f * 4.0f, 113.0f * 3.0f), 16, 8, 10, Vector2::Zero, 0.07f);
-		mAnimator->CreateAnimation(L"OverWorldCupheadIdleDownDiagnal", mSheetImage, Vector2(0.0f, 113.0f * 4.0f), 16, 8, 4, Vector2::Zero, 0.1f);
-		mAnimator->CreateAnimation(L"OverWorldCupheadRunDownDiagnal", mSheetImage, Vector2(103.0f * 4.0f, 113.0f * 4.0f), 16, 8, 12, Vector2::Zero, 0.07f);
-		mAnimator->CreateAnimation(L"OverWorldCupheadIdleDown", mSheetImage, Vector2(0.0f, 113.0f * 5.0f), 16, 8, 9, Vector2::Zero, 0.1f);
-		mAnimator->CreateAnimation(L"OverWorldCupheadRunDown", mSheetImage, Vector2(0.0f, 113.0f * 6.0f), 16, 8, 13, Vector2::Zero, 0.07f);
+		mAnimator = AddComponent<Animator>();
+		mSheetImage = Resources::Load<Image>(L"OverWorldCuphead", L"..\\Resources\\OverWorld\\OverWorldCuphead.bmp");
+		Vector2 animOffeset = Vector2(0.0f, 12.0f);
+		mAnimator->CreateAnimation(L"OverWorldCupheadIdleUp", mSheetImage, Vector2(0.0f, 0.0f), 16, 8, 4, animOffeset, 0.1f);
+		mAnimator->CreateAnimation(L"OverWorldCupheadRunUp", mSheetImage, Vector2(103.0f * 4.0f, 0.0f), 16, 8, 12, animOffeset, 0.07f);
+		mAnimator->CreateAnimation(L"OverWorldCupheadIdleUpDiagnal", mSheetImage, Vector2(0.0f, 113.0f * 1.0f), 16, 8, 3, animOffeset, 0.1f);
+		mAnimator->CreateAnimation(L"OverWorldCupheadRunUpDiagnal", mSheetImage, Vector2(103.0f * 4.0f, 113.0f * 1.0f), 16, 8, 10, animOffeset, 0.07f);
+		mAnimator->CreateAnimation(L"OverWorldCupheadIdleSide", mSheetImage, Vector2(0.0f, 113.0f * 2.0f), 16, 8, 4, animOffeset, 0.1f);
+		mAnimator->CreateAnimation(L"OverWorldCupheadRunSide", mSheetImage, Vector2(103.0f * 4.0f, 113.0f * 3.0f), 16, 8, 10, animOffeset, 0.07f);
+		mAnimator->CreateAnimation(L"OverWorldCupheadIdleDownDiagnal", mSheetImage, Vector2(0.0f, 113.0f * 4.0f), 16, 8, 4, animOffeset, 0.1f);
+		mAnimator->CreateAnimation(L"OverWorldCupheadRunDownDiagnal", mSheetImage, Vector2(103.0f * 4.0f, 113.0f * 4.0f), 16, 8, 12, animOffeset, 0.07f);
+		mAnimator->CreateAnimation(L"OverWorldCupheadIdleDown", mSheetImage, Vector2(0.0f, 113.0f * 5.0f), 16, 8, 9, animOffeset, 0.1f);
+		mAnimator->CreateAnimation(L"OverWorldCupheadRunDown", mSheetImage, Vector2(0.0f, 113.0f * 6.0f), 16, 8, 13, animOffeset, 0.07f);
 		
 		SetDirection(eDirection::Down);
 		mAnimator->Play(L"OverWorldCupheadIdleDown", true);
@@ -62,7 +66,14 @@ namespace kw
 			break;
 		}
 		
-		Camera::SetLookPosition(mTransform->GetPos());
+		Vector2 CameraPos = mTransform->GetPos();
+		// 카메라 경계값
+		if (CameraPos.x < 640.0f)	CameraPos.x = 640.0f;
+		if (CameraPos.x > 2940.0f)	CameraPos.x = 2940.0f;
+		if (CameraPos.y < 360.0f)	CameraPos.y = 360.0f;
+		if (CameraPos.y > 1640.0f)	CameraPos.y = 1640.0f;
+		Camera::SetLookPosition(CameraPos);
+
 		GameObject::Update();
 	}
 
@@ -196,12 +207,12 @@ namespace kw
 
 		addPos = addPos.Normalize() * mSpeed * Time::DeltaTime();
 
-		Vector2 pixelOffset = Vector2::Zero;
+		Vector2 pixelOffset = Vector2(0.0f, -15.0f);
 
 		if (addPos.y > 0.0f)
-			pixelOffset.y += 0.0f;
+			pixelOffset.y += 20.0f;
 		else if (addPos.y < 0.0f)
-			pixelOffset.y -= 40.0f;
+			pixelOffset.y -= 10.0f;
 
 		if (addPos.x > 0.0f)
 			pixelOffset.x += 10.0f;

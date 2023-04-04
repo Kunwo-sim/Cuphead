@@ -10,6 +10,8 @@
 namespace kw
 {
 	Ground::Ground()
+		: mCollider(nullptr)
+		, mPlayer(nullptr)
 	{
 	}
 
@@ -19,8 +21,9 @@ namespace kw
 
 	void Ground::Initialize()
 	{
+		SetPivot(GameObject::ePivot::LowCenter);
 		mCollider = AddComponent<Collider>();
-		mCollider->SetSize(Vector2(1600.0f, 100.0f));
+
 		GameObject::Initialize();
 	}
 
@@ -53,10 +56,10 @@ namespace kw
 		Collider* groundCol = this->GetComponent<Collider>();
 		Vector2 groundPos = this->GetComponent<Transform>()->GetPos();
 
-		if (cupheadPos.y < groundCol->GetCenter().y)
+		if (cupheadPos.y < groundCol->GetCenter().y && rb->GetVelocity().y > 0.0f)
 		{
 			// ÄÅÇìµå ¹Ù´Ú À§Ä¡¸¦ ¶¥ À§·Î Á¶Á¤
-			cupheadPos.y = groundCol->GetCenter().y - groundCol->GetSize().y / 2.0f;
+			cupheadPos.y = (groundCol->GetCenter().y - groundCol->GetSize().y / 2.0f);
 			cuphead->GetComponent<Transform>()->SetPos(cupheadPos);
 			rb->SetGround(true);
 		}
@@ -73,7 +76,7 @@ namespace kw
 		Vector2 cupheadPos = cuphead->GetComponent<Transform>()->GetPos();
 		Collider* groundCol = this->GetComponent<Collider>();
 
-		if (cupheadPos.y < groundCol->GetCenter().y)
+		if (cupheadPos.y < groundCol->GetCenter().y && rb->GetVelocity().y > 0.0f)
 		{
 			// ÄÅÇìµå ¹Ù´Ú À§Ä¡¸¦ ¶¥ À§·Î Á¶Á¤
 			cupheadPos.y = groundCol->GetCenter().y - groundCol->GetSize().y / 2.0f;
@@ -84,6 +87,15 @@ namespace kw
 
 	void Ground::OnCollisionExit(Collider* other)
 	{
+		Cuphead* cuphead = dynamic_cast<Cuphead*>(other->GetOwner());
+		if (cuphead == nullptr)
+			return;
 
+		cuphead->GetComponent<Rigidbody>()->SetGround(false);
+	}
+
+	void Ground::SetColliderSize(Vector2 size)
+	{
+		mCollider->SetSize(size);
 	}
 }

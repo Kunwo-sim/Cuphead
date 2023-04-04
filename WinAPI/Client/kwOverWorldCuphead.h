@@ -34,7 +34,6 @@ namespace kw
 		eOverWorldCupheadState mState;
 		Transform* mTransform;
 		Collider* mCollider;
-		Rigidbody* mRigidbody;
 		Animator* mAnimator;
 		Image* mSheetImage;
 		PixelMap* mPixelMap;

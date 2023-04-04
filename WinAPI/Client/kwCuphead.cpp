@@ -38,10 +38,6 @@ namespace kw
 		mRigidbody = AddComponent<Rigidbody>();
 		mCollider = AddComponent<Collider>();
 
-		/*Image* mImage = Resources::Load<Image>(L"Cuphead", L"..\\Resources\\Cuphead_Stage.bmp");
-		mAnimator->CreateAnimation(L"FowardRun", mImage, Vector2::Zero, 16, 8, 16, Vector2::Zero, 0.1);
-		mAnimator->CreateAnimation(L"FowardRight", mImage, Vector2(0.0f, 113.0f), 16, 8, 15, Vector2::Zero, 0.1);
-		mAnimator->CreateAnimation(L"Idle", mImage, Vector2(0.0f, 113.0f * 5), 16, 8, 9, Vector2(0.0f, 0.0f), 0.1);*/
 		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\StageCuphead\\IdleLeft", Vector2::Zero, 0.08f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\StageCuphead\\IdleRight", Vector2::Zero, 0.08f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\StageCuphead\\ShootLeft", Vector2(-14.0f, 0.0f), 0.07f);
@@ -114,7 +110,7 @@ namespace kw
 
 	void Cuphead::idle()
 	{
-		if (Input::GetKey(eKeyCode::W))
+		if (Input::GetKeyDown(eKeyCode::W))
 		{
 			SetStateJump();
 		}
@@ -144,7 +140,7 @@ namespace kw
 
 	void Cuphead::run()
 	{
-		if (Input::GetKey(eKeyCode::W))
+		if (Input::GetKeyDown(eKeyCode::W))
 		{
 			SetStateJump();
 			return;
@@ -188,7 +184,7 @@ namespace kw
 	}
 	void Cuphead::shoot()
 	{
-		if (Input::GetKey(eKeyCode::W))
+		if (Input::GetKeyDown(eKeyCode::W))
 		{
 			SetStateJump();
 			return;
@@ -226,7 +222,7 @@ namespace kw
 
 	void Cuphead::runShoot()
 	{
-		if (Input::GetKey(eKeyCode::W))
+		if (Input::GetKeyDown(eKeyCode::W))
 		{
 			SetStateJump();
 			return;
@@ -415,7 +411,7 @@ namespace kw
 		playCupheadAnim(L"Jump");
 
 		Vector2 velocity = mRigidbody->GetVelocity();
-		velocity.y -= 800.0f;
+		velocity.y -= 1800.0f;
 
 		mRigidbody->SetVelocity(velocity);
 		mRigidbody->SetGround(false);

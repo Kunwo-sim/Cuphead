@@ -1,15 +1,18 @@
 #include "kwPlayScene.h"
-#include "kwCuphead.h"
-#include "kwInput.h"
 #include "kwSceneManager.h"
-#include "kwCarnation.h"
-#include "kwResources.h"
 #include "kwCollisionManager.h"
+#include "kwInput.h"
+
+#include "kwResources.h"
 #include "kwImage.h"
 #include "kwObject.h"
 #include "kwGameObject.h"
-#include "kwGround.h"
 #include "kwSound.h"
+
+#include "kwCuphead.h"
+#include "kwCarnation.h"
+#include "kwFlowerPlatform.h"
+#include "kwGround.h"
 
 namespace kw
 {
@@ -25,15 +28,16 @@ namespace kw
 	{
 		Scene::Initialize();
 
-		//mBackGround = Resources::Load<Image>(L"Slime_BackGroud", L"..\\Resources\\Slime_BackGroud.bmp");
 		mBackGround1 = Resources::Load<Image>(L"Carnation_Back_01", L"..\\Resources\\Stage\\Carnation\\BackGround\\Carnation_Back_01.bmp");
 		mBackGround2 = Resources::Load<Image>(L"Carnation_Back_02", L"..\\Resources\\Stage\\Carnation\\BackGround\\Carnation_Back_02.bmp");
 		mBackGround3 = Resources::Load<Image>(L"Carnation_Back_03", L"..\\Resources\\Stage\\Carnation\\BackGround\\Carnation_Back_03.bmp");
 
-		object::Instantiate<Ground>(eLayerType::Ground, Vector2(640, 700));
-		object::Instantiate<Cuphead>(eLayerType::Player, Vector2(400, 650));
-		object::Instantiate<Carnation>(eLayerType::Monster, Vector2(500, 650));
-		// obj->SetPivot(GameObject::ePivot::LowCenter);
+		object::Instantiate<Ground>(eLayerType::Ground, Vector2(640, 720))->SetColliderSize(Vector2(1600.0f, 120.0f));
+		object::Instantiate<Cuphead>(eLayerType::Player, Vector2(400, 600));
+		object::Instantiate<Carnation>(eLayerType::Monster, Vector2(1050, 680));
+		object::Instantiate<FlowerPlatform>(eLayerType::Ground, Vector2(150, 400))->SetPlatformType(FlowerPlatform::PlatformType::A);
+		object::Instantiate<FlowerPlatform>(eLayerType::Ground, Vector2(400, 400))->SetPlatformType(FlowerPlatform::PlatformType::B);
+		object::Instantiate<FlowerPlatform>(eLayerType::Ground, Vector2(650, 400))->SetPlatformType(FlowerPlatform::PlatformType::C);
 
 		mFloralFuryBGM = Resources::Load<Sound>(L"FlowerFuryBGM", L"..\\Resources\\Sound\\BGM\\FloralFuryBGM.wav");
 	}
@@ -50,8 +54,6 @@ namespace kw
 
 	void PlayScene::Render(HDC hdc)
 	{
-		// BitBlt(hdc, 0, 0, mBackGround->GetWidth(), mBackGround->GetHeight(), mBackGround->GetHdc(), 0, 0, SRCCOPY);
-
 		TransparentBlt(hdc, -50, 0
 			, mBackGround1->GetWidth()
 			, mBackGround1->GetHeight()

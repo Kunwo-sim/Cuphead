@@ -3,11 +3,11 @@
 
 namespace kw
 {
-	class Ground : public GameObject
+	class DefaultGameObject : public GameObject
 	{
 	public:
-		Ground();
-		virtual ~Ground();
+		DefaultGameObject();
+		virtual ~DefaultGameObject();
 
 		virtual void Initialize();
 		virtual void Update();
@@ -18,11 +18,9 @@ namespace kw
 		virtual void OnCollisionStay(class Collider* other);
 		virtual void OnCollisionExit(class Collider* other);
 
-		void SetColliderSize(Vector2 size);
-		void SetPlayer(class Cuphead* player) { mPlayer = player; }
-
 	private:
+		class Transform* mTransform;
 		class Collider* mCollider;
-		class Cuphead* mPlayer;
+		class Animator* mAnimator;
 	};
 }

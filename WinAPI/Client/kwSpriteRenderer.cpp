@@ -32,35 +32,45 @@ namespace kw
 		Vector2 pos = GetOwner()->GetComponent<Transform>()->GetPos();
 		pos = Camera::CalculatePos(pos);
 
-		for (Image* sprite : mSprites)
+		for (Sprite sprite : mSprites)
 		{
-			BitBlt(hdc
-				, pos.x
-				, pos.y
-				, sprite->GetWidth()
-				, sprite->GetHeight()
-				, sprite->GetHdc()
-				, 0
-				, 0
-				, SRCCOPY);
-
-			/*TransparentBlt(hdc
-				, pos.x
-				, pos.y
-				, sprite.GetWidth()
-				, sprite.GetHeight()
-				, sprite.GetHdc()
-				, 0
-				, 0
-				, sprite.GetWidth()
-				, sprite.GetHeight()
-				, RGB(255, 0, 255));*/
+			if (sprite.isTransParent)
+			{
+				TransparentBlt(hdc
+					, pos.x + sprite.leftTop.x
+					, pos.y + sprite.leftTop.y
+					, sprite.image->GetWidth()
+					, sprite.image->GetHeight()
+					, sprite.image->GetHdc()
+					, 0
+					, 0
+					, sprite.image->GetWidth()
+					, sprite.image->GetHeight()
+					, RGB(255, 0, 255)
+				);
+			}
+			else
+			{
+				BitBlt(hdc
+					, pos.x + sprite.leftTop.x
+					, pos.y + sprite.leftTop.y
+					, sprite.image->GetWidth()
+					, sprite.image->GetHeight()
+					, sprite.image->GetHdc()
+					, 0
+					, 0
+					, SRCCOPY);
+			}
 		}
-		
 	}
 
 	void SpriteRenderer::Release()
 	{
 
+	}
+
+	void SpriteRenderer::AddSprite(Image* image, Vector2 leftTop, bool isTransParent)
+	{
+		mSprites.push_back(Sprite(image, leftTop, isTransParent));
 	}
 }

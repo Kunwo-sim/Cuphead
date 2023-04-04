@@ -11,13 +11,14 @@
 #include "kwOverWorldCuphead.h"
 #include "kwImage.h"
 #include "kwPixelMap.h"
+#include "kwSpriteRenderer.h"
 #include "kwSound.h"
 
 namespace kw
 {
 	OverWorldScene::OverWorldScene()
-		: mBackGround(nullptr)
-		, mStartPos(Vector2(1000.0f, 1000.0f))
+		: mOverWorldBGM(nullptr)
+		, mPlayerStartPos(Vector2(650.0f, 800.0f))
 	{
 
 	}
@@ -32,9 +33,20 @@ namespace kw
 		Scene::Initialize();
 
 		mOverWorldBGM = Resources::Load<Sound>(L"OverWorldBGM", L"..\\Resources\\Sound\\BGM\\OverWorldBGM.wav");
-		mBackGround = Resources::Load<Image>(L"Stage1BackGround", L"..\\Resources\\Stage1BackGround.bmp");
+
 		PixelMap* pixelMap = object::Instantiate<PixelMap>(eLayerType::PixelMap);
-		OverWorldCuphead* player = object::Instantiate<OverWorldCuphead>(eLayerType::Player, mStartPos);
+
+		GameObject* frontBG = object::Instantiate<GameObject>(eLayerType::FrontBG);
+		Image* backFrontImage = Resources::Load<Image>(L"Stage1FrontMap", L"..\\Resources\\OverWorld\\Stage1FrontMap.bmp");
+		SpriteRenderer* sr2 = frontBG->AddComponent<SpriteRenderer>();
+		sr2->AddSprite(backFrontImage, Vector2(398.0f, 380.0f), true);
+
+		GameObject* backGround = object::Instantiate<GameObject>(eLayerType::BG);
+		Image* backGroundImage = Resources::Load<Image>(L"Stage1BackGround", L"..\\Resources\\OverWorld\\Stage1BackGround.bmp");
+		SpriteRenderer* sr = backGround->AddComponent<SpriteRenderer>();
+		sr->AddSprite(backGroundImage, Vector2(0.0f, 0.0f), false);
+		
+		OverWorldCuphead* player = object::Instantiate<OverWorldCuphead>(eLayerType::Player, mPlayerStartPos);
 		player->SetPixelMap(pixelMap);
 	}
 
@@ -50,9 +62,6 @@ namespace kw
 
 	void OverWorldScene::Render(HDC hdc)
 	{
-		Vector2 pos = Vector2::Zero;
-		pos = Camera::CalculatePos(pos);
-		BitBlt(hdc, pos.x, pos.y, mBackGround->GetWidth(), mBackGround->GetHeight(), mBackGround->GetHdc(), 0, 0, SRCCOPY);
 		Scene::Render(hdc);
 	}
 
@@ -63,7 +72,7 @@ namespace kw
 
 	void OverWorldScene::OnEnter()
 	{
-		Camera::SetLookPosition(mStartPos);
+		Camera::SetLookPosition(mPlayerStartPos);
 		mOverWorldBGM->Play(true);
 	}
 

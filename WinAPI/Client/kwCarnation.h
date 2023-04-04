@@ -1,8 +1,5 @@
 #pragma once
 #include "kwGameObject.h"
-#include "kwImage.h"
-#include "kwAnimator.h"
-#include "kwTransform.h"
 
 namespace kw
 {
@@ -14,10 +11,9 @@ namespace kw
 			Idle,
 			Intro,
 			FaceAttack,
-			FiringSeed,
-
+			Firing,
 			// Acorn, ºÎ¸Þ¶û
-			SpawnSeed,
+			Creating,
 		};
 
 		Carnation();
@@ -31,12 +27,16 @@ namespace kw
 		void idle();
 		void intro();
 		void faceAttack();
-		void firingSeed();
-		void SpawnSeed();
+		void firing();
+		void creating();
+		void idleCallback();
 
 		eCarnationState mState;
-		Animator* mAnimator;
-		Transform* mTransform;
+		class Animator* mAnimator;
+		class Transform* mTransform;
+		class Sound* mSFX;
+
+		float mTime;
 	};
 }
 

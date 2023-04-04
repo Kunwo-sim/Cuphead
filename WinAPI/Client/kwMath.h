@@ -1,5 +1,6 @@
 #pragma once
 #include <math.h>
+#include <random>
 #define PI 3.141592
 
 struct Vector2
@@ -172,5 +173,14 @@ namespace kw::math
 	inline static float Cross(Vector2& v1, Vector2& v2)
 	{
 		return v1.x * v2.y - v1.y * v2.x;
+	}
+
+	static int GetRandomNumber(int start, int end)
+	{
+		std::random_device rd;
+		std::mt19937 gen(rd());
+		std::uniform_int_distribution<> dis(start, end);
+
+		return dis(gen);
 	}
 }

@@ -19,7 +19,7 @@ namespace kw
 	{
 		mSR = AddComponent<SpriteRenderer>();
 		mPixelMapImage = Resources::Load<Image>(L"Stage1PixelMap", L"..\\Resources\\OverWorld\\Stage1PixelMap.bmp");
-		mSR->mSprites.push_back(mPixelMapImage);
+		mSR->AddSprite(mPixelMapImage, Vector2::Zero, false);
 
 		GameObject::Initialize();
 	}
@@ -41,7 +41,7 @@ namespace kw
 
 	bool PixelMap::PixelMovableCheck(Vector2 pos)
 	{
-		COLORREF nextPixel = mPixelMapImage->GetPixel(pos.x, pos.y);
+		COLORREF nextPixel = mPixelMapImage->GetPixel(pos.x +1 , pos.y - 1);
 		if (nextPixel == RGB(255, 0, 255))
 		{
 			return false;

@@ -4,6 +4,30 @@
 namespace kw
 {
 	class Image;
+
+	struct Sprite
+	{
+		Image* image;
+		Vector2 leftTop;
+		bool isTransParent;
+
+		Sprite()
+			: image(nullptr)
+			, leftTop(Vector2::Zero)
+			, isTransParent(false)
+		{
+
+		}
+
+		Sprite(Image* image, Vector2 leftTop, bool isTransParent)
+			: image(image)
+			, leftTop(leftTop)
+			, isTransParent(isTransParent)
+		{
+
+		}
+	};
+
 	class SpriteRenderer : public Component
 	{
 	public:
@@ -15,9 +39,9 @@ namespace kw
 		virtual void Render(HDC hdc) override;
 		virtual void Release() override;
 
-		std::vector<Image*> mSprites;
+		void AddSprite(Image* image, Vector2 leftTop, bool isTransParent);
 
 	private:
-		
+		std::vector<Sprite> mSprites;
 	};
 }

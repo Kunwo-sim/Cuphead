@@ -56,15 +56,6 @@
     <Filter Include="Contents\Bullet">
       <UniqueIdentifier>{c60f98c2-f947-4e36-8101-34e40b856362}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\UI">
-      <UniqueIdentifier>{1244c9e2-7645-420d-a69c-7c974601bd71}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\UI\Title">
-      <UniqueIdentifier>{839b2472-1aa6-446c-84fb-16b7ce38bbdd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\UI\Title\TitleCharacter">
-      <UniqueIdentifier>{4c9d44ec-0d85-4cbc-a434-2787696c0015}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\Camera">
       <UniqueIdentifier>{f8eedec1-2610-44b6-98c6-1d1797caa103}</UniqueIdentifier>
     </Filter>
@@ -85,6 +76,27 @@
     </Filter>
     <Filter Include="Contents\Effect">
       <UniqueIdentifier>{a9cfa14a-44c6-43ec-b298-76f7610f3af3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Tool">
+      <UniqueIdentifier>{984b53af-1e83-465c-a0a0-f89cd1fe392c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Sound">
+      <UniqueIdentifier>{590c5962-e9dc-4fa6-aef8-219d3ff6bc00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObjects">
+      <UniqueIdentifier>{1244c9e2-7645-420d-a69c-7c974601bd71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObjects\TitleScene">
+      <UniqueIdentifier>{839b2472-1aa6-446c-84fb-16b7ce38bbdd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObjects\TitleScene\TitleCharacter">
+      <UniqueIdentifier>{4c9d44ec-0d85-4cbc-a434-2787696c0015}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObjects\OverWorldScene">
+      <UniqueIdentifier>{f43c967f-2325-4dbf-ac83-7fa884466acb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObjects\CarnationScene">
+      <UniqueIdentifier>{0b4591ee-18d2-4edc-85b3-69a2a840acaa}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -173,7 +185,7 @@
       <Filter>Contents\Bullet</Filter>
     </ClInclude>
     <ClInclude Include="kwTitleCharacter.h">
-      <Filter>Contents\UI\Title\TitleCharacter</Filter>
+      <Filter>Contents\GameObjects\TitleScene\TitleCharacter</Filter>
     </ClInclude>
     <ClInclude Include="kwCamera.h">
       <Filter>Engine\Camera</Filter>
@@ -205,11 +217,9 @@
     <ClInclude Include="kwGround.h">
       <Filter>Contents\Object</Filter>
     </ClInclude>
-    <ClInclude Include="kwTile.h" />
     <ClInclude Include="kwBulletFireEffect.h">
       <Filter>Contents\Effect</Filter>
     </ClInclude>
-    <ClInclude Include="kwTilePalette.h" />
     <ClInclude Include="kwOverWorldScene.h">
       <Filter>Contents\Scene</Filter>
     </ClInclude>
@@ -219,8 +229,24 @@
     <ClInclude Include="kwPixelMap.h">
       <Filter>Contents\Object</Filter>
     </ClInclude>
-    <ClInclude Include="kwSound.h" />
-    <ClInclude Include="kwSoundManager.h" />
+    <ClInclude Include="kwTile.h">
+      <Filter>Contents\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="kwTilePalette.h">
+      <Filter>Contents\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="kwSound.h">
+      <Filter>Engine\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="kwSoundManager.h">
+      <Filter>Engine\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="kwDefaultGameObject.h">
+      <Filter>Contents\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="kwFlowerPlatform.h">
+      <Filter>Contents\GameObjects\CarnationScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc">
@@ -303,7 +329,7 @@
       <Filter>Contents\Bullet</Filter>
     </ClCompile>
     <ClCompile Include="kwTitleCharacter.cpp">
-      <Filter>Contents\UI\Title\TitleCharacter</Filter>
+      <Filter>Contents\GameObjects\TitleScene\TitleCharacter</Filter>
     </ClCompile>
     <ClCompile Include="kwCamera.cpp">
       <Filter>Engine\Camera</Filter>
@@ -332,11 +358,9 @@
     <ClCompile Include="kwGround.cpp">
       <Filter>Contents\Object</Filter>
     </ClCompile>
-    <ClCompile Include="kwTile.cpp" />
     <ClCompile Include="kwBulletFireEffect.cpp">
       <Filter>Contents\Effect</Filter>
     </ClCompile>
-    <ClCompile Include="kwTilePalette.cpp" />
     <ClCompile Include="kwOverWorldScene.cpp">
       <Filter>Contents\Scene</Filter>
     </ClCompile>
@@ -346,7 +370,23 @@
     <ClCompile Include="kwPixelMap.cpp">
       <Filter>Contents\Object</Filter>
     </ClCompile>
-    <ClCompile Include="kwSound.cpp" />
-    <ClCompile Include="kwSoundManager.cpp" />
+    <ClCompile Include="kwTile.cpp">
+      <Filter>Contents\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="kwTilePalette.cpp">
+      <Filter>Contents\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="kwSoundManager.cpp">
+      <Filter>Engine\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="kwSound.cpp">
+      <Filter>Engine\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="kwDefaultGameObject.cpp">
+      <Filter>Contents\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="kwFlowerPlatform.cpp">
+      <Filter>Contents\GameObjects\CarnationScene</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

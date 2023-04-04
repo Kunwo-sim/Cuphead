@@ -22,7 +22,7 @@ namespace kw
 		Scene::Initialize();
 
 		mTitleBGM = Resources::Load<Sound>(L"TilteBGM", L"..\\Resources\\Sound\\BGM\\TitleBGM.wav");
-		mBackGround = Resources::Load<Image>(L"Tilte_BackGroud", L"..\\Resources\\Title_BackGroud.bmp");
+		mBackGround = Resources::Load<Image>(L"Tilte_BackGroud", L"..\\Resources\\Title\\Title_BackGroud.bmp");
 		object::Instantiate<TitleCharacter>(eLayerType::UI, Vector2(640.0f, 720.0f));
 	}
 

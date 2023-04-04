@@ -18,9 +18,9 @@ namespace kw
 		virtual void OnExit() override;
 
 	private:
-		class Image* mBackGround;
 		class Sound* mOverWorldBGM;
 
-		Vector2 mStartPos;
+		Vector2 mPlayerStartPos;
+
 	};
 }

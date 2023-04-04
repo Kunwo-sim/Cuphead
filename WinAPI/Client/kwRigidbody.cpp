@@ -12,10 +12,10 @@ namespace kw
 		, mAccelation(Vector2::Zero)
 		, mVelocity(Vector2::Zero)
 	{
-		mLimitedVelocity.x = 200.0f;
-		mLimitedVelocity.y = 1000.0f;
+		mLimitedVelocity.x = 1000.0f;
+		mLimitedVelocity.y = 2000.0f;
 		mbGround = false;
-		mGravity = Vector2(0.0f, 2000.0f);
+		mGravity = Vector2(0.0f, 5000.0f);
 		mFriction = 100.0f;
 	}
 
