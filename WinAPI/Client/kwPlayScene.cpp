@@ -35,9 +35,18 @@ namespace kw
 		object::Instantiate<Ground>(eLayerType::Ground, Vector2(640, 720))->SetColliderSize(Vector2(1600.0f, 120.0f));
 		object::Instantiate<Cuphead>(eLayerType::Player, Vector2(400, 600));
 		object::Instantiate<Carnation>(eLayerType::Monster, Vector2(1050, 680));
-		object::Instantiate<FlowerPlatform>(eLayerType::Ground, Vector2(150, 400))->SetPlatformType(FlowerPlatform::PlatformType::A);
-		object::Instantiate<FlowerPlatform>(eLayerType::Ground, Vector2(400, 400))->SetPlatformType(FlowerPlatform::PlatformType::B);
-		object::Instantiate<FlowerPlatform>(eLayerType::Ground, Vector2(650, 400))->SetPlatformType(FlowerPlatform::PlatformType::C);
+
+		FlowerPlatform* platformA = object::Instantiate<FlowerPlatform>(eLayerType::Ground, Vector2(150, 400));
+		platformA->SetPlatformType(FlowerPlatform::PlatformType::A);
+		platformA->PlayPlatformAnim();
+
+		FlowerPlatform* platformB = object::Instantiate<FlowerPlatform>(eLayerType::Ground, Vector2(400, 400));
+		platformB->SetPlatformType(FlowerPlatform::PlatformType::B);
+		platformB->PlayPlatformAnim();
+
+		FlowerPlatform* platformC = object::Instantiate<FlowerPlatform>(eLayerType::Ground, Vector2(650, 400));
+		platformC->SetPlatformType(FlowerPlatform::PlatformType::C);
+		platformC->PlayPlatformAnim();
 
 		mFloralFuryBGM = Resources::Load<Sound>(L"FlowerFuryBGM", L"..\\Resources\\Sound\\BGM\\FloralFuryBGM.wav");
 	}

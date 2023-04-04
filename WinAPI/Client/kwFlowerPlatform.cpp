@@ -33,21 +33,6 @@ namespace kw
 		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Carnation\\Platform\\B", Vector2(0.0f, 0.0f), 0.07f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Carnation\\Platform\\C", Vector2(0.0f, 0.0f), 0.07f);
 
-		switch (mPlatformType)
-		{
-		case kw::FlowerPlatform::PlatformType::A:
-			mAnimator->Play(L"PlatformA", true);
-			break;
-		case kw::FlowerPlatform::PlatformType::B:
-			mAnimator->Play(L"PlatformB", true);
-			break;
-		case kw::FlowerPlatform::PlatformType::C:
-			mAnimator->Play(L"PlatformC", true);
-			break;
-		default:
-			break;
-		}
-
 		mGround = object::Instantiate<Ground>(eLayerType::Ground, mTransform->GetPos());
 		mGround->SetColliderSize(Vector2(60.0f, 65.0f));
 
@@ -90,5 +75,23 @@ namespace kw
 	void FlowerPlatform::OnCollisionExit(Collider* other)
 	{
 
+	}
+
+	void FlowerPlatform::PlayPlatformAnim()
+	{
+		switch (mPlatformType)
+		{
+		case kw::FlowerPlatform::PlatformType::A:
+			mAnimator->Play(L"PlatformA", true);
+			break;
+		case kw::FlowerPlatform::PlatformType::B:
+			mAnimator->Play(L"PlatformB", true);
+			break;
+		case kw::FlowerPlatform::PlatformType::C:
+			mAnimator->Play(L"PlatformC", true);
+			break;
+		default:
+			break;
+		}
 	}
 }

@@ -31,6 +31,7 @@ namespace kw
 		virtual void OnCollisionExit(class Collider* other);
 
 		void SetPlatformType(PlatformType type) { mPlatformType = type; };
+		void PlayPlatformAnim();
 
 	private:
 		class Transform* mTransform;
