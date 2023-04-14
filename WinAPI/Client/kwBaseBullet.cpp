@@ -8,36 +8,31 @@ namespace kw
 {
 	BaseBullet::BaseBullet()
 		: mTime(0.0f)
+		, mAnimator(nullptr)
 		, mSpeed(1500.0f)
+		, mBulletDestoryEffect(nullptr)
 	{
 
 	}
 
 	BaseBullet::~BaseBullet()
 	{
-
+		delete mBulletDestoryEffect;
+		mBulletDestoryEffect = nullptr;
 	}
 
 	void BaseBullet::Initialize()
 	{
 		mAnimator = AddComponent<Animator>();
-		//mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Bullet\\Create", Vector2::Zero, 0.08f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Bullet\\LoopLeft", Vector2::Zero, 0.08f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Bullet\\LoopRight", Vector2::Zero, 0.08f);
-		//mAnimator->GetEndEvent(L"BulletLoopRight") = std::bind(&BaseBullet::BulletTest, this);
-		mAnimator->GetEndEvent(L"BulletLoopLeft") = std::bind(&BaseBullet::BulletTest, this);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Bullet\\Create", Vector2::Zero, 0.08f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Bullet\\Loop", Vector2::Zero, 0.08f);
+
+		mAnimator->GetCompleteEvent(L"BulletCreate") = std::bind(&BaseBullet::BulletLoop, this);
 
 		Collider* collider = AddComponent<Collider>();
 		collider->SetSize(Vector2(40, 20));
 
-		if (GetDirection() == eDirection::Left)
-		{
-			mAnimator->Play(L"BulletLoopLeft", true);
-		}
-		else if (GetDirection() == eDirection::Right)
-		{
-			mAnimator->Play(L"BulletLoopRight", true);
-		}
+		mAnimator->Play(L"BulletCreate", true);
 
 		GameObject::Initialize();
 	}
@@ -45,23 +40,24 @@ namespace kw
 	void BaseBullet::Update()
 	{
 		Transform* tr = GetComponent<Transform>();
-		Vector2 pos = tr->GetPos();
+		Vector2 addPos = Vector2::Zero;
 
-		if (GetDirection() == eDirection::Left)
+		if (GetFlipX() == true)
 		{
-			pos.x -= mSpeed * Time::DeltaTime();
+			addPos.x -= mSpeed * Time::DeltaTime();
 		}
-		else if (GetDirection() == eDirection::Right)
+		else if (GetFlipX() == false)
 		{
-			pos.x += mSpeed * Time::DeltaTime();
+			addPos.x += mSpeed * Time::DeltaTime();
 		}
 
-		tr->SetPos(pos);
+		tr->AddPos(addPos);
 
 		mTime += Time::DeltaTime();
+
 		if (mTime > 3.0f)
 		{
-			object::Destory(this);
+			BulletDestroy();
 		}
 
 		GameObject::Update();
@@ -78,11 +74,20 @@ namespace kw
 
 	void BaseBullet::OnCollisionEnter(Collider* other)
 	{
-		object::Destory(this);
+		BulletDestroy();
 	}
 
-	void BaseBullet::BulletTest()
+	void BaseBullet::BulletLoop()
 	{
+		mAnimator->Play(L"BulletLoop", true);
+	}
+
+	void BaseBullet::BulletDestroy()
+	{
+		GameObject* destroyEffect = object::Instantiate<GameObject>(eLayerType::Effect, GetComponent<Transform>()->GetPos());
+		destroyEffect->AddComponent<Animator>()->CreateAnimations(L"..\\Resources\\Stage\\Bullet\\End", Vector2::Zero, 0.05f);
+		destroyEffect->GetComponent<Animator>()->Play(L"BulletEnd", false);
+
 		object::Destory(this);
 	}
 }

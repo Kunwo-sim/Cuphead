@@ -87,4 +87,36 @@ namespace kw
 	{
 		::SetPixel(mHdc, x, y, color);
 	}
+
+	void Image::SetBright(int bright)
+	{
+		for (int x = 0; x < 100; x++)
+		{
+			for (int y = 0; y < 100; y++)
+			{
+				int a = 0;
+				COLORREF color = GetPixel(x, y);
+
+				//if (color == RGB(255, 0, 255) || color == RGB(255, 255, 255))
+				//	continue;
+				//else
+				//{
+				//	int r = GetRValue(color);
+				//	int g = GetGValue(color);
+				//	int b = GetBValue(color);
+
+				//	r += bright;
+				//	g += bright;
+				//	b += bright;
+
+				//	r = min(r, 255);
+				//	g = min(g, 255);
+				//	b = min(b, 255);
+
+				//	COLORREF newColor = RGB(r, g, b);
+				//	SetPixel(x, y, newColor);
+				//}
+			}
+		}
+	}
 }

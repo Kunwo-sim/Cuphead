@@ -15,6 +15,7 @@ namespace kw
 
 		COLORREF GetPixel(int x, int y);
 		void SetPixel(int x, int y, COLORREF color);
+		void SetBright(int bright);
 
 		HBITMAP GetBitmap() { return mBitmap; }
 		HDC GetHdc() { return mHdc; }

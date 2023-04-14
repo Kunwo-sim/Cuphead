@@ -10,16 +10,19 @@
 #include "kwAnimator.h"
 #include "kwCollider.h"
 
-#include "kwBaseBullet.h"
 #include "kwObject.h"
+#include "kwBaseBullet.h"
+#include "kwBoomerang.h"
+#include "kwBlueFlowerSeed.h"
+#include "kwPurpleFlowerSeed.h"
 
 namespace kw
 {
 	Carnation::Carnation()
-		: mState(eCarnationState::Idle)
-		, mTransform(nullptr)
-		, mAnimator(nullptr)
+		: mState(eCarnationState::Intro)
 		, mTime(0.0f)
+		, mLoopCount(0)
+		, mSFX(nullptr)
 	{
 
 	}
@@ -36,17 +39,26 @@ namespace kw
 		mTransform = GetComponent<Transform>();
 		mAnimator = AddComponent<Animator>();
 
-		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Carnation\\Idle", Vector2::Zero, 0.08f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Carnation\\FaceAttack\\High", Vector2(-400.0f, 0.0f), 0.08f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Carnation\\FaceAttack\\Low", Vector2(-400.0f, 0.0f), 0.08f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Carnation\\Firing", Vector2::Zero, 0.08f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Carnation\\Creating", Vector2::Zero, 0.08f);
-		mAnimator->GetCompleteEvent(L"FaceAttackHigh") = std::bind(&Carnation::idleCallback, this);
-		mAnimator->GetCompleteEvent(L"FaceAttackLow") = std::bind(&Carnation::idleCallback, this);
-		mAnimator->GetCompleteEvent(L"CarnationFiring") = std::bind(&Carnation::idleCallback, this);
-		mAnimator->GetCompleteEvent(L"CarnationCreating") = std::bind(&Carnation::idleCallback, this);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Carnation\\Intro", Vector2::Zero, 0.08f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Carnation\\Idle", Vector2::Zero, 0.06f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Carnation\\FaceAttack\\HighStart", Vector2(-400.0f, 0.0f), 0.06f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Carnation\\FaceAttack\\LowStart", Vector2(-400.0f, 0.0f), 0.06f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Carnation\\FiringStart", Vector2::Zero, 0.06f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Carnation\\FiringLoop", Vector2::Zero, 0.06f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Carnation\\FiringEnd", Vector2::Zero, 0.06f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Carnation\\CreatingStart", Vector2::Zero, 0.06f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Carnation\\CreatingEnd", Vector2::Zero, 0.06f);
 
-		mAnimator->Play(L"CarnationIdle", true);
+		mAnimator->GetCompleteEvent(L"CarnationIntro") = std::bind(&Carnation::idleCallback, this);
+		mAnimator->GetCompleteEvent(L"FaceAttackHighStart") = std::bind(&Carnation::idleCallback, this);
+		mAnimator->GetCompleteEvent(L"FaceAttackLowStart") = std::bind(&Carnation::idleCallback, this);
+		mAnimator->GetCompleteEvent(L"CarnationFiringStart") = std::bind(&Carnation::firingStartCallback, this);
+		mAnimator->GetCompleteEvent(L"CarnationFiringLoop") = std::bind(&Carnation::firingLoopCallback, this);
+		mAnimator->GetCompleteEvent(L"CarnationFiringEnd") = std::bind(&Carnation::idleCallback, this);
+		mAnimator->GetCompleteEvent(L"CarnationCreatingStart") = std::bind(&Carnation::creatingStartCallback, this);
+		mAnimator->GetCompleteEvent(L"CarnationCreatingEnd") = std::bind(&Carnation::idleCallback, this);
+
+		mAnimator->Play(L"CarnationIntro", true);
 
 		Collider* collider = AddComponent<Collider>();
 		collider->SetSize(Vector2(200, 600));
@@ -84,22 +96,22 @@ namespace kw
 		if (mTime > 3.0f)
 		{
 			mTime = 0.0f;
-
-			int type = math::GetRandomNumber(0, 2);
-			switch (type)
-			{
-				case 0:
-					faceAttack();
-					break;
-				case 1:
-					firing();
-					break;
-				case 2:
-					creating();
-					break;
-			default:
-				break;
-			}
+			firing();
+			//int type = math::GetRandomNumber(0, 2);
+			//switch (type)
+			//{
+			//	case 0:
+			//		faceAttack();
+			//		break;
+			//	case 1:
+			//		firing();
+			//		break;
+			//	case 2:
+			//		creating();
+			//		break;
+			//default:
+			//	break;
+			//}
 		}
 	}
 
@@ -115,9 +127,9 @@ namespace kw
 		int type = math::GetRandomNumber(0, 1);
 
 		if (type == 0)
-			mAnimator->Play(L"FaceAttackHigh", true);
+			mAnimator->Play(L"FaceAttackHighStart", true);
 		else
-			mAnimator->Play(L"FaceAttackLow", true);
+			mAnimator->Play(L"FaceAttackLowStart", true);
 		
 		 mSFX = Resources::Load<Sound>(L"FaceAttack", L"..\\Resources\\Sound\\SFX\\FaceAttack.wav");
 		 mSFX->Play(false);
@@ -126,18 +138,59 @@ namespace kw
 	void Carnation::firing()
 	{
 		mState = eCarnationState::Firing;
-		mAnimator->Play(L"CarnationFiring", true);
+		mAnimator->Play(L"CarnationFiringStart", true);
 	}
 
 	void Carnation::creating()
 	{
 		mState = eCarnationState::Creating;
-		mAnimator->Play(L"CarnationCreating", true);
+		mAnimator->Play(L"CarnationCreatingStart", true);
 	}
 
 	void Carnation::idleCallback()
 	{
-		mState = eCarnationState::Idle();
+		mState = eCarnationState::Idle;
 		mAnimator->Play(L"CarnationIdle", true);
+	}
+
+	void Carnation::creatingStartCallback()
+	{
+		object::Instantiate<Boomerang>(eLayerType::AttackObject);
+		mAnimator->Play(L"CarnationCreatingEnd", true);
+	}
+
+	void Carnation::firingStartCallback()
+	{
+		mAnimator->Play(L"CarnationFiringLoop", true);
+	}
+	void Carnation::firingLoopCallback()
+	{
+		mLoopCount++;
+
+		int seedType = math::GetRandomNumber(0, 1);
+		GameObject* seed = nullptr;
+		switch (seedType)
+		{
+		case 0:
+			seed = object::Instantiate<BlueFlowerSeed>(eLayerType::AttackObject);
+			break;
+		case 1:
+			seed = object::Instantiate<PurpleFlowerSeed>(eLayerType::AttackObject);
+		default:
+			break;
+		}
+
+		int xPos = math::GetRandomNumber(100, 800);
+		seed->GetComponent<Transform>()->SetPos(Vector2(xPos, 0));
+
+		if (mLoopCount >= 8)
+		{
+			mLoopCount = 0;
+			mAnimator->Play(L"CarnationFiringEnd", true);
+		}
+		else
+		{
+			mAnimator->Play(L"CarnationFiringLoop", true);
+		}
 	}
 }

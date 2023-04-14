@@ -24,6 +24,9 @@ namespace kw
 		static void SetTarget(GameObject* target) { mTarget = target; }
 		static void SetLookPosition(Vector2 pos) { mLookPosition = pos; }
 		static Vector2 CalculatePos(Vector2 pos) { return pos - mDistance; }
+		static Vector2 GetCameraCenter();
+		static void SceneEnterEffect();
+		static void SceneExitEffect();
 
 	private:
 		static Vector2 mResolution;

@@ -1,5 +1,6 @@
 #include "kwAnimator.h"
 #include "kwResources.h"
+#include "kwObject.h"
 
 namespace kw
 {
@@ -34,23 +35,24 @@ namespace kw
 
 	void Animator::Update()
 	{
-		if (mActiveAnimation)
+		if (mActiveAnimation == nullptr)
+			return;
+
+		mActiveAnimation->Update();
+
+		if (mActiveAnimation->IsComplete())
 		{
-			mActiveAnimation->Update();
-
-			if (mActiveAnimation->IsComplete())
+			if (mbLoop == false)
 			{
-				Animator::Events* events
-					= FindEvents(mActiveAnimation->GetAnimationName());
-
-				if (events != nullptr)
-					events->mCompleteEvent();
-
-				mActiveAnimation->Reset();
+				object::Destory(GetOwner());
 			}
 
-			if (mbLoop && mActiveAnimation->IsComplete())
-				mActiveAnimation->Reset();
+			Animator::Events* events = FindEvents(mActiveAnimation->GetAnimationName());
+
+			if (events != nullptr)
+				events->mCompleteEvent();
+
+			mActiveAnimation->Reset();			
 		}
 	}
 
@@ -101,7 +103,7 @@ namespace kw
 			std::wstring fullName = path + L"\\" + fileName;
 
 			const std::wstring ext = p.path().extension();
-			if (ext == L".png")
+			if (ext != L".bmp")
 				continue;
 
 			Image* image = Resources::Load<Image>(fileName, fullName);

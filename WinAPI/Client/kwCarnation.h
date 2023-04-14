@@ -8,8 +8,8 @@ namespace kw
 	public:
 		enum class eCarnationState
 		{
-			Idle,
 			Intro,
+			Idle,
 			FaceAttack,
 			Firing,
 			// Acorn, ºÎ¸Þ¶û
@@ -30,12 +30,14 @@ namespace kw
 		void firing();
 		void creating();
 		void idleCallback();
+		void creatingStartCallback();
+		void firingStartCallback();
+		void firingLoopCallback();
 
 		eCarnationState mState;
-		class Animator* mAnimator;
-		class Transform* mTransform;
 		class Sound* mSFX;
 
+		int mLoopCount;
 		float mTime;
 	};
 }

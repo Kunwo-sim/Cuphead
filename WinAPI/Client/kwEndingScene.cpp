@@ -2,7 +2,6 @@
 #include "kwCuphead.h"
 #include "kwInput.h"
 #include "kwSceneManager.h"
-#include "kwSlime.h"
 #include "kwResources.h"
 
 namespace kw

@@ -10,6 +10,9 @@
 namespace kw
 {
 	TitleScene::TitleScene()
+		: mBackCharacter(nullptr)
+		, mBackGround(nullptr)
+		, mTitleBGM(nullptr)
 	{
 	}
 
@@ -23,6 +26,7 @@ namespace kw
 
 		mTitleBGM = Resources::Load<Sound>(L"TilteBGM", L"..\\Resources\\Sound\\BGM\\TitleBGM.wav");
 		mBackGround = Resources::Load<Image>(L"Tilte_BackGroud", L"..\\Resources\\Title\\Title_BackGroud.bmp");
+
 		object::Instantiate<TitleCharacter>(eLayerType::UI, Vector2(640.0f, 720.0f));
 	}
 
@@ -51,13 +55,11 @@ namespace kw
 	{
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
 
-		
 		mTitleBGM->Play(true);
 	}
 
 	void TitleScene::OnExit()
 	{
 		mTitleBGM->Stop(true);
-		//mCuphead->SetPos(Vector2{ 0.0f, 0.0f });
 	}
 }

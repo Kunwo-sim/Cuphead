@@ -12,6 +12,7 @@ namespace kw
 	public:
 		enum class eCupheadState
 		{
+			Intro,
 			Idle,
 			Shoot,
 			Run,
@@ -19,7 +20,8 @@ namespace kw
 			Duck,
 			DuckShoot,
 			Jump,
-			JumpShoot,
+			Dash,
+			Hit,
 			Death,
 		};
 
@@ -31,6 +33,12 @@ namespace kw
 		virtual void Render(HDC hdc) override;
 		virtual void Release() override;
 
+		void Hit();
+		void GroundExit();
+		void CreateBullet();
+		void SetStateJump();
+		void IdleCallback();
+
 	private:
 		void idle();
 		void shoot();
@@ -39,20 +47,14 @@ namespace kw
 		void duck();
 		void duckShoot();
 		void jump();
+		void dash();
 		void death();
-		
+		void move();
 		void playCupheadAnim(std::wstring State, bool loop = true);
-		void CupheadMove();
-		void CreateBullet();
-		void SetStateJump();
-
-		Vector2 DirectionToVector2(eDirection direction);
+		
 
 		eCupheadState mState;
-		Transform* mTransform;
-		Collider* mCollider;
 		Rigidbody* mRigidbody;
-		Animator* mAnimator;
 
 		Vector2 mBulletOffset;
 

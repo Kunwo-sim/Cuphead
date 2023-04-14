@@ -2,6 +2,7 @@
 #include "kwSceneManager.h"
 #include "kwCollisionManager.h"
 #include "kwInput.h"
+#include "kwCamera.h"
 
 #include "kwResources.h"
 #include "kwImage.h"
@@ -33,8 +34,8 @@ namespace kw
 		mBackGround3 = Resources::Load<Image>(L"Carnation_Back_03", L"..\\Resources\\Stage\\Carnation\\BackGround\\Carnation_Back_03.bmp");
 
 		object::Instantiate<Ground>(eLayerType::Ground, Vector2(640, 720))->SetColliderSize(Vector2(1600.0f, 120.0f));
-		object::Instantiate<Cuphead>(eLayerType::Player, Vector2(400, 600));
-		object::Instantiate<Carnation>(eLayerType::Monster, Vector2(1050, 680));
+		object::Instantiate<Cuphead>(eLayerType::Player, Vector2(300, 600));
+		object::Instantiate<Carnation>(eLayerType::Monster, Vector2(1050, 680));	
 
 		FlowerPlatform* platformA = object::Instantiate<FlowerPlatform>(eLayerType::Ground, Vector2(150, 400));
 		platformA->SetPlatformType(FlowerPlatform::PlatformType::A);
@@ -103,8 +104,11 @@ namespace kw
 
 	void PlayScene::OnEnter()
 	{
-		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
+		Camera::SceneEnterEffect();
+
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::AttackObject, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
 		CollisionManager::SetLayer(eLayerType::Bullet, eLayerType::Monster, true);
 
 		mFloralFuryBGM->Play(true);

@@ -98,6 +98,24 @@
     <Filter Include="Contents\GameObjects\CarnationScene">
       <UniqueIdentifier>{0b4591ee-18d2-4edc-85b3-69a2a840acaa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Enemy\Carnation">
+      <UniqueIdentifier>{e9fb6554-ac15-465a-939a-8ae288308b09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Enemy\Carnation\CarnationObject">
+      <UniqueIdentifier>{a3976378-7b1e-4bb1-971a-b4b4f6c408e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObjects\Common">
+      <UniqueIdentifier>{fb5a81a1-e7e3-4045-a42a-1c14281e50b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Enemy\Carnation\CarnationObject\FlowerSeed">
+      <UniqueIdentifier>{1d92af7a-82a0-4dfe-924c-f4838320ba80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Enemy\Carnation\CarnationObject\CreatingObject">
+      <UniqueIdentifier>{27fdcd0d-4cbb-4b61-8a6a-378ff3e4f52f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Enemy\Carnation\CarnationObject\SeedObject">
+      <UniqueIdentifier>{04da4ad3-dfc0-49a2-aead-211fafda8241}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -166,9 +184,6 @@
     <ClInclude Include="kwTitleScene.h">
       <Filter>Contents\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="kwSlime.h">
-      <Filter>Contents\Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="kwEndingScene.h">
       <Filter>Contents\Scene</Filter>
     </ClInclude>
@@ -204,9 +219,6 @@
     </ClInclude>
     <ClInclude Include="kwSpriteRenderer.h">
       <Filter>Engine\Component\SpriteRenderer</Filter>
-    </ClInclude>
-    <ClInclude Include="kwCarnation.h">
-      <Filter>Contents\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="kwRigidbody.h">
       <Filter>Engine\Component\Rigidbody</Filter>
@@ -246,6 +258,36 @@
     </ClInclude>
     <ClInclude Include="kwFlowerPlatform.h">
       <Filter>Contents\GameObjects\CarnationScene</Filter>
+    </ClInclude>
+    <ClInclude Include="kwCarnation.h">
+      <Filter>Contents\Enemy\Carnation</Filter>
+    </ClInclude>
+    <ClInclude Include="kwCharacter.h">
+      <Filter>Contents\GameObjects\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="kwAttackObject.h">
+      <Filter>Contents\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="kwCarnationEntrance.h">
+      <Filter>Contents\GameObjects\OverWorldScene</Filter>
+    </ClInclude>
+    <ClInclude Include="kwOverWorldEntrance.h">
+      <Filter>Contents\GameObjects\OverWorldScene</Filter>
+    </ClInclude>
+    <ClInclude Include="kwFlowerSeed.h">
+      <Filter>Contents\Enemy\Carnation\CarnationObject\FlowerSeed</Filter>
+    </ClInclude>
+    <ClInclude Include="kwPurpleFlowerSeed.h">
+      <Filter>Contents\Enemy\Carnation\CarnationObject\FlowerSeed</Filter>
+    </ClInclude>
+    <ClInclude Include="kwBlueFlowerSeed.h">
+      <Filter>Contents\Enemy\Carnation\CarnationObject\FlowerSeed</Filter>
+    </ClInclude>
+    <ClInclude Include="kwBoomerang.h">
+      <Filter>Contents\Enemy\Carnation\CarnationObject\CreatingObject</Filter>
+    </ClInclude>
+    <ClInclude Include="kwChomper.h">
+      <Filter>Contents\Enemy\Carnation\CarnationObject\SeedObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -310,9 +352,6 @@
     <ClCompile Include="kwTitleScene.cpp">
       <Filter>Contents\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="kwSlime.cpp">
-      <Filter>Contents\Enemy</Filter>
-    </ClCompile>
     <ClCompile Include="kwEndingScene.cpp">
       <Filter>Contents\Scene</Filter>
     </ClCompile>
@@ -345,9 +384,6 @@
     </ClCompile>
     <ClCompile Include="kwSpriteRenderer.cpp">
       <Filter>Engine\Component\SpriteRenderer</Filter>
-    </ClCompile>
-    <ClCompile Include="kwCarnation.cpp">
-      <Filter>Contents\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="kwRigidbody.cpp">
       <Filter>Engine\Component\Rigidbody</Filter>
@@ -387,6 +423,36 @@
     </ClCompile>
     <ClCompile Include="kwFlowerPlatform.cpp">
       <Filter>Contents\GameObjects\CarnationScene</Filter>
+    </ClCompile>
+    <ClCompile Include="kwCarnation.cpp">
+      <Filter>Contents\Enemy\Carnation</Filter>
+    </ClCompile>
+    <ClCompile Include="kwCharacter.cpp">
+      <Filter>Contents\GameObjects\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="kwAttackObject.cpp">
+      <Filter>Contents\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="kwCarnationEntrance.cpp">
+      <Filter>Contents\GameObjects\OverWorldScene</Filter>
+    </ClCompile>
+    <ClCompile Include="kwOverWorldEntrance.cpp">
+      <Filter>Contents\GameObjects\OverWorldScene</Filter>
+    </ClCompile>
+    <ClCompile Include="kwFlowerSeed.cpp">
+      <Filter>Contents\Enemy\Carnation\CarnationObject\FlowerSeed</Filter>
+    </ClCompile>
+    <ClCompile Include="kwPurpleFlowerSeed.cpp">
+      <Filter>Contents\Enemy\Carnation\CarnationObject\FlowerSeed</Filter>
+    </ClCompile>
+    <ClCompile Include="kwBlueFlowerSeed.cpp">
+      <Filter>Contents\Enemy\Carnation\CarnationObject\FlowerSeed</Filter>
+    </ClCompile>
+    <ClCompile Include="kwBoomerang.cpp">
+      <Filter>Contents\Enemy\Carnation\CarnationObject\CreatingObject</Filter>
+    </ClCompile>
+    <ClCompile Include="kwChomper.cpp">
+      <Filter>Contents\Enemy\Carnation\CarnationObject\SeedObject</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

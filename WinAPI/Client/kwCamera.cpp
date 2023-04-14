@@ -5,6 +5,9 @@
 #include "kwInput.h"
 #include "kwTime.h"
 #include "kwImage.h"
+#include "kwResources.h"
+#include "kwObject.h"
+#include "kwAnimator.h"
 
 extern kw::Application application;
 
@@ -19,7 +22,7 @@ namespace kw
 	class Image* Camera::mCutton = nullptr;
 	float Camera::mCuttonAlpha = 1.0f;
 	float Camera::mAlphaTime = 0.0f;
-	float Camera::mEndTime = 2.0f;
+	float Camera::mEndTime = 5.0f;
 
 	void Camera::Initiailize()
 	{
@@ -28,7 +31,7 @@ namespace kw
 		mLookPosition = (mResolution / 2.0f);
 
 		mType = eCameraEffectType::FadeIn;
-		mCutton = Image::Create(L"Cutton", mResolution.x, mResolution.y, RGB(0, 0, 0));
+		//mCutton = Resources::Load<Image>(L"CarmeraImage", L"..\\Resources\\ScreenEffect\\Exit\\tile0001.bmp");
 	}
 
 	void Camera::Update()
@@ -60,7 +63,7 @@ namespace kw
 
 			if (mType == eCameraEffectType::FadeIn)
 			{
-				mCuttonAlpha = 1.0f - ratio;
+				mCuttonAlpha = 1.0f;
 			}
 			else if (mType == eCameraEffectType::FadeOut)
 			{
@@ -77,22 +80,22 @@ namespace kw
 
 	void Camera::Render(HDC hdc)
 	{
-		if (mAlphaTime < mEndTime
-			&& mType == eCameraEffectType::FadeIn)
-		{
-			BLENDFUNCTION func = {};
-			func.BlendOp = AC_SRC_OVER;
-			func.BlendFlags = 0;
-			func.AlphaFormat = 0;
-			func.SourceConstantAlpha = (BYTE)(255.0f * mCuttonAlpha);
+		//if (mAlphaTime < mEndTime
+		//	&& mType == eCameraEffectType::FadeIn)
+		//{
+		//	BLENDFUNCTION func = {};
+		//	func.BlendOp = AC_SRC_OVER;
+		//	func.BlendFlags = 0;
+		//	func.AlphaFormat = AC_SRC_ALPHA;
+		//	func.SourceConstantAlpha = (BYTE)(255.0f * mCuttonAlpha);
 
-			AlphaBlend(hdc, 0, 0
-				, mResolution.x, mResolution.y
-				, mCutton->GetHdc()
-				, 0, 0
-				, mCutton->GetWidth(), mCutton->GetHeight()
-				, func);
-		}
+		//	AlphaBlend(hdc, 0, 0
+		//		, mResolution.x, mResolution.y
+		//		, mCutton->GetHdc()
+		//		, 0, 0
+		//		, mCutton->GetWidth(), mCutton->GetHeight()
+		//		, func);
+		//}
 	}
 
 	void Camera::Clear()
@@ -101,5 +104,33 @@ namespace kw
 		mResolution.y = application.GetHeight();
 		mLookPosition = (mResolution / 2.0f);
 		mDistance = Vector2::Zero;
+	}
+
+	Vector2 Camera::GetCameraCenter()
+	{
+		Vector2 pos = Vector2::Zero;
+		pos.x = mResolution.x / 2.0f;
+		pos.y = mResolution.y / 2.0f;
+
+		return pos;
+	}
+
+	void Camera::SceneEnterEffect()
+	{
+		GameObject* effect = object::Instantiate<GameObject>(eLayerType::SceneEffect);
+		effect->SetIsUI(true);
+		Animator* animator = effect->AddComponent<Animator>();
+		animator->CreateAnimations(L"..\\Resources\\ScreenEffect\\Enter", GetCameraCenter(), 0.03f);
+		animator->Play(L"ScreenEffectEnter", false);
+	
+	}
+
+	void Camera::SceneExitEffect()
+	{
+		GameObject* effect = object::Instantiate<GameObject>(eLayerType::SceneEffect);
+		effect->SetIsUI(true);
+		Animator* animator = effect->AddComponent<Animator>();
+		animator->CreateAnimations(L"..\\Resources\\ScreenEffect\\Exit", GetCameraCenter(), 0.04f);
+		animator->Play(L"ScreenEffectExit", false);
 	}
 }

@@ -59,7 +59,7 @@ namespace kw
 		if (cupheadPos.y < groundCol->GetCenter().y && rb->GetVelocity().y > 0.0f)
 		{
 			// ÄÅÇìµå ¹Ù´Ú À§Ä¡¸¦ ¶¥ À§·Î Á¶Á¤
-			cupheadPos.y = (groundCol->GetCenter().y - groundCol->GetSize().y / 2.0f);
+			cupheadPos.y = (groundCol->GetCenter().y - groundCol->GetSize().y / 2.0f) + 1;
 			cuphead->GetComponent<Transform>()->SetPos(cupheadPos);
 			rb->SetGround(true);
 		}
@@ -79,7 +79,7 @@ namespace kw
 		if (cupheadPos.y < groundCol->GetCenter().y && rb->GetVelocity().y > 0.0f)
 		{
 			// ÄÅÇìµå ¹Ù´Ú À§Ä¡¸¦ ¶¥ À§·Î Á¶Á¤
-			cupheadPos.y = groundCol->GetCenter().y - groundCol->GetSize().y / 2.0f;
+			cupheadPos.y = groundCol->GetCenter().y - groundCol->GetSize().y / 2.0f + 1;
 			cuphead->GetComponent<Transform>()->SetPos(cupheadPos);
 			rb->SetGround(true);
 		}
@@ -91,7 +91,7 @@ namespace kw
 		if (cuphead == nullptr)
 			return;
 
-		cuphead->GetComponent<Rigidbody>()->SetGround(false);
+		cuphead->GroundExit();
 	}
 
 	void Ground::SetColliderSize(Vector2 size)

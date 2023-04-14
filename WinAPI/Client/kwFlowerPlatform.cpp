@@ -28,7 +28,6 @@ namespace kw
 
 		mTransform = GetComponent<Transform>();
 		mAnimator = AddComponent<Animator>();
-		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\StageCuphead\\ShootLeft", Vector2(-14.0f, 0.0f), 0.07f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Carnation\\Platform\\A", Vector2(0.0f, 0.0f), 0.07f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Carnation\\Platform\\B", Vector2(0.0f, 0.0f), 0.07f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Carnation\\Platform\\C", Vector2(0.0f, 0.0f), 0.07f);

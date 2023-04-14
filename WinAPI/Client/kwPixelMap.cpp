@@ -41,7 +41,7 @@ namespace kw
 
 	bool PixelMap::PixelMovableCheck(Vector2 pos)
 	{
-		COLORREF nextPixel = mPixelMapImage->GetPixel(pos.x +1 , pos.y - 1);
+		COLORREF nextPixel = mPixelMapImage->GetPixel(pos.x + 1 , pos.y - 1);
 		if (nextPixel == RGB(255, 0, 255))
 		{
 			return false;

@@ -9,6 +9,11 @@ namespace kw
 		, mDirection(eDirection::Front)
 		, mFlipX(false)
 		, mFlipY(false)
+		, mIsUI(false)
+		, mTransform(nullptr)
+		, mAnimator(nullptr)
+		, mCollider(nullptr)
+		, mRigidbody(nullptr)
 	{
 		mComponents.resize((UINT)eComponentType::End);
 		AddComponent<Transform>();

@@ -15,13 +15,16 @@ enum class eLayerType
 	PixelMap,
 	BG,
 	Tile,
+	Entrance,
 	Ground,
 	Monster,
+	AttackObject,
 	Player,
 	FrontBG,
 	Bullet,
 	Effect,
 	UI,
+	SceneEffect,
 	End,
 };
 

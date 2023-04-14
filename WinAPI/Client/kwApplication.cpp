@@ -9,6 +9,9 @@
 #include "kwSceneManager.h"
 #include "kwCollisionManager.h"
 
+#include <gdiplus.h>
+#pragma comment(lib, "gdiplus.lib")
+
 namespace kw
 {
 	Application::Application()
@@ -71,6 +74,8 @@ namespace kw
 
 	void Application::Update()
 	{
+		SceneManager::LateLoadScene();
+
 		Time::Update();
 		Input::Update();
 		Camera::Update();

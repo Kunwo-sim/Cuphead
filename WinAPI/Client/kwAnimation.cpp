@@ -55,9 +55,28 @@ namespace kw
         Vector2 scale = tr->GetScale();
         bool isFlip = obj->GetFlipX();
 
+        std::wstring playAnimName = mAnimationName + std::to_wstring(mSpriteIndex);
+        Image* playAnimImage = Image::Create(playAnimName, mSpriteSheet[mSpriteIndex].size.x, mSpriteSheet[mSpriteIndex].size.y);
+
+        Vector2 LeftTop = mSpriteSheet[mSpriteIndex].leftTop;
+
         Vector2 pos = tr->GetPos();
-        pos = Camera::CalculatePos(pos);
-        pos += mSpriteSheet[mSpriteIndex].offset;
+        if (obj->IsUI() == false)
+        {
+            pos = Camera::CalculatePos(pos);
+        }
+        
+        pos.y += mSpriteSheet[mSpriteIndex].offset.y;
+
+        if (isFlip)
+        {
+            pos.x -= mSpriteSheet[mSpriteIndex].offset.x;
+            playAnimName += L"Flip";
+        }
+        else
+        {
+            pos.x += mSpriteSheet[mSpriteIndex].offset.x;
+        }
 
         // 피벗이 중하단인경우
         if (obj->GetPivot() == GameObject::ePivot::LowCenter)
@@ -72,16 +91,6 @@ namespace kw
             pos.y -= mSpriteSheet[mSpriteIndex].size.y / 2.0f;
         }
         
-        std::wstring playAnimName = mAnimationName + std::to_wstring(mSpriteIndex);
-
-        if (isFlip)
-        {
-            playAnimName += L"Flip";
-        }
-
-        Image* playAnimImage = Image::Create(playAnimName, mSpriteSheet[mSpriteIndex].size.x, mSpriteSheet[mSpriteIndex].size.y);
-        Vector2 LeftTop = mSpriteSheet[mSpriteIndex].leftTop;
-
         if (isFlip)
         {
             StretchBlt(

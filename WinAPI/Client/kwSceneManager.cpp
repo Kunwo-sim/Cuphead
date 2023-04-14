@@ -11,6 +11,8 @@ namespace kw
 {
 	std::vector<Scene*> SceneManager::mScenes = {};
 	Scene* SceneManager::mActiveScene = nullptr;
+	bool SceneManager::mIsSceneLoaded = false;
+	eSceneType SceneManager::mLoadScene = eSceneType::Title;
 
 	void SceneManager::Initialize()
 	{
@@ -64,12 +66,22 @@ namespace kw
 
 	void SceneManager::LoadScene(eSceneType type)
 	{
-		Camera::Clear();
-
-		mActiveScene->OnExit();
-		CollisionManager::Clear();
-		mActiveScene = mScenes[(UINT)type];
-		mActiveScene->OnEnter();
+		mIsSceneLoaded = true;
+		mLoadScene = type;
 	}
 
+	void SceneManager::LateLoadScene()
+	{
+		if (mIsSceneLoaded)
+		{
+			Camera::Clear();
+
+			mActiveScene->OnExit();
+			CollisionManager::Clear();
+			mActiveScene = mScenes[(UINT)mLoadScene];
+			mActiveScene->OnEnter();
+
+			mIsSceneLoaded = false;
+		}
+	}
 }

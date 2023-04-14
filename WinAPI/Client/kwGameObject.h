@@ -1,6 +1,11 @@
 #pragma once
 #include "kwEntity.h"
+
 #include "kwComponent.h"
+#include "kwTransform.h"
+#include "kwAnimator.h"
+#include "kwCollider.h"
+#include "kwRigidbody.h"
 
 namespace kw
 {
@@ -77,6 +82,8 @@ namespace kw
 
 		bool GetFlipX() { return mFlipX; }
 		void SetFlipX(bool value) { mFlipX = value; }
+		bool IsUI() { return mIsUI; }
+		void SetIsUI(bool value) { mIsUI = value; }
 
 	private:
 		std::vector<Component*> mComponents;
@@ -86,6 +93,13 @@ namespace kw
 
 		bool mFlipX;
 		bool mFlipY;
+		bool mIsUI;
+
+	protected:
+		Transform* mTransform;
+		Collider* mCollider;
+		Animator* mAnimator;
+		Rigidbody* mRigidbody;
 	};
 }
 

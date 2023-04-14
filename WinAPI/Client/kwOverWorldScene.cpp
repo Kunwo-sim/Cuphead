@@ -13,6 +13,7 @@
 #include "kwPixelMap.h"
 #include "kwSpriteRenderer.h"
 #include "kwSound.h"
+#include "kwCarnationEntrance.h"
 
 namespace kw
 {
@@ -46,6 +47,8 @@ namespace kw
 		SpriteRenderer* sr = backGround->AddComponent<SpriteRenderer>();
 		sr->AddSprite(backGroundImage, Vector2(0.0f, 0.0f), false);
 		
+		CarnationEntrance* carnationEntrance = object::Instantiate<CarnationEntrance>(eLayerType::Entrance, Vector2(1850.0f, 750.0f));
+
 		OverWorldCuphead* player = object::Instantiate<OverWorldCuphead>(eLayerType::Player, mPlayerStartPos);
 		player->SetPixelMap(pixelMap);
 	}
@@ -72,12 +75,16 @@ namespace kw
 
 	void OverWorldScene::OnEnter()
 	{
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Entrance, true);
+
+		Camera::SceneEnterEffect();
 		Camera::SetLookPosition(mPlayerStartPos);
 		mOverWorldBGM->Play(true);
 	}
 
 	void OverWorldScene::OnExit()
 	{
+		// Camera::SceneExitEffect();
 		mOverWorldBGM->Stop(true);
 	}
 }

@@ -17,10 +17,7 @@ namespace kw
 		, mBulletOffset(Vector2(50.0f, -80.0f))
 		, mAttackCoolTime(0.2f)
 		, mAttackCoolChecker(0.0f)
-		, mTransform(nullptr)
-		, mCollider(nullptr)
 		, mRigidbody(nullptr)
-		, mAnimator(nullptr)
 	{
 
 	}
@@ -38,32 +35,43 @@ namespace kw
 		mRigidbody = AddComponent<Rigidbody>();
 		mCollider = AddComponent<Collider>();
 
-		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\StageCuphead\\IdleLeft", Vector2::Zero, 0.08f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\StageCuphead\\IdleRight", Vector2::Zero, 0.08f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\StageCuphead\\ShootLeft", Vector2(-14.0f, 0.0f), 0.07f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\StageCuphead\\ShootRight", Vector2(14.0f, 0.0f), 0.07f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\StageCuphead\\RunLeft", Vector2::Zero, 0.05f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\StageCuphead\\RunRight", Vector2::Zero, 0.05f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\StageCuphead\\RunShootLeft", Vector2::Zero, 0.05f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\StageCuphead\\RunShootRight", Vector2::Zero, 0.05f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\StageCuphead\\DuckLeft", Vector2::Zero, 0.08f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\StageCuphead\\DuckRight", Vector2::Zero, 0.08f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\StageCuphead\\DuckShootLeft", Vector2::Zero, 0.08f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\StageCuphead\\DuckShootRight", Vector2::Zero, 0.08f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\StageCuphead\\JumpLeft", Vector2::Zero, 0.05f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\StageCuphead\\JumpRight", Vector2::Zero, 0.05f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\StageCuphead\\Intro", Vector2::Zero, 0.05f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\StageCuphead\\Idle", Vector2::Zero, 0.08f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\StageCuphead\\Idle", Vector2::Zero, 0.08f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\StageCuphead\\Shoot", Vector2(10.0f, 0.0f), 0.07f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\StageCuphead\\Run", Vector2::Zero, 0.05f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\StageCuphead\\RunShoot", Vector2::Zero, 0.05f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\StageCuphead\\Duck", Vector2::Zero, 0.08f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\StageCuphead\\DuckShoot", Vector2::Zero, 0.08f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\StageCuphead\\Jump", Vector2::Zero, 0.05f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\StageCuphead\\Parry", Vector2::Zero, 0.05f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\StageCuphead\\Dash", Vector2::Zero, 0.045f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\StageCuphead\\Hit", Vector2::Zero, 0.05f);
+
+		mAnimator->GetCompleteEvent(L"StageCupheadIntro") = std::bind(&Cuphead::IdleCallback, this);
+		mAnimator->GetCompleteEvent(L"StageCupheadDash") = std::bind(&Cuphead::IdleCallback, this);
+		mAnimator->GetCompleteEvent(L"StageCupheadHit") = std::bind(&Cuphead::IdleCallback, this);
 		
 		SetDirection(eDirection::Right);
-		mState = eCupheadState::Idle;
+		mState = eCupheadState::Intro;
 		mCollider->SetSize(Vector2(100, 130));
 		mRigidbody->SetGround(false);
-		mAnimator->Play(L"StageCupheadIdleRight", true);
+		playCupheadAnim(L"Intro");
+
+		GameObject* Effect = object::Instantiate<GameObject>(eLayerType::Effect, Vector2(400, 400));
+		Effect->AddComponent<Animator>()->CreateAnimations(L"..\\Resources\\Stage\\StageCuphead\\Effect\\Spark", Vector2::Zero, 0.05f);
+		Effect->GetComponent<Animator>()->Play(L"EffectSpark", false);
 
 		GameObject::Initialize();
 	}
 	void Cuphead::Update()
 	{
 		mAttackCoolChecker -= Time::DeltaTime();
+
+		if (Input::GetKeyDown(eKeyCode::X) && mState != eCupheadState::Hit)
+		{
+			dash();
+		}
 
 		switch (mState)
 		{
@@ -88,6 +96,12 @@ namespace kw
 		case kw::Cuphead::eCupheadState::Jump:
 			jump();
 			break;
+		case kw::Cuphead::eCupheadState::Dash:
+			dash();
+			break;
+		case kw::Cuphead::eCupheadState::Hit:
+			Hit();
+			break;
 		case kw::Cuphead::eCupheadState::Death:
 			death();
 			break;
@@ -110,19 +124,27 @@ namespace kw
 
 	void Cuphead::idle()
 	{
+		if (mRigidbody->GetGround() == false)
+		{
+			mState = eCupheadState::Jump;
+			playCupheadAnim(L"Jump");
+			jump();
+			return;
+		}
+
 		if (Input::GetKeyDown(eKeyCode::W))
 		{
 			SetStateJump();
 		}
 		else if (Input::GetKey(eKeyCode::A))
 		{
-			SetDirection(eDirection::Left);
+			SetFlipX(true);
 			mState = eCupheadState::Run;
 			playCupheadAnim(L"Run");
 		}
 		else if(Input::GetKey(eKeyCode::D))
 		{
-			SetDirection(eDirection::Right);
+			SetFlipX(false);
 			mState = eCupheadState::Run;
 			playCupheadAnim(L"Run");
 		}
@@ -153,34 +175,7 @@ namespace kw
 			return;
 		}
 
-		Transform* tr = GetComponent<Transform>();
-		Vector2 pos = tr->GetPos();
-
-		if (Input::GetKey(eKeyCode::A))
-		{
-			pos.x -= mSpeed * Time::DeltaTime();
-			if (GetDirection() == eDirection::Right)
-			{
-				SetDirection(eDirection::Left);
-				playCupheadAnim(L"Run");
-			}
-		}
-		else if (Input::GetKey(eKeyCode::D))
-		{
-			pos.x += mSpeed * Time::DeltaTime();
-			if (GetDirection() == eDirection::Left)
-			{
-				SetDirection(eDirection::Right);
-				playCupheadAnim(L"Run");
-			}
-		}
-		else
-		{
-			mState = eCupheadState::Idle;
-			playCupheadAnim(L"Idle");
-		}
-
-		tr->SetPos(pos);
+		move();
 	}
 	void Cuphead::shoot()
 	{
@@ -208,13 +203,13 @@ namespace kw
 
 		if (Input::GetKey(eKeyCode::A))
 		{
-			SetDirection(eDirection::Left);
+			SetFlipX(true);
 			mState = eCupheadState::RunShoot;
 			playCupheadAnim(L"RunShoot");
 		}
 		else if (Input::GetKey(eKeyCode::D))
 		{
-			SetDirection(eDirection::Right);
+			SetFlipX(false);
 			mState = eCupheadState::RunShoot;
 			playCupheadAnim(L"RunShoot");
 		}
@@ -231,7 +226,6 @@ namespace kw
 		{
 			if (!Input::GetKey(eKeyCode::A) && !Input::GetKey(eKeyCode::D))
 			{
-				mState = eCupheadState::Idle;
 				playCupheadAnim(L"Idle");
 			}
 			else
@@ -251,24 +245,19 @@ namespace kw
 
 		CreateBullet();
 
-		Transform* tr = GetComponent<Transform>();
-		Vector2 pos = tr->GetPos();
+		move();
 
 		if (Input::GetKey(eKeyCode::A))
 		{
-			pos.x -= mSpeed * Time::DeltaTime();
-			if (GetDirection() == eDirection::Right)
+			if (GetFlipX() == false)
 			{
-				SetDirection(eDirection::Left);
 				playCupheadAnim(L"RunShoot");
 			}
 		}
 		else if (Input::GetKey(eKeyCode::D))
 		{
-			pos.x += mSpeed * Time::DeltaTime();
-			if (GetDirection() == eDirection::Left)
+			if (GetFlipX() == true)
 			{
-				SetDirection(eDirection::Right);
 				playCupheadAnim(L"RunShoot");
 			}
 		}
@@ -277,8 +266,6 @@ namespace kw
 			mState = eCupheadState::Shoot;
 			playCupheadAnim(L"Shoot");
 		}
-
-		tr->SetPos(pos);
 	}
 
 	void Cuphead::duck()
@@ -317,8 +304,6 @@ namespace kw
 
 	void Cuphead::jump()
 	{
-		Vector2 pos = mTransform->GetPos();
-
 		if (mRigidbody->GetGround() == true)
 		{
 			mState = eCupheadState::Idle;
@@ -327,32 +312,36 @@ namespace kw
 			return;
 		}
 
-		if (Input::GetKey(eKeyCode::A))
-		{
-			pos.x -= mSpeed * Time::DeltaTime();
-			if (GetDirection() == eDirection::Right)
-			{
-				SetDirection(eDirection::Left);
-				playCupheadAnim(L"Jump");
-			}
-			
-		}
-		else if (Input::GetKey(eKeyCode::D))
-		{
-			pos.x += mSpeed * Time::DeltaTime();
-			if (GetDirection() == eDirection::Left)
-			{
-				SetDirection(eDirection::Right);
-				playCupheadAnim(L"Jump");
-			}
-		}
-
-		mTransform->SetPos(pos);
-
 		if (Input::GetKey(eKeyCode::K))
 		{
 			CreateBullet();
 		}
+
+		move();
+	}
+
+	void Cuphead::dash()
+	{
+		Vector2 pos = Vector2::Zero;
+
+		if (GetFlipX())
+		{
+			pos.x -= (mSpeed * Time::DeltaTime());
+		}
+		else
+		{
+			pos.x += (mSpeed * Time::DeltaTime());
+		}
+
+		mTransform->AddPos(pos);
+
+		if (mState == eCupheadState::Dash)
+			return;
+
+		playCupheadAnim(L"Dash", true);
+		mState = eCupheadState::Dash;
+		mSpeed = 1000.0f;
+		mRigidbody->SetGround(true);
 	}
 
 	void Cuphead::death()
@@ -363,22 +352,66 @@ namespace kw
 	void Cuphead::playCupheadAnim(std::wstring State, bool loop)
 	{
 		std::wstring playAnimName = L"StageCuphead" + State;
-
-		if (GetDirection() == eDirection::Left)
-		{
-			playAnimName += L"Left";
-		}
-		else if (GetDirection() == eDirection::Right)
-		{
-			playAnimName += L"Right";
-		}
-
 		mAnimator->Play(playAnimName, loop);
 	}
 
-	void Cuphead::CupheadMove()
+	void Cuphead::move()
 	{
+		Vector2 pos = mTransform->GetPos();
 
+		if (Input::GetKey(eKeyCode::A))
+		{
+			pos.x -= mSpeed * Time::DeltaTime();
+			if (GetFlipX() == false);
+			{
+				SetFlipX(true);
+			}
+		}
+		else if (Input::GetKey(eKeyCode::D))
+		{
+			pos.x += mSpeed * Time::DeltaTime();
+			if (GetFlipX() == true)
+			{
+				SetFlipX(false);
+			}
+		}
+		else
+		{
+			if (mState != eCupheadState::Jump && mState != eCupheadState::Hit)
+			{
+				mState = eCupheadState::Idle;
+				playCupheadAnim(L"Idle", true);
+			}
+		}
+
+		mTransform->SetPos(pos);
+	}
+
+	void Cuphead::Hit()
+	{
+		move();
+
+		if (Input::GetKeyDown(eKeyCode::W))
+		{
+			SetStateJump();
+		}
+
+		if (mState == eCupheadState::Hit)
+			return;
+
+		mState = eCupheadState::Hit;
+		playCupheadAnim(L"Hit");
+	}
+
+	void Cuphead::GroundExit()
+	{
+		if (mState == eCupheadState::Dash)
+			return;
+
+		mState = eCupheadState::Jump;
+		playCupheadAnim(L"Jump");
+
+		mRigidbody->SetGround(false);
 	}
 
 	void Cuphead::CreateBullet()
@@ -387,20 +420,20 @@ namespace kw
 		{
 			mAttackCoolChecker = mAttackCoolTime;
 			Vector2 bulletPos = mTransform->GetPos();
-			eDirection bulletDir = GetDirection();
 
-			if (GetDirection() == eDirection::Left)
+			if (GetFlipX() == true)
 			{
 				bulletPos.x -= mBulletOffset.x;
 				bulletPos.y += mBulletOffset.y;
 			}
-			else if (GetDirection() == eDirection::Right)
+			else if (GetFlipX() == false)
 			{
 				bulletPos.x += mBulletOffset.x;
 				bulletPos.y += mBulletOffset.y;
 			}
 
-			BaseBullet* Bullet = object::Instantiate<BaseBullet>(eLayerType::Bullet, bulletPos, bulletDir);
+			BaseBullet* Bullet = object::Instantiate<BaseBullet>(eLayerType::Bullet, bulletPos);
+			Bullet->SetFlipX(GetFlipX());
 			BulletFireEffect* FireEffect = object::Instantiate<BulletFireEffect>(eLayerType::Effect, bulletPos);
 		}
 	}
@@ -417,14 +450,12 @@ namespace kw
 		mRigidbody->SetGround(false);
 	}
 
-	Vector2 Cuphead::DirectionToVector2(eDirection direction)
+	void Cuphead::IdleCallback()
 	{
-		Vector2 vec = Vector2::Zero;
-		if (direction == eDirection::Right)
-			vec = Vector2(1.0f, 0.0f);
-		else
-			vec = Vector2(-1.0f, 0.0f);
+		mSpeed = 500.0f;
 
-		return vec;
+		mRigidbody->SetGround(false);
+		mState = eCupheadState::Idle;
+		playCupheadAnim(L"Idle");
 	}
 }

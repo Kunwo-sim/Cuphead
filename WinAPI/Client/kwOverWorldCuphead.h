@@ -5,6 +5,7 @@
 #include "kwTransform.h"
 #include "kwRigidbody.h"
 #include "kwPixelMap.h"
+#include "kwSpriteRenderer.h"
 
 namespace kw
 {
@@ -25,6 +26,8 @@ namespace kw
 		virtual void Render(HDC hdc) override;
 		virtual void Release() override;
 
+		virtual void OnCollisionEnter(class Collider* other) override;
+		virtual void OnCollisionExit(class Collider* other) override;
 		void SetPixelMap(PixelMap* pixelMap) { mPixelMap = pixelMap; };
 
 	private:
@@ -32,13 +35,14 @@ namespace kw
 		void run();
 
 		eOverWorldCupheadState mState;
-		Transform* mTransform;
-		Collider* mCollider;
-		Animator* mAnimator;
-		Image* mSheetImage;
-		PixelMap* mPixelMap;
 
-		float mSpeed;		
+		Image* mSheetImage;
+		Image* mEnterBoxImage;
+		PixelMap* mPixelMap;
+		class OverWorldEntrance* mEntrance;
+
+		float mSpeed;
+		bool mIsOverlapEntrance;
 	};
 }
 
