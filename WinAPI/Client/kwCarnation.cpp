@@ -25,7 +25,7 @@ namespace kw
 		, mSFX(nullptr)
 		, mPrevPatternType(99)
 	{
-
+		SetHp(20.0f);
 	}
 
 	Carnation::~Carnation()
@@ -49,6 +49,7 @@ namespace kw
 		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Carnation\\FiringEnd", Vector2::Zero, 0.06f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Carnation\\CreatingStart", Vector2::Zero, 0.06f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Carnation\\CreatingEnd", Vector2::Zero, 0.06f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Carnation\\Death", Vector2::Zero, 0.06f);
 
 		mAnimator->GetCompleteEvent(L"CarnationIntro") = std::bind(&Carnation::idleCallback, this);
 		mAnimator->GetCompleteEvent(L"FaceAttackHighStart") = std::bind(&Carnation::idleCallback, this);
@@ -59,8 +60,8 @@ namespace kw
 		mAnimator->GetCompleteEvent(L"CarnationCreatingStart") = std::bind(&Carnation::creatingStartCallback, this);
 		mAnimator->GetCompleteEvent(L"CarnationCreatingEnd") = std::bind(&Carnation::idleCallback, this);
 
-		Collider* collider = AddComponent<Collider>();
-		collider->SetSize(Vector2(200, 600));
+		mCollider = AddComponent<Collider>();
+		mCollider->SetSize(Vector2(200, 600));
 
 		Monster::Initialize();
 	}
@@ -86,6 +87,14 @@ namespace kw
 	void Carnation::Release()
 	{
 		Monster::Release();
+	}
+
+	void Carnation::Die()
+	{
+		mState = eCarnationState::Die;
+		mAnimator->Play(L"CarnationDeath", true);
+		mCollider->SetSize(Vector2::Zero);
+		Monster::Die();
 	}
 
 	void Carnation::idle()

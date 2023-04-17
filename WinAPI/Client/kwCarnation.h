@@ -13,6 +13,7 @@ namespace kw
 			FaceAttack,
 			Creating,
 			Firing,
+			Die,
 			End,
 		};
 
@@ -23,6 +24,8 @@ namespace kw
 		virtual void Update() override;
 		virtual void Render(HDC hdc) override;
 		virtual void Release() override;
+		virtual void Die() override;
+
 		void Intro();
 
 	private:
