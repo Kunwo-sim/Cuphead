@@ -1,8 +1,9 @@
 #include "kwBaseBullet.h"
-#include "kwTransform.h"
+
 #include "kwTime.h"
 #include "kwObject.h"
-#include "kwCollider.h"
+
+#include "kwMonster.h"
 
 namespace kw
 {
@@ -11,6 +12,7 @@ namespace kw
 		, mAnimator(nullptr)
 		, mSpeed(1500.0f)
 		, mBulletDestoryEffect(nullptr)
+		, mAttackPower(1.0f)
 	{
 
 	}
@@ -23,6 +25,8 @@ namespace kw
 
 	void BaseBullet::Initialize()
 	{
+		SetPivot(ePivot::MiddleCenter);
+
 		mAnimator = AddComponent<Animator>();
 		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Bullet\\Create", Vector2::Zero, 0.08f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Bullet\\Loop", Vector2::Zero, 0.08f);
@@ -74,7 +78,12 @@ namespace kw
 
 	void BaseBullet::OnCollisionEnter(Collider* other)
 	{
-		BulletDestroy();
+		Monster* monster = dynamic_cast<Monster*>(other->GetOwner());
+		if (monster != nullptr)
+		{
+			monster->ReceiveDamage(mAttackPower);
+			BulletDestroy();
+		}
 	}
 
 	void BaseBullet::BulletLoop()

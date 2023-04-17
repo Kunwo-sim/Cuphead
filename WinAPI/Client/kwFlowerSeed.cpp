@@ -25,13 +25,17 @@ namespace kw
 	{
 		SetPivot(ePivot::LowCenter);
 
-		mTransform = GetComponent<Transform>();
+		mTransform = AddComponent<Transform>();
 		mAnimator = AddComponent<Animator>();
-		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Carnation\\Object\\Vine\\Long", Vector2::Zero, 0.08f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Carnation\\Object\\Vine\\Short", Vector2::Zero, 0.08f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Carnation\\Object\\Vine\\LongStart", Vector2::Zero, 0.08f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Carnation\\Object\\Vine\\LongEnd", Vector2::Zero, 0.08f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Carnation\\Object\\Vine\\ShortStart", Vector2::Zero, 0.08f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Carnation\\Object\\Vine\\ShortEnd", Vector2::Zero, 0.08f);
+		mAnimator->GetCompleteEvent(L"VineLongStart") = std::bind(&FlowerSeed::PlayLongVineEndAnim, this);
+		mAnimator->GetCompleteEvent(L"VineShortStart") = std::bind(&FlowerSeed::PlayShortVineEndAnim, this);
 
-		Collider* collider = AddComponent<Collider>();
-		collider->SetSize(Vector2(50, 50));
+		mCollider = AddComponent<Collider>();
+		mCollider->SetSize(Vector2(50, 50));
 
 		AttackObject::Initialize();
 	}
@@ -84,7 +88,18 @@ namespace kw
 
 	void FlowerSeed::CreateVine()
 	{
+		mCollider->SetSize(Vector2::Zero);
 		mState = eSeedState::Vine;
-		mAnimator->Play(L"VineLong", false);
+		mAnimator->Play(L"VineLongStart", true);
+	}
+
+	void FlowerSeed::PlayLongVineEndAnim()
+	{
+		mAnimator->Play(L"VineLongEnd", false);
+	}
+
+	void FlowerSeed::PlayShortVineEndAnim()
+	{
+		mAnimator->Play(L"VineShortEnd", false);
 	}
 }

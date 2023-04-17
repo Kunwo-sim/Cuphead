@@ -7,6 +7,8 @@
 #include "kwAnimator.h"
 #include "kwCollider.h"
 
+#include "kwVenus.h"
+
 namespace kw
 {
 	BlueFlowerSeed::BlueFlowerSeed()
@@ -57,5 +59,13 @@ namespace kw
 	void BlueFlowerSeed::CreateVine()
 	{
 		FlowerSeed::CreateVine();
+	}
+
+	void BlueFlowerSeed::PlayLongVineEndAnim()
+	{
+		FlowerSeed::PlayLongVineEndAnim();
+		Vector2 pos = mTransform->GetPos();
+		pos.y -= 300.0f;
+		Venus* obj = object::Instantiate<Venus>(eLayerType::Monster, pos);
 	}
 }

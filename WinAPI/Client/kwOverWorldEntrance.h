@@ -20,11 +20,6 @@ namespace kw
 		virtual void OnCollisionEnter(class Collider* other);
 		virtual void OnCollisionStay(class Collider* other);
 		virtual void OnCollisionExit(class Collider* other);
-		virtual void EnterBossMap() = 0;
-
-	protected:
-		Transform* mTransform;
-		Collider* mCollider;
-		Animator* mAnimator;
+		virtual void EnterBossMap();
 	};
 }

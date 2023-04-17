@@ -289,6 +289,15 @@
     <ClInclude Include="kwChomper.h">
       <Filter>Contents\Enemy\Carnation\CarnationObject\SeedObject</Filter>
     </ClInclude>
+    <ClInclude Include="kwVenus.h">
+      <Filter>Contents\Enemy\Carnation\CarnationObject\SeedObject</Filter>
+    </ClInclude>
+    <ClInclude Include="kwMonster.h">
+      <Filter>Contents\GameObjects\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="kwChangeScene.h">
+      <Filter>Contents\Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc">
@@ -453,6 +462,15 @@
     </ClCompile>
     <ClCompile Include="kwChomper.cpp">
       <Filter>Contents\Enemy\Carnation\CarnationObject\SeedObject</Filter>
+    </ClCompile>
+    <ClCompile Include="kwVenus.cpp">
+      <Filter>Contents\Enemy\Carnation\CarnationObject\SeedObject</Filter>
+    </ClCompile>
+    <ClCompile Include="kwMonster.cpp">
+      <Filter>Contents\GameObjects\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="kwChangeScene.cpp">
+      <Filter>Contents\Scene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

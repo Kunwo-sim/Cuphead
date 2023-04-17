@@ -3,6 +3,8 @@
 
 namespace kw
 {
+	class Cuphead;
+
 	class SceneManager
 	{
 	public:
@@ -16,12 +18,15 @@ namespace kw
 		static void SetActiveScene(Scene* scene) { mActiveScene = scene; }
 
 		static void LoadScene(eSceneType type);
+		static void LoadScene(eSceneType type, float time);
 		static void LateLoadScene();
+		static Cuphead* GetPlayer();
 
 	private:
 		static std::vector<Scene*> mScenes;
 		static Scene* mActiveScene;
 		static bool mIsSceneLoaded;
+		static float mRemainTime;
 		static eSceneType mLoadScene;
 	};
 }

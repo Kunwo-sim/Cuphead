@@ -10,9 +10,10 @@ namespace kw::object
 	static inline T* Instantiate(eLayerType type)
 	{
 		T* gameObj = new T();
+		gameObj->Initialize();
 		Scene* scene = SceneManager::GetActiveScene();
 		scene->AddGameObeject(gameObj, type);
-		gameObj->Initialize();
+		gameObj->SetScene(scene);
 		return gameObj;
 	}
 
@@ -20,10 +21,11 @@ namespace kw::object
 	static inline T* Instantiate(eLayerType type, Vector2 pos)
 	{
 		T* gameObj = new T();
-		gameObj->GameObject::GetComponent<Transform>()->SetPos(pos);
 		gameObj->Initialize();
+		gameObj->GameObject::GetComponent<Transform>()->SetPos(pos);
 		Scene* scene = SceneManager::GetActiveScene();
 		scene->AddGameObeject(gameObj, type);
+		gameObj->SetScene(scene);
 		
 		return gameObj;
 	}
@@ -37,6 +39,8 @@ namespace kw::object
 		gameObj->GameObject::GetComponent<Transform>()->SetPos(pos);
 		gameObj->SetDirection(direction);
 		gameObj->Initialize();
+		gameObj->SetScene(scene);
+
 		return gameObj;
 	}
 

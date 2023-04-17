@@ -1,13 +1,16 @@
 #include "kwCuphead.h"
+
+#include "kwInput.h"
 #include "kwTime.h"
 #include "kwSceneManager.h"
-#include "kwInput.h"
 #include "kwResources.h"
-#include "kwTransform.h"
-#include "kwCollider.h"
-#include "kwBaseBullet.h"
+#include "kwSound.h"
+
 #include "kwObject.h"
+
+#include "kwBaseBullet.h"
 #include "kwBulletFireEffect.h"
+
 
 namespace kw
 {
@@ -17,7 +20,7 @@ namespace kw
 		, mBulletOffset(Vector2(50.0f, -80.0f))
 		, mAttackCoolTime(0.2f)
 		, mAttackCoolChecker(0.0f)
-		, mRigidbody(nullptr)
+		, mBulletSound(nullptr)
 	{
 
 	}
@@ -61,6 +64,8 @@ namespace kw
 		GameObject* Effect = object::Instantiate<GameObject>(eLayerType::Effect, Vector2(400, 400));
 		Effect->AddComponent<Animator>()->CreateAnimations(L"..\\Resources\\Stage\\StageCuphead\\Effect\\Spark", Vector2::Zero, 0.05f);
 		Effect->GetComponent<Animator>()->Play(L"EffectSpark", false);
+
+		mBulletSound = Resources::Load<Sound>(L"BulletFire", L"..\\Resources\\Sound\\SFX\\Cuphead\\Cuphead_BulletFire.wav");
 
 		GameObject::Initialize();
 	}
@@ -152,6 +157,7 @@ namespace kw
 		{
 			mState = eCupheadState::Shoot;
 			playCupheadAnim(L"Shoot");
+			mBulletSound->Play(true);
 		}
 		else if (Input::GetKey(eKeyCode::S))
 		{
@@ -171,6 +177,7 @@ namespace kw
 		{
 			mState = eCupheadState::RunShoot;
 			playCupheadAnim(L"RunShoot");
+			mBulletSound->Play(true);
 			runShoot();
 			return;
 		}
@@ -188,6 +195,7 @@ namespace kw
 		{
 			mState = eCupheadState::Idle;
 			playCupheadAnim(L"Idle");
+			mBulletSound->Stop(true);
 			idle();
 			return;
 		}
@@ -233,6 +241,8 @@ namespace kw
 				mState = eCupheadState::Run;
 				playCupheadAnim(L"Run");
 			}
+
+			mBulletSound->Stop(true);
 			return;
 		}
 		else if (Input::GetKey(eKeyCode::S))
@@ -279,6 +289,7 @@ namespace kw
 		{
 			mState = eCupheadState::DuckShoot;
 			playCupheadAnim(L"DuckShoot");
+			mBulletSound->Play(true);
 			duckShoot();
 			return;
 		}
@@ -295,6 +306,7 @@ namespace kw
 		{
 			mState = eCupheadState::Duck;
 			playCupheadAnim(L"Duck");
+			mBulletSound->Stop(true);
 			duck();
 			return;
 		}
@@ -312,11 +324,19 @@ namespace kw
 			return;
 		}
 
+		if (Input::GetKeyDown(eKeyCode::K))
+		{
+			mBulletSound->Play(true);
+		}
+
 		if (Input::GetKey(eKeyCode::K))
 		{
 			CreateBullet();
 		}
-
+		else
+		{
+			mBulletSound->Stop(true);
+		}
 		move();
 	}
 
@@ -430,6 +450,11 @@ namespace kw
 			{
 				bulletPos.x += mBulletOffset.x;
 				bulletPos.y += mBulletOffset.y;
+			}
+
+			if (mState == eCupheadState::DuckShoot)
+			{
+				bulletPos.y += 30.0f;
 			}
 
 			BaseBullet* Bullet = object::Instantiate<BaseBullet>(eLayerType::Bullet, bulletPos);

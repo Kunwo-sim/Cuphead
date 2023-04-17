@@ -1,10 +1,14 @@
 #include "kwSceneManager.h"
+
+#include "kwCollisionManager.h"
+#include "kwTime.h"
+#include "kwCamera.h"
+
 #include "kwTitleScene.h"
 #include "kwOverWorldScene.h"
+#include "kwChangeScene.h"
 #include "kwPlayScene.h"
 #include "kwEndingScene.h"
-#include "kwCollisionManager.h"
-#include "kwCamera.h"
 #include "kwToolScene.h"
 
 namespace kw
@@ -13,6 +17,7 @@ namespace kw
 	Scene* SceneManager::mActiveScene = nullptr;
 	bool SceneManager::mIsSceneLoaded = false;
 	eSceneType SceneManager::mLoadScene = eSceneType::Title;
+	float SceneManager::mRemainTime = 0.0f;
 
 	void SceneManager::Initialize()
 	{
@@ -21,6 +26,7 @@ namespace kw
 		// 새로운 씬 추가하려면 아래에 작성 및 헤더 추가
 		mScenes[(UINT)eSceneType::Title] = new TitleScene();
 		mScenes[(UINT)eSceneType::OverWorld] = new OverWorldScene();
+		mScenes[(UINT)eSceneType::Change] = new ChangeScene();
 		mScenes[(UINT)eSceneType::Play] = new PlayScene();
 		mScenes[(UINT)eSceneType::Ending] = new EndingScene();
 		mScenes[(UINT)eSceneType::Tool] = new ToolScene();
@@ -40,6 +46,13 @@ namespace kw
 	void SceneManager::Update()
 	{
 		mActiveScene->Update();
+
+		mRemainTime -= Time::DeltaTime();
+		if (mRemainTime < 0.0f)
+		{
+			mIsSceneLoaded = true;
+			mRemainTime = 9999.0f;
+		}
 	}
 
 	void SceneManager::Render(HDC hdc)
@@ -70,6 +83,12 @@ namespace kw
 		mLoadScene = type;
 	}
 
+	void SceneManager::LoadScene(eSceneType type, float time)
+	{
+		mLoadScene = type;
+		mRemainTime = time;
+	}
+
 	void SceneManager::LateLoadScene()
 	{
 		if (mIsSceneLoaded)
@@ -83,5 +102,10 @@ namespace kw
 
 			mIsSceneLoaded = false;
 		}
+	}
+
+	Cuphead* SceneManager::GetPlayer()
+	{
+		return mActiveScene->GetPlayer();
 	}
 }

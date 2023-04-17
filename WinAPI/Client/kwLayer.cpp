@@ -33,8 +33,10 @@ namespace kw
 
 	void Layer::Update()
 	{
-		for (GameObject* gameObj : mGameObjects)
+		for (int i = 0; i < mGameObjects.size(); i++)
 		{
+			GameObject* gameObj = mGameObjects[i];
+
 			if (gameObj == nullptr)
 				continue;
 
@@ -43,6 +45,17 @@ namespace kw
 
 			gameObj->Update();
 		}
+
+		//for (GameObject* gameObj : mGameObjects)
+		//{
+		//	if (gameObj == nullptr)
+		//		continue;
+
+		//	if (gameObj->GetState() != GameObject::eState::Active)
+		//		continue;
+
+		//	gameObj->Update();
+		//}
 	}
 
 	void Layer::Render(HDC hdc)

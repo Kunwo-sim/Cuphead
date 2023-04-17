@@ -3,11 +3,15 @@
 namespace kw
 {
 	Character::Character()
+		: mHp(100.0f)
+		, mIsDead(false)
 	{
+
 	}
 
 	Character::~Character()
 	{
+
 	}
 
 	void Character::Initialize()
@@ -20,13 +24,19 @@ namespace kw
 		GameObject::Update();
 	}
 
-	void Character::Render(HDC hdc)
+	void Character::ReceiveDamage(float value)
 	{
-		GameObject::Render(hdc);
+		mHp -= value;
+
+		if (mHp <= 0)
+		{
+			mHp = 0;
+			Die();
+		}
 	}
 
-	void Character::Release()
+	void Character::Die()
 	{
-
+		mIsDead = true;
 	}
 }

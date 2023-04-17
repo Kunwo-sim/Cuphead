@@ -11,8 +11,11 @@ namespace kw
 
 		virtual void Initialize();
 		virtual void Update();
-		virtual void Render(HDC hdc);
-		virtual void Release();
+		virtual void ReceiveDamage(float value);
+		virtual void Die();
+
+		float GetHp() { return mHp; };
+		void SetHp(float value) { mHp = value; };
 
 	private:
 		float mHp;

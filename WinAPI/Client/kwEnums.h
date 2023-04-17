@@ -4,6 +4,7 @@ enum class eSceneType
 {
 	Title,
 	OverWorld,
+	Change,
 	Play,
 	Ending,
 	Tool,

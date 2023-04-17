@@ -143,6 +143,7 @@
     <ClInclude Include="kwCamera.h" />
     <ClInclude Include="kwCarnation.h" />
     <ClInclude Include="kwCarnationEntrance.h" />
+    <ClInclude Include="kwChangeScene.h" />
     <ClInclude Include="kwCharacter.h" />
     <ClInclude Include="kwChomper.h" />
     <ClInclude Include="kwCollider.h" />
@@ -153,6 +154,7 @@
     <ClInclude Include="kwEndingScene.h" />
     <ClInclude Include="kwEngine.h" />
     <ClInclude Include="kwEntity.h" />
+    <ClInclude Include="kwMonster.h" />
     <ClInclude Include="kwOverWorldEntrance.h" />
     <ClInclude Include="kwEnums.h" />
     <ClInclude Include="kwFlowerPlatform.h" />
@@ -184,6 +186,7 @@
     <ClInclude Include="kwTitleScene.h" />
     <ClInclude Include="kwToolScene.h" />
     <ClInclude Include="kwTransform.h" />
+    <ClInclude Include="kwVenus.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -199,6 +202,7 @@
     <ClCompile Include="kwCamera.cpp" />
     <ClCompile Include="kwCarnation.cpp" />
     <ClCompile Include="kwCarnationEntrance.cpp" />
+    <ClCompile Include="kwChangeScene.cpp" />
     <ClCompile Include="kwCharacter.cpp" />
     <ClCompile Include="kwChomper.cpp" />
     <ClCompile Include="kwCollider.cpp" />
@@ -208,6 +212,7 @@
     <ClCompile Include="kwDefaultGameObject.cpp" />
     <ClCompile Include="kwEndingScene.cpp" />
     <ClCompile Include="kwEntity.cpp" />
+    <ClCompile Include="kwMonster.cpp" />
     <ClCompile Include="kwOverWorldEntrance.cpp" />
     <ClCompile Include="kwFlowerPlatform.cpp" />
     <ClCompile Include="kwFlowerSeed.cpp" />
@@ -237,6 +242,7 @@
     <ClCompile Include="kwTitleScene.cpp" />
     <ClCompile Include="kwToolScene.cpp" />
     <ClCompile Include="kwTransform.cpp" />
+    <ClCompile Include="kwVenus.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>

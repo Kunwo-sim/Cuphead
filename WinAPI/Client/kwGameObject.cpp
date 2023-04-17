@@ -14,9 +14,10 @@ namespace kw
 		, mAnimator(nullptr)
 		, mCollider(nullptr)
 		, mRigidbody(nullptr)
+		, mScene(nullptr)
 	{
 		mComponents.resize((UINT)eComponentType::End);
-		AddComponent<Transform>();
+		mTransform = AddComponent<Transform>();
 	}
 
 	GameObject::~GameObject()

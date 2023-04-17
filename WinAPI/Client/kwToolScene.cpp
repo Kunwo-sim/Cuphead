@@ -135,7 +135,7 @@ LRESULT CALLBACK AtlasWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPa
             //    break;
             //case IDM_EXIT:
             //    DestroyWindow(hWnd);
-            break;
+            //break;
         default:
             return DefWindowProc(hWnd, message, wParam, lParam);
         }

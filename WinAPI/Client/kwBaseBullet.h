@@ -27,5 +27,6 @@ namespace kw
 
 		float mTime;
 		float mSpeed;
+		float mAttackPower;
 	};
 };

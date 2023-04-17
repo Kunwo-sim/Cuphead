@@ -1,7 +1,5 @@
 #include "kwAttackObject.h"
 
-#include "kwCollider.h"
-
 #include "kwCuphead.h"
 
 

@@ -1,9 +1,5 @@
 #pragma once
 #include "kwGameObject.h"
-#include "kwImage.h"
-#include "kwAnimator.h"
-#include "kwTransform.h"
-#include "kwRigidbody.h"
 
 namespace kw
 {
@@ -54,7 +50,7 @@ namespace kw
 		
 
 		eCupheadState mState;
-		Rigidbody* mRigidbody;
+		class Sound* mBulletSound;
 
 		Vector2 mBulletOffset;
 

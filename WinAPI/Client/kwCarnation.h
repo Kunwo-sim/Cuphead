@@ -1,9 +1,9 @@
 #pragma once
-#include "kwGameObject.h"
+#include "kwMonster.h"
 
 namespace kw
 {
-	class Carnation : public GameObject
+	class Carnation : public Monster
 	{
 	public:
 		enum class eCarnationState
@@ -11,9 +11,9 @@ namespace kw
 			Intro,
 			Idle,
 			FaceAttack,
-			Firing,
-			// Acorn, ºÎ¸Þ¶û
 			Creating,
+			Firing,
+			End,
 		};
 
 		Carnation();
@@ -23,9 +23,10 @@ namespace kw
 		virtual void Update() override;
 		virtual void Render(HDC hdc) override;
 		virtual void Release() override;
+		void Intro();
 
+	private:
 		void idle();
-		void intro();
 		void faceAttack();
 		void firing();
 		void creating();
@@ -39,6 +40,6 @@ namespace kw
 
 		int mLoopCount;
 		float mTime;
+		int mPrevPatternType;
 	};
 }
-

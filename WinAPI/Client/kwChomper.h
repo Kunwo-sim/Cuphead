@@ -1,18 +1,17 @@
 #pragma once
-#include "kwAttackObject.h"
+#include "kwMonster.h"
 
 namespace kw
 {
-	class Chomper : public AttackObject
+	class Chomper : public Monster
 	{
 	public:
 		Chomper();
 		virtual ~Chomper();
 
-		virtual void Initialize();
-		virtual void Update();
-		virtual void Render(HDC hdc);
-		virtual void Release();
+		virtual void Initialize() override;
+		virtual void Update() override;
+		virtual void Die() override;
 
 	private:
 	};

@@ -37,6 +37,7 @@ namespace kw
 
 	void CarnationEntrance::EnterBossMap()
 	{
-		SceneManager::LoadScene(eSceneType::Play);
+		OverWorldEntrance::EnterBossMap();
+		SceneManager::LoadScene(eSceneType::Change, 0.6f);
 	}
 }

@@ -23,6 +23,7 @@ namespace kw
 		, mTime(0.0f)
 		, mLoopCount(0)
 		, mSFX(nullptr)
+		, mPrevPatternType(99)
 	{
 
 	}
@@ -58,12 +59,10 @@ namespace kw
 		mAnimator->GetCompleteEvent(L"CarnationCreatingStart") = std::bind(&Carnation::creatingStartCallback, this);
 		mAnimator->GetCompleteEvent(L"CarnationCreatingEnd") = std::bind(&Carnation::idleCallback, this);
 
-		mAnimator->Play(L"CarnationIntro", true);
-
 		Collider* collider = AddComponent<Collider>();
 		collider->SetSize(Vector2(200, 600));
 
-		GameObject::Initialize();
+		Monster::Initialize();
 	}
 	void Carnation::Update()
 	{
@@ -76,17 +75,17 @@ namespace kw
 			break;
 		}
 
-		GameObject::Update();
+		Monster::Update();
 	}
 
 	void Carnation::Render(HDC hdc)
 	{
-		GameObject::Render(hdc);
+		Monster::Render(hdc);
 	}
 
 	void Carnation::Release()
 	{
-		GameObject::Release();
+		Monster::Release();
 	}
 
 	void Carnation::idle()
@@ -96,33 +95,41 @@ namespace kw
 		if (mTime > 3.0f)
 		{
 			mTime = 0.0f;
-			firing();
-			//int type = math::GetRandomNumber(0, 2);
-			//switch (type)
-			//{
-			//	case 0:
-			//		faceAttack();
-			//		break;
-			//	case 1:
-			//		firing();
-			//		break;
-			//	case 2:
-			//		creating();
-			//		break;
-			//default:
-			//	break;
-			//}
+			int type = math::GetRandomNumber((int)eCarnationState::FaceAttack, (int)eCarnationState::End - 1);
+			while (type == mPrevPatternType)
+			{
+				type = math::GetRandomNumber((int)eCarnationState::FaceAttack, (int)eCarnationState::End - 1);
+			}
+
+			switch (type)
+			{
+			case (int)eCarnationState::FaceAttack:
+					faceAttack();
+					break;
+			case (int)eCarnationState::Firing:
+					firing();
+					break;
+			case (int)eCarnationState::Creating:
+					creating();
+					break;
+			default:
+				break;
+			}
 		}
 	}
 
-	void Carnation::intro()
+	void Carnation::Intro()
 	{
+		mAnimator->Play(L"CarnationIntro", true);
 
+		mSFX = Resources::Load<Sound>(L"Carnation_Intro", L"..\\Resources\\Sound\\SFX\\Carnation\\Intro.wav");
+		mSFX->Play(false);
 	}
 
 	void Carnation::faceAttack()
 	{
 		mState = eCarnationState::FaceAttack;
+		mPrevPatternType = (int)eCarnationState::FaceAttack;
 
 		int type = math::GetRandomNumber(0, 1);
 
@@ -131,20 +138,28 @@ namespace kw
 		else
 			mAnimator->Play(L"FaceAttackLowStart", true);
 		
-		 mSFX = Resources::Load<Sound>(L"FaceAttack", L"..\\Resources\\Sound\\SFX\\FaceAttack.wav");
+		 mSFX = Resources::Load<Sound>(L"Carnation_FaceAttack", L"..\\Resources\\Sound\\SFX\\Carnation\\FaceAttack.wav");
 		 mSFX->Play(false);
 	}
 
 	void Carnation::firing()
 	{
 		mState = eCarnationState::Firing;
+		mPrevPatternType = (int)eCarnationState::Firing;
 		mAnimator->Play(L"CarnationFiringStart", true);
+
+		mSFX = Resources::Load<Sound>(L"Carnation_Gattling_Start", L"..\\Resources\\Sound\\SFX\\Carnation\\Gattling_Start.wav");
+		mSFX->Play(false);
 	}
 
 	void Carnation::creating()
 	{
 		mState = eCarnationState::Creating;
+		mPrevPatternType = (int)eCarnationState::Creating;
 		mAnimator->Play(L"CarnationCreatingStart", true);
+
+		mSFX = Resources::Load<Sound>(L"Carnation_Creating", L"..\\Resources\\Sound\\SFX\\Carnation\\Creating.wav");
+		mSFX->Play(false);
 	}
 
 	void Carnation::idleCallback()
@@ -162,35 +177,48 @@ namespace kw
 	void Carnation::firingStartCallback()
 	{
 		mAnimator->Play(L"CarnationFiringLoop", true);
+
+		mSFX = Resources::Load<Sound>(L"Carnation_Gattling_Loop", L"..\\Resources\\Sound\\SFX\\Carnation\\Gattling_Loop.wav");
+		mSFX->Play(true);
 	}
+
 	void Carnation::firingLoopCallback()
 	{
-		mLoopCount++;
-
-		int seedType = math::GetRandomNumber(0, 1);
-		GameObject* seed = nullptr;
-		switch (seedType)
-		{
-		case 0:
-			seed = object::Instantiate<BlueFlowerSeed>(eLayerType::AttackObject);
-			break;
-		case 1:
-			seed = object::Instantiate<PurpleFlowerSeed>(eLayerType::AttackObject);
-		default:
-			break;
-		}
-
-		int xPos = math::GetRandomNumber(100, 800);
-		seed->GetComponent<Transform>()->SetPos(Vector2(xPos, 0));
-
 		if (mLoopCount >= 8)
 		{
 			mLoopCount = 0;
 			mAnimator->Play(L"CarnationFiringEnd", true);
+
+			mSFX->Stop(true);
+			mSFX = Resources::Load<Sound>(L"Carnation_Gattling_End", L"..\\Resources\\Sound\\SFX\\Carnation\\Gattling_End.wav");
+			mSFX->Play(false);
+
+			return;
 		}
 		else
 		{
 			mAnimator->Play(L"CarnationFiringLoop", true);
 		}
+
+		if (mLoopCount % 2 == 0)
+		{
+			int seedType = math::GetRandomNumber(0, 1);
+			GameObject* seed = nullptr;
+			switch (seedType)
+			{
+			case 0:
+				seed = object::Instantiate<BlueFlowerSeed>(eLayerType::AttackObject);
+				break;
+			case 1:
+				seed = object::Instantiate<PurpleFlowerSeed>(eLayerType::AttackObject);
+			default:
+				break;
+			}
+
+			int xPos = math::GetRandomNumber(100, 800);
+			seed->GetComponent<Transform>()->SetPos(Vector2(xPos, 0));
+		}		
+
+		mLoopCount++;
 	}
 }

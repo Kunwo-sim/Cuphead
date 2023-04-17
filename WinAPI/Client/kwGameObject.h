@@ -7,6 +7,8 @@
 #include "kwCollider.h"
 #include "kwRigidbody.h"
 
+#include "kwScene.h"
+
 namespace kw
 {
 	class GameObject : public Entity
@@ -84,6 +86,7 @@ namespace kw
 		void SetFlipX(bool value) { mFlipX = value; }
 		bool IsUI() { return mIsUI; }
 		void SetIsUI(bool value) { mIsUI = value; }
+		void SetScene(Scene* scene) { mScene = scene; }
 
 	private:
 		std::vector<Component*> mComponents;
@@ -100,6 +103,7 @@ namespace kw
 		Collider* mCollider;
 		Animator* mAnimator;
 		Rigidbody* mRigidbody;
+		Scene* mScene;
 	};
 }
 

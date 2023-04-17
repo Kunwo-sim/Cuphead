@@ -1,5 +1,8 @@
 #include "kwOverWorldEntrance.h"
-#include "kwCuphead.h"
+
+#include "kwResources.h"
+#include "kwSound.h"
+#include "kwCamera.h"
 
 namespace kw
 {
@@ -48,5 +51,12 @@ namespace kw
 	void OverWorldEntrance::OnCollisionExit(Collider* other)
 	{
 
+	}
+
+	void OverWorldEntrance::EnterBossMap()
+	{
+		Camera::SceneExitEffect();
+		Sound* sound = Resources::Load<Sound>(L"EnterSound", L"..\\Resources\\Sound\\SFX\\OverWorld_Entrance.wav");
+		sound->Play(false);
 	}
 }

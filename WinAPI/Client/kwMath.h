@@ -1,7 +1,7 @@
 #pragma once
 #include <math.h>
 #include <random>
-#define PI 3.141592
+#define PI 3.141592f
 
 struct Vector2
 {
@@ -21,8 +21,8 @@ struct Vector2
 	}
 
 	Vector2(int x, int y)
-		: x(x)
-		, y(y)
+		: x((float)x)
+		, y((float)y)
 	{
 
 	}
@@ -173,6 +173,14 @@ namespace kw::math
 	inline static float Cross(Vector2& v1, Vector2& v2)
 	{
 		return v1.x * v2.y - v1.y * v2.x;
+	}
+	
+	static Vector2 Direction(Vector2 start, Vector2 end)
+	{
+		Vector2 vec = end - start;
+		vec.Normalize();
+
+		return vec;
 	}
 
 	static int GetRandomNumber(int start, int end)

@@ -17,6 +17,7 @@ namespace kw
 		virtual void PlayFallAnim() override;
 		virtual void PlayGrowAnim() override;
 		virtual void CreateVine() override;
+		virtual void PlayLongVineEndAnim() override;
 
 	private:
 

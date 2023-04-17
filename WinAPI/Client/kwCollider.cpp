@@ -14,7 +14,7 @@ namespace kw
 		, mTransform(nullptr)
 		, mCenter(Vector2::Zero)
 		, mOffset(Vector2::Zero)
-		, mSize(100, 100)
+		, mSize(0, 0)
 		, mScale(Vector2::One)
 		, mPos(Vector2::Zero)
 	{

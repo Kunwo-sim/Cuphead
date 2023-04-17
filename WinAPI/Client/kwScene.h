@@ -18,6 +18,8 @@ namespace kw
 
 		virtual void OnEnter();
 		virtual void OnExit();
+		
+		virtual class Cuphead* GetPlayer();
 
 		void AddGameObeject(GameObject* obj, eLayerType layer);
 		std::vector<GameObject*>& GetGameObjects(eLayerType layer);

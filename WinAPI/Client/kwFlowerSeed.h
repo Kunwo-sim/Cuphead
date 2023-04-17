@@ -24,9 +24,13 @@ namespace kw
 		virtual void PlayFallAnim();
 		virtual void PlayGrowAnim();
 		virtual void CreateVine();
+		virtual void PlayLongVineEndAnim();
+		virtual void PlayShortVineEndAnim();
 
 	protected:
 		eSeedState mState;
 		float mSpeed;
+		
+
 	};
 }

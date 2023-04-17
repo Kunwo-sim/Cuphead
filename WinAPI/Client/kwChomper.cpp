@@ -8,7 +8,7 @@ namespace kw
 {
 	Chomper::Chomper()
 	{
-
+		SetHp(3.0f);
 	}
 
 	Chomper::~Chomper()
@@ -22,24 +22,24 @@ namespace kw
 
 		mAnimator = AddComponent<Animator>();
 		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Carnation\\Object\\PurpleSeed\\Chomper\\Idle", Vector2::Zero, 0.04f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Carnation\\Object\\PurpleSeed\\Chomper\\Death", Vector2::Zero, 0.04f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Carnation\\Object\\PurpleSeed\\Chomper\\Die", Vector2::Zero, 0.04f);
 		mAnimator->Play(L"ChomperIdle", true);
 
-		AttackObject::Initialize();
+		mCollider = AddComponent<Collider>();
+		mCollider->SetSize(Vector2(50.0f, 80.0f));
+
+		Monster::Initialize();
 	}
 
 	void Chomper::Update()
 	{
-		AttackObject::Update();
+		Monster::Update();
 	}
 
-	void Chomper::Render(HDC hdc)
-	{
-		AttackObject::Render(hdc);
-	}
-
-	void Chomper::Release()
-	{
-
+	void Chomper::Die()
+	{		
+		mCollider->SetSize(Vector2::Zero);
+		mAnimator->Play(L"ChomperDie", false);
+		Monster::Die();
 	}
 }
