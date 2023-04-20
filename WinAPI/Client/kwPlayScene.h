@@ -27,6 +27,7 @@ namespace kw
 		class Image* mBackGround3;
 		class Image* mBackGround1;
 		class Sound* mFloralFuryBGM;
+		class Sound* mReadySound;
 		
 		class Carnation* mCarnation;
 		Cuphead* mPlayer;

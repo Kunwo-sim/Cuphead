@@ -139,10 +139,12 @@
     <ClInclude Include="kwBaseBullet.h" />
     <ClInclude Include="kwBlueFlowerSeed.h" />
     <ClInclude Include="kwBoomerang.h" />
+    <ClInclude Include="kwBossExplosion.h" />
     <ClInclude Include="kwBulletFireEffect.h" />
     <ClInclude Include="kwCamera.h" />
     <ClInclude Include="kwCarnation.h" />
     <ClInclude Include="kwCarnationEntrance.h" />
+    <ClInclude Include="kwCarnationScene.h" />
     <ClInclude Include="kwChangeScene.h" />
     <ClInclude Include="kwCharacter.h" />
     <ClInclude Include="kwChomper.h" />
@@ -198,10 +200,12 @@
     <ClCompile Include="kwBaseBullet.cpp" />
     <ClCompile Include="kwBlueFlowerSeed.cpp" />
     <ClCompile Include="kwBoomerang.cpp" />
+    <ClCompile Include="kwBossExplosion.cpp" />
     <ClCompile Include="kwBulletFireEffect.cpp" />
     <ClCompile Include="kwCamera.cpp" />
     <ClCompile Include="kwCarnation.cpp" />
     <ClCompile Include="kwCarnationEntrance.cpp" />
+    <ClCompile Include="kwCarnationScene.cpp" />
     <ClCompile Include="kwChangeScene.cpp" />
     <ClCompile Include="kwCharacter.cpp" />
     <ClCompile Include="kwChomper.cpp" />

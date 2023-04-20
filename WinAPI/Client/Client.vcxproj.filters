@@ -298,6 +298,10 @@
     <ClInclude Include="kwChangeScene.h">
       <Filter>Contents\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="kwBossExplosion.h">
+      <Filter>Contents\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="kwCarnationScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc">
@@ -472,5 +476,9 @@
     <ClCompile Include="kwChangeScene.cpp">
       <Filter>Contents\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="kwBossExplosion.cpp">
+      <Filter>Contents\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="kwCarnationScene.cpp" />
   </ItemGroup>
 </Project>

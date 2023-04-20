@@ -50,6 +50,7 @@ namespace kw
 		platformC->PlayPlatformAnim();
 
 		mFloralFuryBGM = Resources::Load<Sound>(L"FlowerFuryBGM", L"..\\Resources\\Sound\\BGM\\FloralFuryBGM.wav");
+		mReadySound = Resources::Load<Sound>(L"ReadySound", L"..\\Resources\\Sound\\SFX\\ReadySound.wav");
 	}
 
 	void PlayScene::Update()
@@ -113,6 +114,7 @@ namespace kw
 
 		mCarnation->Intro();
 		mFloralFuryBGM->Play(true);
+		mReadySound->Play(false);
 	}
 
 	void PlayScene::OnExit()

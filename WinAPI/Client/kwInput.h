@@ -60,6 +60,7 @@ namespace kw
 	private:
 		static std::vector<Key> mKeys;
 		static Vector2 mMousePos;
+		static bool mInputEnable;
 	};
 }
 

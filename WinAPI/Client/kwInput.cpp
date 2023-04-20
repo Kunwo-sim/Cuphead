@@ -17,6 +17,7 @@ namespace kw
 
 	std::vector<Input::Key> Input::mKeys;
 	Vector2 Input::mMousePos = Vector2::Zero;
+	bool Input::mInputEnable = false;
 
 	void Input::Initialize()
 	{
@@ -35,7 +36,6 @@ namespace kw
 	{
 		if (GetFocus())
 		{
-
 			for (UINT i = 0; i < (UINT)eKeyCode::END; i++)
 			{
 				if (GetAsyncKeyState(ASCII[i]) & 0x8000)
