@@ -32,7 +32,12 @@ namespace kw
         if (mbComplete == true)
             return;
 
-        mTime += Time::DeltaTime();
+        GameObject* obj = mAnimator->GetOwner();
+        if (obj->GetTimeIndependent())
+            mTime += Time::IndependentDeltaTime();
+        else
+            mTime += Time::DeltaTime();
+
         if (mSpriteSheet[mSpriteIndex].duration < mTime)
         {
             mTime = 0.0f;
@@ -81,14 +86,14 @@ namespace kw
         // 피벗이 중하단인경우
         if (obj->GetPivot() == GameObject::ePivot::LowCenter)
         {
-            pos.x -= mSpriteSheet[mSpriteIndex].size.x / 2.0f;
-            pos.y -= mSpriteSheet[mSpriteIndex].size.y;
+            pos.x -= mSpriteSheet[mSpriteIndex].size.x * scale.x / 2.0f;
+            pos.y -= mSpriteSheet[mSpriteIndex].size.y * scale.y;
         }
         // 피벗이 정중앙인경우
         else if (obj->GetPivot() == GameObject::ePivot::MiddleCenter)
         {
-            pos.x -= mSpriteSheet[mSpriteIndex].size.x / 2.0f;
-            pos.y -= mSpriteSheet[mSpriteIndex].size.y / 2.0f;
+            pos.x -= mSpriteSheet[mSpriteIndex].size.x * scale.x / 2.0f;
+            pos.y -= mSpriteSheet[mSpriteIndex].size.y * scale.y / 2.0f;
         }
         
         if (isFlip)

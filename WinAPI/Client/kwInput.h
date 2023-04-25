@@ -42,20 +42,30 @@ namespace kw
 
 		static __forceinline bool GetKey(eKeyCode keyCode)
 		{
-			return mKeys[static_cast<UINT>(keyCode)].state == eKeyState::Pressed;
+			if (mInputEnable)
+				return mKeys[static_cast<UINT>(keyCode)].state == eKeyState::Pressed;
+			else
+				return false;
 		}
 
 		static __forceinline bool GetKeyDown(eKeyCode keyCode)
 		{
-			return mKeys[static_cast<UINT>(keyCode)].state == eKeyState::Down;
+			if (mInputEnable)
+				return mKeys[static_cast<UINT>(keyCode)].state == eKeyState::Down;
+			else
+				return false;
 		}
 
 		static __forceinline bool GetKeyUp(eKeyCode keyCode)
 		{
-			return mKeys[static_cast<UINT>(keyCode)].state == eKeyState::Up;
+			if (mInputEnable)
+				return mKeys[static_cast<UINT>(keyCode)].state == eKeyState::Up;
+			else
+				return false;
 		}
 
 		static __forceinline Vector2 GetMousePos() { return mMousePos; }
+		static void SetInputEnable(bool value) { mInputEnable = value; }
 
 	private:
 		static std::vector<Key> mKeys;

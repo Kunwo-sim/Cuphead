@@ -15,6 +15,7 @@
 #include "kwBoomerang.h"
 #include "kwBlueFlowerSeed.h"
 #include "kwPurpleFlowerSeed.h"
+#include "kwBossExplosion.h"
 
 namespace kw
 {
@@ -25,7 +26,7 @@ namespace kw
 		, mSFX(nullptr)
 		, mPrevPatternType(99)
 	{
-		SetHp(20.0f);
+		SetHp(5.0f);
 	}
 
 	Carnation::~Carnation()
@@ -63,7 +64,7 @@ namespace kw
 		mCollider = AddComponent<Collider>();
 		mCollider->SetSize(Vector2(200, 600));
 
-		Monster::Initialize();
+		BossMonster::Initialize();
 	}
 	void Carnation::Update()
 	{
@@ -72,29 +73,47 @@ namespace kw
 		case kw::Carnation::eCarnationState::Idle:
 			idle();
 			break;
+		case kw::Carnation::eCarnationState::Die:
+			Die();
 		default:
 			break;
 		}
 
-		Monster::Update();
+		BossMonster::Update();
 	}
 
 	void Carnation::Render(HDC hdc)
 	{
-		Monster::Render(hdc);
+		BossMonster::Render(hdc);
 	}
 
 	void Carnation::Release()
 	{
-		Monster::Release();
+		BossMonster::Release();
 	}
 
 	void Carnation::Die()
 	{
-		mState = eCarnationState::Die;
-		mAnimator->Play(L"CarnationDeath", true);
-		mCollider->SetSize(Vector2::Zero);
-		Monster::Die();
+		if (mState == eCarnationState::Die)
+		{
+			mTime += Time::DeltaTime();
+			if (mTime > 0.4f)
+			{
+				mTime = 0.0f;
+				Vector2 effectPos = Vector2::Zero;
+				Vector2 bossPos =  mTransform->GetPos();
+				effectPos.x = math::GetRandomNumber(bossPos.x - 200, bossPos.x + 200);
+				effectPos.y = math::GetRandomNumber(bossPos.y - 200, bossPos.y + 200);
+				object::Instantiate<BossExplosion>(eLayerType::Effect, effectPos);
+			}
+		}
+		else
+		{
+			mState = eCarnationState::Die;
+			mAnimator->Play(L"CarnationDeath", true);
+			mCollider->SetSize(Vector2::Zero);
+			BossMonster::Die();
+		}
 	}
 
 	void Carnation::idle()

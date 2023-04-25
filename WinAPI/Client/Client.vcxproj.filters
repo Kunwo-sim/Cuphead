@@ -116,6 +116,9 @@
     <Filter Include="Contents\Enemy\Carnation\CarnationObject\SeedObject">
       <UniqueIdentifier>{04da4ad3-dfc0-49a2-aead-211fafda8241}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\UI">
+      <UniqueIdentifier>{5bb96b0b-d901-444f-9b54-d648450b3cb2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -292,9 +295,6 @@
     <ClInclude Include="kwVenus.h">
       <Filter>Contents\Enemy\Carnation\CarnationObject\SeedObject</Filter>
     </ClInclude>
-    <ClInclude Include="kwMonster.h">
-      <Filter>Contents\GameObjects\Common</Filter>
-    </ClInclude>
     <ClInclude Include="kwChangeScene.h">
       <Filter>Contents\Scene</Filter>
     </ClInclude>
@@ -302,6 +302,21 @@
       <Filter>Contents\Effect</Filter>
     </ClInclude>
     <ClInclude Include="kwCarnationScene.h" />
+    <ClInclude Include="kwHpBar.h">
+      <Filter>Contents\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="kwKnockOut.h">
+      <Filter>Contents\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="kwReadyWallop.h">
+      <Filter>Contents\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="kwMonster.h">
+      <Filter>Contents\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="kwBossMonster.h">
+      <Filter>Contents\Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc">
@@ -470,9 +485,6 @@
     <ClCompile Include="kwVenus.cpp">
       <Filter>Contents\Enemy\Carnation\CarnationObject\SeedObject</Filter>
     </ClCompile>
-    <ClCompile Include="kwMonster.cpp">
-      <Filter>Contents\GameObjects\Common</Filter>
-    </ClCompile>
     <ClCompile Include="kwChangeScene.cpp">
       <Filter>Contents\Scene</Filter>
     </ClCompile>
@@ -480,5 +492,20 @@
       <Filter>Contents\Effect</Filter>
     </ClCompile>
     <ClCompile Include="kwCarnationScene.cpp" />
+    <ClCompile Include="kwHpBar.cpp">
+      <Filter>Contents\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="kwKnockOut.cpp">
+      <Filter>Contents\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="kwReadyWallop.cpp">
+      <Filter>Contents\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="kwBossMonster.cpp">
+      <Filter>Contents\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="kwMonster.cpp">
+      <Filter>Contents\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

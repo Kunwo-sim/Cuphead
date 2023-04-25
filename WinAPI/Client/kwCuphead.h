@@ -1,9 +1,9 @@
 #pragma once
-#include "kwGameObject.h"
+#include "kwCharacter.h"
 
 namespace kw
 {
-	class Cuphead : public GameObject
+	class Cuphead : public Character
 	{
 	public:
 		enum class eCupheadState
@@ -57,6 +57,9 @@ namespace kw
 		float mSpeed;
 		float mAttackCoolTime;
 		float mAttackCoolChecker;
+		float mHitBlinkCoolTime;
+		float mHitBlinkCoolChecker;
+		bool mIsBlink;
 	};
 }
 

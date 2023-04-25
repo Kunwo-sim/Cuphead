@@ -17,7 +17,7 @@ namespace kw
 
 	std::vector<Input::Key> Input::mKeys;
 	Vector2 Input::mMousePos = Vector2::Zero;
-	bool Input::mInputEnable = false;
+	bool Input::mInputEnable = true;
 
 	void Input::Initialize()
 	{

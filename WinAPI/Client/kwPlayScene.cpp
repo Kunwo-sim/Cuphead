@@ -10,10 +10,13 @@
 #include "kwGameObject.h"
 #include "kwSound.h"
 
+#include "kwGround.h"
+
+#include "kwHpBar.h"
 #include "kwCuphead.h"
 #include "kwCarnation.h"
 #include "kwFlowerPlatform.h"
-#include "kwGround.h"
+#include "kwReadyWallop.h"
 
 namespace kw
 {
@@ -33,7 +36,10 @@ namespace kw
 		mBackGround2 = Resources::Load<Image>(L"Carnation_Back_02", L"..\\Resources\\Stage\\Carnation\\BackGround\\Carnation_Back_02.bmp");
 		mBackGround3 = Resources::Load<Image>(L"Carnation_Back_03", L"..\\Resources\\Stage\\Carnation\\BackGround\\Carnation_Back_03.bmp");
 
+		object::Instantiate<HpBar>(eLayerType::UI, Vector2(60, 700));
 		object::Instantiate<Ground>(eLayerType::Ground, Vector2(640, 720))->SetColliderSize(Vector2(1600.0f, 120.0f));
+		object::Instantiate<ReadyWallop>(eLayerType::Effect, Vector2::Center);
+
 		mPlayer = object::Instantiate<Cuphead>(eLayerType::Player, Vector2(300, 600));
 		mCarnation = object::Instantiate<Carnation>(eLayerType::Monster, Vector2(1050, 680));
 
@@ -49,7 +55,7 @@ namespace kw
 		platformC->SetPlatformType(FlowerPlatform::PlatformType::C);
 		platformC->PlayPlatformAnim();
 
-		mFloralFuryBGM = Resources::Load<Sound>(L"FlowerFuryBGM", L"..\\Resources\\Sound\\BGM\\FloralFuryBGM.wav");
+		mBGM = Resources::Load<Sound>(L"FlowerFuryBGM", L"..\\Resources\\Sound\\BGM\\FloralFuryBGM.wav");
 		mReadySound = Resources::Load<Sound>(L"ReadySound", L"..\\Resources\\Sound\\SFX\\ReadySound.wav");
 	}
 
@@ -113,12 +119,12 @@ namespace kw
 		CollisionManager::SetLayer(eLayerType::Bullet, eLayerType::Monster, true);
 
 		mCarnation->Intro();
-		mFloralFuryBGM->Play(true);
+		mBGM->Play(true);
 		mReadySound->Play(false);
 	}
 
 	void PlayScene::OnExit()
 	{
-		mFloralFuryBGM->Stop(true);
+		mBGM->Stop(true);
 	}
 }

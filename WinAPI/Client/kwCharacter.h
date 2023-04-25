@@ -17,7 +17,7 @@ namespace kw
 		float GetHp() { return mHp; };
 		void SetHp(float value) { mHp = value; };
 
-	private:
+	public:
 		float mHp;
 		bool mIsDead;
 	};

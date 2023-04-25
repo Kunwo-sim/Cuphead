@@ -15,6 +15,7 @@ namespace kw
 		, mCollider(nullptr)
 		, mRigidbody(nullptr)
 		, mScene(nullptr)
+		, mTimeIndependent(false)
 	{
 		mComponents.resize((UINT)eComponentType::End);
 		mTransform = AddComponent<Transform>();

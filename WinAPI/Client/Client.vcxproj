@@ -129,6 +129,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="kwBossMonster.h" />
+    <ClInclude Include="kwKnockOut.h" />
+    <ClInclude Include="kwHpBar.h" />
     <ClInclude Include="kwAnimation.h" />
     <ClInclude Include="kwAnimator.h" />
     <ClInclude Include="kwApplication.h" />
@@ -189,10 +192,14 @@
     <ClInclude Include="kwToolScene.h" />
     <ClInclude Include="kwTransform.h" />
     <ClInclude Include="kwVenus.h" />
+    <ClInclude Include="kwReadyWallop.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="kwBossMonster.cpp" />
+    <ClCompile Include="kwKnockOut.cpp" />
+    <ClCompile Include="kwHpBar.cpp" />
     <ClCompile Include="kwAnimation.cpp" />
     <ClCompile Include="kwAnimator.cpp" />
     <ClCompile Include="kwApplication.cpp" />
@@ -248,6 +255,7 @@
     <ClCompile Include="kwTransform.cpp" />
     <ClCompile Include="kwVenus.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="kwReadyWallop.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc" />

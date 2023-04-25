@@ -87,6 +87,7 @@ namespace kw
 		bool IsUI() { return mIsUI; }
 		void SetIsUI(bool value) { mIsUI = value; }
 		void SetScene(Scene* scene) { mScene = scene; }
+		bool GetTimeIndependent() { return mTimeIndependent; }
 
 	private:
 		std::vector<Component*> mComponents;
@@ -104,6 +105,7 @@ namespace kw
 		Animator* mAnimator;
 		Rigidbody* mRigidbody;
 		Scene* mScene;
+		bool mTimeIndependent;
 	};
 }
 

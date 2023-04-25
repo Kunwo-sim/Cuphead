@@ -11,10 +11,12 @@ namespace kw
 		static void Render(HDC hdc);
 
 		__forceinline static double DeltaTime() { return mDeltaTime; }
-		static double SetTimeScale(double scale) { mTimeScale = scale; }
+		__forceinline static double IndependentDeltaTime() { return mIndependentDeltaTime; }
+		static void SetTimeScale(double scale) { mTimeScale = scale; }
 
 	private:
 		static double mDeltaTime;
+		static double mIndependentDeltaTime;
 		static double mSecond;
 		static double mTimeScale;
 		static LARGE_INTEGER mCpuFrequency;

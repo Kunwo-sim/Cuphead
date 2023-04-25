@@ -1,5 +1,6 @@
 #include "kwScene.h"
 #include "kwSceneManager.h"
+#include "kwSound.h"
 
 namespace kw
 {
@@ -79,6 +80,11 @@ namespace kw
 	void Scene::OnExit()
 	{
 
+	}
+
+	void Scene::StopBGM()
+	{
+		mBGM->Stop(true);
 	}
 
 	Cuphead* Scene::GetPlayer()

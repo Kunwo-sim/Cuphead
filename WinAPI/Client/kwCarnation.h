@@ -1,9 +1,9 @@
 #pragma once
-#include "kwMonster.h"
+#include "kwBossMonster.h"
 
 namespace kw
 {
-	class Carnation : public Monster
+	class Carnation : public BossMonster
 	{
 	public:
 		enum class eCarnationState

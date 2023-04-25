@@ -6,6 +6,7 @@ extern kw::Application application;
 namespace kw
 {
 	double Time::mDeltaTime = 0.0l;
+	double Time::mIndependentDeltaTime = 0.0l;
 	double Time::mSecond = 0.0l;
 	double Time::mTimeScale = 1.0l;
 	LARGE_INTEGER Time::mCpuFrequency = {};
@@ -28,6 +29,7 @@ namespace kw
 		double differnceFrequency = mCurFrequency.QuadPart - mPrevFrequency.QuadPart;
 
 		mDeltaTime = differnceFrequency / mCpuFrequency.QuadPart;
+		mIndependentDeltaTime = differnceFrequency / mCpuFrequency.QuadPart;
 		mDeltaTime *= mTimeScale;
 		mPrevFrequency.QuadPart = mCurFrequency.QuadPart;
 	}

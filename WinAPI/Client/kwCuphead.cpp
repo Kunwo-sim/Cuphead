@@ -21,8 +21,11 @@ namespace kw
 		, mAttackCoolTime(0.2f)
 		, mAttackCoolChecker(0.0f)
 		, mBulletSound(nullptr)
+		, mHitBlinkCoolTime(0.1f)
+		, mHitBlinkCoolChecker(mHitBlinkCoolTime)
+		, mIsBlink(false)
 	{
-
+		mHp = (int)3;
 	}
 
 	Cuphead::~Cuphead()
@@ -119,7 +122,10 @@ namespace kw
 
 	void Cuphead::Render(HDC hdc)
 	{
-		GameObject::Render(hdc);
+		if (mIsBlink == false)
+		{
+			GameObject::Render(hdc);
+		}
 	}
 
 	void Cuphead::Release()
@@ -410,6 +416,12 @@ namespace kw
 	void Cuphead::Hit()
 	{
 		move();
+		mHitBlinkCoolChecker -= Time::DeltaTime();
+		if (mHitBlinkCoolChecker < 0.0f)
+		{
+			mIsBlink = !mIsBlink;
+			mHitBlinkCoolChecker = mHitBlinkCoolTime;
+		}
 
 		if (Input::GetKeyDown(eKeyCode::W))
 		{
@@ -419,6 +431,7 @@ namespace kw
 		if (mState == eCupheadState::Hit)
 			return;
 
+		SetHp((int)GetHp() - 1);
 		mState = eCupheadState::Hit;
 		playCupheadAnim(L"Hit");
 	}
@@ -478,9 +491,9 @@ namespace kw
 	void Cuphead::IdleCallback()
 	{
 		mSpeed = 500.0f;
-
-		mRigidbody->SetGround(false);
 		mState = eCupheadState::Idle;
 		playCupheadAnim(L"Idle");
+		mRigidbody->SetGround(false);
+		mIsBlink = false;
 	}
 }

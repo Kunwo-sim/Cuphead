@@ -9,6 +9,7 @@ struct Vector2
 	static Vector2 Right;
 	static Vector2 One;
 	static Vector2 Zero;
+	static Vector2 Center;
 
 	float x;
 	float y;
