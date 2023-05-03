@@ -92,9 +92,14 @@ namespace kw
 		return nullptr;
 	}
 
-	void Scene::AddGameObeject(GameObject* obj, eLayerType layer)
+	void Scene::AddGameObject(GameObject* obj, eLayerType layer)
 	{
 		mLayers[(UINT)layer].AddGameObject(obj);
+	}
+
+	void Scene::AddGameObjectFront(GameObject* obj, eLayerType layer)
+	{
+		mLayers[(UINT)layer].AddGameObjectFront(obj);
 	}
 
 	std::vector<GameObject*>& Scene::GetGameObjects(eLayerType layer)

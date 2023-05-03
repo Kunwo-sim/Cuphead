@@ -1,5 +1,6 @@
 #pragma once
 #include "kwScene.h"
+#include "kwChangeScene.h"
 
 namespace kw
 {
@@ -15,6 +16,7 @@ namespace kw
 		static void Release();
 
 		static Scene* GetActiveScene() { return mActiveScene; }
+		static class ChangeScene* GetChangeScene();
 		static void SetActiveScene(Scene* scene) { mActiveScene = scene; }
 
 		static void LoadScene(eSceneType type);

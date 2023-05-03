@@ -64,7 +64,12 @@ namespace kw
 
 		if (Input::GetKeyState(eKeyCode::N) == eKeyState::Down)
 		{
-			SceneManager::LoadScene(eSceneType::Play);
+			SceneManager::LoadScene(eSceneType::Carnation);
+		}
+
+		if (Input::GetKeyState(eKeyCode::M) == eKeyState::Down)
+		{
+			SceneManager::LoadScene(eSceneType::Dragon);
 		}
 	}
 

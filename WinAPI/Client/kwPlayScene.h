@@ -3,8 +3,6 @@
 
 namespace kw
 {
-	class Cuphead;
-
 	class PlayScene : public Scene
 	{
 	public:
@@ -21,14 +19,8 @@ namespace kw
 
 		virtual Cuphead* GetPlayer() override { return mPlayer; };
 
-	private:
-		class Image* mBackGround;
-		class Image* mBackGround2;
-		class Image* mBackGround3;
-		class Image* mBackGround1;
+	protected:
 		class Sound* mReadySound;
-		
-		class Carnation* mCarnation;
-		Cuphead* mPlayer;
+		class Cuphead* mPlayer;
 	};
 }

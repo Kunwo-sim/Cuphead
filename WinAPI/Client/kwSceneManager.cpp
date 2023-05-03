@@ -8,6 +8,9 @@
 #include "kwOverWorldScene.h"
 #include "kwChangeScene.h"
 #include "kwPlayScene.h"
+#include "kwCarnationScene.h"
+#include "kwDragonScene.h"
+
 #include "kwEndingScene.h"
 #include "kwToolScene.h"
 
@@ -28,6 +31,8 @@ namespace kw
 		mScenes[(UINT)eSceneType::OverWorld] = new OverWorldScene();
 		mScenes[(UINT)eSceneType::Change] = new ChangeScene();
 		mScenes[(UINT)eSceneType::Play] = new PlayScene();
+		mScenes[(UINT)eSceneType::Carnation] = new CarnationScene();
+		mScenes[(UINT)eSceneType::Dragon] = new DragonScene();
 		mScenes[(UINT)eSceneType::Ending] = new EndingScene();
 		mScenes[(UINT)eSceneType::Tool] = new ToolScene();
 
@@ -75,6 +80,11 @@ namespace kw
 			delete scene;
 			scene = nullptr;
 		}
+	}
+
+	ChangeScene* SceneManager::GetChangeScene()
+	{
+		return dynamic_cast<ChangeScene*>(mScenes[(int)eSceneType::Change]);
 	}
 
 	void SceneManager::LoadScene(eSceneType type)

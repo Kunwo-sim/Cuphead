@@ -22,7 +22,8 @@ namespace kw
 		virtual void StopBGM();
 		virtual class Cuphead* GetPlayer();
 
-		void AddGameObeject(GameObject* obj, eLayerType layer);
+		void AddGameObject(GameObject* obj, eLayerType layer);
+		void AddGameObjectFront(GameObject* obj, eLayerType layer);
 		std::vector<GameObject*>& GetGameObjects(eLayerType layer);
 
 	protected:
