@@ -12,7 +12,7 @@ namespace kw
 		, mAnimator(nullptr)
 		, mSpeed(1500.0f)
 		, mBulletDestoryEffect(nullptr)
-		, mAttackPower(1.0f)
+		, mAttackPower(4.0f)
 	{
 
 	}
@@ -28,8 +28,8 @@ namespace kw
 		SetPivot(ePivot::MiddleCenter);
 
 		mAnimator = AddComponent<Animator>();
-		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Bullet\\Create", Vector2::Zero, 0.08f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Bullet\\Loop", Vector2::Zero, 0.08f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Bullet\\Create", Vector2::Zero, 0.06f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Bullet\\Loop", Vector2::Zero, 0.06f);
 
 		mAnimator->GetCompleteEvent(L"BulletCreate") = std::bind(&BaseBullet::BulletLoop, this);
 
@@ -94,6 +94,7 @@ namespace kw
 	void BaseBullet::BulletDestroy()
 	{
 		GameObject* destroyEffect = object::Instantiate<GameObject>(eLayerType::Effect, GetComponent<Transform>()->GetPos());
+		destroyEffect->SetPivot(ePivot::MiddleCenter);
 		destroyEffect->AddComponent<Animator>()->CreateAnimations(L"..\\Resources\\Stage\\Bullet\\End", Vector2::Zero, 0.05f);
 		destroyEffect->GetComponent<Animator>()->Play(L"BulletEnd", false);
 

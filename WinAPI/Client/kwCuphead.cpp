@@ -9,6 +9,7 @@
 #include "kwObject.h"
 
 #include "kwBaseBullet.h"
+#include "kwSpreadShot.h"
 #include "kwBulletFireEffect.h"
 
 
@@ -16,11 +17,13 @@ namespace kw
 {
 	Cuphead::Cuphead()
 		: mState(eCupheadState::Idle)
+		, mBulletType(eBulletType::PeaShot)
 		, mSpeed(500.0f)
 		, mBulletOffset(Vector2(50.0f, -80.0f))
 		, mAttackCoolTime(0.2f)
 		, mAttackCoolChecker(0.0f)
 		, mBulletSound(nullptr)
+		, mSpreadSound(nullptr)
 		, mHitBlinkCoolTime(0.1f)
 		, mHitBlinkCoolChecker(mHitBlinkCoolTime)
 		, mIsBlink(false)
@@ -69,6 +72,7 @@ namespace kw
 		Effect->GetComponent<Animator>()->Play(L"EffectSpark", false);
 
 		mBulletSound = Resources::Load<Sound>(L"BulletFire", L"..\\Resources\\Sound\\SFX\\Cuphead\\Cuphead_BulletFire.wav");
+		mSpreadSound = Resources::Load<Sound>(L"SpreadFire", L"..\\Resources\\Sound\\SFX\\Cuphead\\Cuphead_SpreadShot.wav");
 
 		GameObject::Initialize();
 	}
@@ -79,6 +83,29 @@ namespace kw
 		if (Input::GetKeyDown(eKeyCode::X) && mState != eCupheadState::Hit)
 		{
 			dash();
+		}
+
+		if (Input::GetKeyDown(eKeyCode::TAB))
+		{
+			if (mBulletType == eBulletType::PeaShot)
+			{
+				mBulletType = eBulletType::SpreadShot;
+			}
+			else
+			{
+				mBulletType = eBulletType::PeaShot;
+			}
+
+			if (Input::GetKey(eKeyCode::K))
+			{
+				stopBulletSound();
+				playBulletSound();
+			}
+		}
+
+		if (mState != eCupheadState::Hit)
+		{
+			mIsBlink = false;
 		}
 
 		switch (mState)
@@ -115,6 +142,16 @@ namespace kw
 			break;
 		default:
 			break;
+		}
+
+		Vector2 pos = mTransform->GetPos();
+		if (pos.x < 30)
+		{
+			mTransform->SetPos(Vector2(30.0f, pos.y));
+		}
+		else if (pos.x > 1250)
+		{
+			mTransform->SetPos(Vector2(1250.0f, pos.y));
 		}
 
 		GameObject::Update();
@@ -163,7 +200,7 @@ namespace kw
 		{
 			mState = eCupheadState::Shoot;
 			playCupheadAnim(L"Shoot");
-			mBulletSound->Play(true);
+			playBulletSound();
 		}
 		else if (Input::GetKey(eKeyCode::S))
 		{
@@ -183,7 +220,7 @@ namespace kw
 		{
 			mState = eCupheadState::RunShoot;
 			playCupheadAnim(L"RunShoot");
-			mBulletSound->Play(true);
+			playBulletSound();
 			runShoot();
 			return;
 		}
@@ -201,7 +238,7 @@ namespace kw
 		{
 			mState = eCupheadState::Idle;
 			playCupheadAnim(L"Idle");
-			mBulletSound->Stop(true);
+			stopBulletSound();
 			idle();
 			return;
 		}
@@ -248,7 +285,7 @@ namespace kw
 				playCupheadAnim(L"Run");
 			}
 
-			mBulletSound->Stop(true);
+			stopBulletSound();
 			return;
 		}
 		else if (Input::GetKey(eKeyCode::S))
@@ -286,8 +323,11 @@ namespace kw
 
 	void Cuphead::duck()
 	{
+		mCollider->SetSize(Vector2(100, 65));
+
 		if (Input::GetKeyUp(eKeyCode::S))
 		{
+			mCollider->SetSize(Vector2(100, 130));
 			mState = eCupheadState::Idle;
 			playCupheadAnim(L"Idle");
 		}
@@ -295,7 +335,7 @@ namespace kw
 		{
 			mState = eCupheadState::DuckShoot;
 			playCupheadAnim(L"DuckShoot");
-			mBulletSound->Play(true);
+			playBulletSound();
 			duckShoot();
 			return;
 		}
@@ -303,8 +343,11 @@ namespace kw
 
 	void Cuphead::duckShoot()
 	{
+		mCollider->SetSize(Vector2(100, 65));
+
 		if (Input::GetKeyUp(eKeyCode::S))
 		{
+			mCollider->SetSize(Vector2(100, 130));
 			mState = eCupheadState::Shoot;
 			playCupheadAnim(L"Shoot");
 		}
@@ -312,7 +355,7 @@ namespace kw
 		{
 			mState = eCupheadState::Duck;
 			playCupheadAnim(L"Duck");
-			mBulletSound->Stop(true);
+			stopBulletSound();
 			duck();
 			return;
 		}
@@ -332,17 +375,17 @@ namespace kw
 
 		if (Input::GetKeyDown(eKeyCode::K))
 		{
-			mBulletSound->Play(true);
+			playBulletSound();
 		}
-
-		if (Input::GetKey(eKeyCode::K))
+		else if (Input::GetKey(eKeyCode::K))
 		{
 			CreateBullet();
 		}
 		else
 		{
-			mBulletSound->Stop(true);
+			stopBulletSound();
 		}
+
 		move();
 	}
 
@@ -449,31 +492,54 @@ namespace kw
 
 	void Cuphead::CreateBullet()
 	{
-		if (Input::GetKey(eKeyCode::K) && mAttackCoolChecker <= 0.0f)
+		if (!Input::GetKey(eKeyCode::K) || mAttackCoolChecker > 0.0f)
+			return;
+
+		mAttackCoolChecker = mAttackCoolTime;
+		Vector2 bulletPos = mTransform->GetPos();
+		if (GetFlipX() == true)
 		{
-			mAttackCoolChecker = mAttackCoolTime;
-			Vector2 bulletPos = mTransform->GetPos();
-
-			if (GetFlipX() == true)
-			{
-				bulletPos.x -= mBulletOffset.x;
-				bulletPos.y += mBulletOffset.y;
-			}
-			else if (GetFlipX() == false)
-			{
-				bulletPos.x += mBulletOffset.x;
-				bulletPos.y += mBulletOffset.y;
-			}
-
-			if (mState == eCupheadState::DuckShoot)
-			{
-				bulletPos.y += 30.0f;
-			}
-
-			BaseBullet* Bullet = object::Instantiate<BaseBullet>(eLayerType::Bullet, bulletPos);
-			Bullet->SetFlipX(GetFlipX());
-			BulletFireEffect* FireEffect = object::Instantiate<BulletFireEffect>(eLayerType::Effect, bulletPos);
+			bulletPos.x -= mBulletOffset.x;
+			bulletPos.y += mBulletOffset.y;
 		}
+		else if (GetFlipX() == false)
+		{
+			bulletPos.x += mBulletOffset.x;
+			bulletPos.y += mBulletOffset.y;
+		}
+
+		if (mState == eCupheadState::DuckShoot)
+		{
+			bulletPos.y += 30.0f;
+		}
+
+		switch (mBulletType)
+		{
+			case eBulletType::PeaShot:
+			{
+				BaseBullet* Bullet = object::Instantiate<BaseBullet>(eLayerType::Bullet, bulletPos);
+				Bullet->SetFlipX(GetFlipX());
+				break;
+			}
+			case eBulletType::SpreadShot:
+			{
+				for (int i = 0; i < 5; i++)
+				{
+					SpreadShot* ss = object::Instantiate<SpreadShot>(eLayerType::Bullet, bulletPos);
+					ss->SetSpreadDirection(i);
+					if (GetFlipX())
+					{
+						ss->SetFlipX(true);
+						ss->SetDirectionFlip();
+					}
+				}
+				break;
+			}
+		default:
+			break;
+		}
+
+		BulletFireEffect* FireEffect = object::Instantiate<BulletFireEffect>(eLayerType::Effect, bulletPos);
 	}
 
 	void Cuphead::SetStateJump()
@@ -495,5 +561,36 @@ namespace kw
 		playCupheadAnim(L"Idle");
 		mRigidbody->SetGround(false);
 		mIsBlink = false;
+	}
+
+	void Cuphead::StageClear()
+	{
+		mState = eCupheadState::Idle;
+		playCupheadAnim(L"Idle");
+		mSpeed = 500.0f;
+		mIsBlink = false;
+
+		stopBulletSound();
+	}
+
+	void Cuphead::playBulletSound()
+	{
+		switch (mBulletType)
+		{
+		case eBulletType::PeaShot:
+			mBulletSound->Play(true);
+			break;
+		case eBulletType::SpreadShot:
+			mSpreadSound->Play(true);
+			break;
+		default:
+			break;
+		}
+	}
+
+	void Cuphead::stopBulletSound()
+	{
+		mBulletSound->Stop(false);
+		mSpreadSound->Stop(false);
 	}
 }

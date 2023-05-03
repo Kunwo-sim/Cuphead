@@ -21,6 +21,12 @@ namespace kw
 			Death,
 		};
 
+		enum class eBulletType
+		{
+			PeaShot,
+			SpreadShot,
+		};
+
 		Cuphead();
 		~Cuphead();
 
@@ -29,11 +35,13 @@ namespace kw
 		virtual void Render(HDC hdc) override;
 		virtual void Release() override;
 
+		eBulletType GetBulletType() { return mBulletType; };
 		void Hit();
 		void GroundExit();
 		void CreateBullet();
 		void SetStateJump();
 		void IdleCallback();
+		void StageClear();
 
 	private:
 		void idle();
@@ -47,10 +55,13 @@ namespace kw
 		void death();
 		void move();
 		void playCupheadAnim(std::wstring State, bool loop = true);
-		
+		void playBulletSound();
+		void stopBulletSound();
 
 		eCupheadState mState;
+		eBulletType mBulletType;
 		class Sound* mBulletSound;
+		class Sound* mSpreadSound;
 
 		Vector2 mBulletOffset;
 
