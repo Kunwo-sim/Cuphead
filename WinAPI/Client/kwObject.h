@@ -7,24 +7,22 @@
 namespace kw::object
 {
 	template <typename T>
-	static inline T* Instantiate(eLayerType type)
+	static inline T* Instantiate(eLayerType type, Vector2 pos = Vector2::Zero)
 	{
 		T* gameObj = new T();
-		gameObj->Initialize();
-		Scene* scene = SceneManager::GetActiveScene();
-		scene->AddGameObeject(gameObj, type);
-		gameObj->SetScene(scene);
-		return gameObj;
-	}
-
-	template <typename T>
-	static inline T* Instantiate(eLayerType type, Vector2 pos)
-	{
-		T* gameObj = new T();
-		gameObj->Initialize();
 		gameObj->GameObject::GetComponent<Transform>()->SetPos(pos);
+		gameObj->Initialize();
+
 		Scene* scene = SceneManager::GetActiveScene();
-		scene->AddGameObeject(gameObj, type);
+		if (type == eLayerType::MeteorEffect)
+		{
+			scene->AddGameObjectFront(gameObj, type);
+		}
+		else
+		{
+			scene->AddGameObject(gameObj, type);
+		}
+		
 		gameObj->SetScene(scene);
 		
 		return gameObj;
@@ -35,7 +33,7 @@ namespace kw::object
 	{
 		T* gameObj = new T();
 		Scene* scene = SceneManager::GetActiveScene();
-		scene->AddGameObeject(gameObj, type);
+		scene->AddGameObject(gameObj, type);
 		gameObj->GameObject::GetComponent<Transform>()->SetPos(pos);
 		gameObj->SetDirection(direction);
 		gameObj->Initialize();

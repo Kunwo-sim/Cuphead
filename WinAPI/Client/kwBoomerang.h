@@ -17,5 +17,6 @@ namespace kw
 	private:
 		float mSpawnTime;
 		float mSpeed;
+		class Sound* mSFX;
 	};
 }

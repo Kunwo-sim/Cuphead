@@ -6,7 +6,9 @@
 #include "kwObject.h"
 #include "kwTime.h"
 
+#include "kwFadeOutEffect.h"
 #include "kwKnockOut.h"
+#include "kwCuphead.h"
 #include "kwSound.h"
 
 namespace kw
@@ -40,6 +42,9 @@ namespace kw
 		Input::SetInputEnable(false);
 		mKnoctOutSound->Play(false);
 		object::Instantiate<KnockOut>(eLayerType::Effect, Vector2::Zero);
+		object::Instantiate<FadeOutEffect>(eLayerType::SceneEffect, Vector2::Zero);
 		Monster::Die();
+		
+		SceneManager::GetPlayer()->StageClear();
 	}
 }

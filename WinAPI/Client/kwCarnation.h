@@ -33,7 +33,12 @@ namespace kw
 		void faceAttack();
 		void firing();
 		void creating();
+
 		void idleCallback();
+		void faceAttackHighStartCallback();
+		void faceAttackHighLoopCallback();
+		void faceAttackLowStartCallback();
+		void faceAttackLowLoopCallback();
 		void creatingStartCallback();
 		void firingStartCallback();
 		void firingLoopCallback();
@@ -44,5 +49,7 @@ namespace kw
 		int mLoopCount;
 		float mTime;
 		int mPrevPatternType;
+
+		GameObject* mFaceAttackCollision;
 	};
 }

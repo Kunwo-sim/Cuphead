@@ -39,5 +39,6 @@ namespace kw
 	{
 		OverWorldEntrance::EnterBossMap();
 		SceneManager::LoadScene(eSceneType::Change, 0.6f);
+		SceneManager::GetChangeScene()->SetLoadScene(eSceneType::Carnation);
 	}
 }

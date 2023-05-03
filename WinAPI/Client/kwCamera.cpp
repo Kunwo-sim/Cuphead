@@ -69,10 +69,6 @@ namespace kw
 			{
 				mCuttonAlpha = ratio;
 			}
-			else
-			{
-
-			}
 		}
 
 		mDistance = mLookPosition - (mResolution / 2.0f);

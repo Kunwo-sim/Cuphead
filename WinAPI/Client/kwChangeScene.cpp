@@ -39,7 +39,7 @@ namespace kw
 
 		if (mTime > 1.0f)
 		{
-			SceneManager::LoadScene(eSceneType::Play);
+			SceneManager::LoadScene(mLoadScene);
 		}
 	}
 
@@ -60,6 +60,6 @@ namespace kw
 
 	void ChangeScene::OnExit()
 	{
-
+		Scene::OnExit();
 	}
 }

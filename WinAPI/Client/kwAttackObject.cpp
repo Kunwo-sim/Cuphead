@@ -46,11 +46,11 @@ namespace kw
 
 	void AttackObject::OnCollisionStay(Collider* other)
 	{
-
+		GameObject::OnCollisionStay(other);
 	}
 
 	void AttackObject::OnCollisionExit(Collider* other)
 	{
-
+		GameObject::OnCollisionExit(other);
 	}
 }

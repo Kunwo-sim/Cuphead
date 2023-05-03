@@ -4,12 +4,15 @@
 #include "kwCollider.h"
 #include "kwObject.h"
 #include "kwTime.h"
+#include "kwResources.h"
+#include "kwSound.h"
 
 namespace kw
 {
 	Boomerang::Boomerang()
 		: mSpawnTime(0.0f)
 		, mSpeed(600.0f)
+		, mSFX(nullptr)
 	{
 
 	}
@@ -48,11 +51,29 @@ namespace kw
 		}
 		else if (mSpawnTime > 2.7f)
 		{
+			if (mSFX == nullptr)
+			{
+				mSFX = Resources::Load<Sound>(L"Boomerang", L"..\\Resources\\Sound\\SFX\\Carnation\\Boomerang.wav");
+				mSFX->Play(false);
+			}
+			
 			pos.x += mSpeed * Time::DeltaTime();
 			pos.y = 525.0f;
 		}
+		else if (mSpawnTime > 2.0f)
+		{
+			mSFX = nullptr;
+			pos.x -= mSpeed * Time::DeltaTime();
+			pos.y = 300.0f;
+		}
 		else if (mSpawnTime > 0.7f)
 		{
+			if (mSFX == nullptr)
+			{
+				mSFX = Resources::Load<Sound>(L"Boomerang", L"..\\Resources\\Sound\\SFX\\Carnation\\Boomerang.wav");
+				mSFX->Play(false);
+			}
+
 			pos.x -= mSpeed * Time::DeltaTime();
 			pos.y = 300.0f;
 		}		

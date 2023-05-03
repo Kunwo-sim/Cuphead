@@ -21,6 +21,7 @@ namespace kw
 		static void Render(HDC hdc);
 		static void Clear();
 
+		static Vector2 GetResolution() { return mResolution; }
 		static void SetTarget(GameObject* target) { mTarget = target; }
 		static void SetLookPosition(Vector2 pos) { mLookPosition = pos; }
 		static Vector2 CalculatePos(Vector2 pos) { return pos - mDistance; }

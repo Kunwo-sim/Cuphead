@@ -16,12 +16,6 @@ namespace kw
 		virtual void Render(HDC hdc) override;
 		virtual void Release() override;
 
-		void BulletFireEnd();
-
 	private:
-		Transform* mTransform;
-		Animator* mAnimator;
-
-		float mTime = 0.0f;
 	};
 };

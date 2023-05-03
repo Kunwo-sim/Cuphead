@@ -25,8 +25,9 @@ namespace kw
 		, mLoopCount(0)
 		, mSFX(nullptr)
 		, mPrevPatternType(99)
+		, mFaceAttackCollision(nullptr)
 	{
-		SetHp(5.0f);
+		SetHp(500.0f);
 	}
 
 	Carnation::~Carnation()
@@ -41,10 +42,15 @@ namespace kw
 		mTransform = GetComponent<Transform>();
 		mAnimator = AddComponent<Animator>();
 
-		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Carnation\\Intro", Vector2::Zero, 0.08f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Carnation\\Before", Vector2(-90.0f, 0.0f), 0.08f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Carnation\\Intro", Vector2(-90.0f, 0.0f), 0.06f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Carnation\\Idle", Vector2::Zero, 0.06f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Carnation\\FaceAttack\\HighStart", Vector2(-400.0f, 0.0f), 0.06f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Carnation\\FaceAttack\\LowStart", Vector2(-400.0f, 0.0f), 0.06f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Carnation\\FaceAttack\\HighStart", Vector2(-370.0f, 0.0f), 0.06f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Carnation\\FaceAttack\\HighLoop", Vector2(-370.0f, 0.0f), 0.06f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Carnation\\FaceAttack\\HighEnd", Vector2(-370.0f, 0.0f), 0.06f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Carnation\\FaceAttack\\LowStart", Vector2(-410.0f, 100.0f), 0.06f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Carnation\\FaceAttack\\LowLoop", Vector2(-410.0f, 100.0f), 0.06f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Carnation\\FaceAttack\\LowEnd", Vector2(-410.0f, 100.0f), 0.06f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Carnation\\FiringStart", Vector2::Zero, 0.06f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Carnation\\FiringLoop", Vector2::Zero, 0.06f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Carnation\\FiringEnd", Vector2::Zero, 0.06f);
@@ -53,13 +59,22 @@ namespace kw
 		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Carnation\\Death", Vector2::Zero, 0.06f);
 
 		mAnimator->GetCompleteEvent(L"CarnationIntro") = std::bind(&Carnation::idleCallback, this);
-		mAnimator->GetCompleteEvent(L"FaceAttackHighStart") = std::bind(&Carnation::idleCallback, this);
-		mAnimator->GetCompleteEvent(L"FaceAttackLowStart") = std::bind(&Carnation::idleCallback, this);
+		// ¾ó±¼ °ø°Ý »ó´Ü ¹× ÇÏ´Ü
+		mAnimator->GetCompleteEvent(L"FaceAttackHighStart") = std::bind(&Carnation::faceAttackHighStartCallback, this);
+		mAnimator->GetCompleteEvent(L"FaceAttackHighLoop") = std::bind(&Carnation::faceAttackHighLoopCallback, this);
+		mAnimator->GetCompleteEvent(L"FaceAttackHighEnd") = std::bind(&Carnation::idleCallback, this);
+		mAnimator->GetCompleteEvent(L"FaceAttackLowStart") = std::bind(&Carnation::faceAttackLowStartCallback, this);
+		mAnimator->GetCompleteEvent(L"FaceAttackLowLoop") = std::bind(&Carnation::faceAttackLowLoopCallback, this);
+		mAnimator->GetCompleteEvent(L"FaceAttackLowEnd") = std::bind(&Carnation::idleCallback, this);
+		// ²É¾¾
 		mAnimator->GetCompleteEvent(L"CarnationFiringStart") = std::bind(&Carnation::firingStartCallback, this);
 		mAnimator->GetCompleteEvent(L"CarnationFiringLoop") = std::bind(&Carnation::firingLoopCallback, this);
 		mAnimator->GetCompleteEvent(L"CarnationFiringEnd") = std::bind(&Carnation::idleCallback, this);
+		// ºÎ¸Þ¶û
 		mAnimator->GetCompleteEvent(L"CarnationCreatingStart") = std::bind(&Carnation::creatingStartCallback, this);
 		mAnimator->GetCompleteEvent(L"CarnationCreatingEnd") = std::bind(&Carnation::idleCallback, this);
+
+		mAnimator->Play(L"CarnationBefore", true);
 
 		mCollider = AddComponent<Collider>();
 		mCollider->SetSize(Vector2(200, 600));
@@ -123,11 +138,11 @@ namespace kw
 		if (mTime > 3.0f)
 		{
 			mTime = 0.0f;
-			int type = math::GetRandomNumber((int)eCarnationState::FaceAttack, (int)eCarnationState::End - 1);
-			while (type == mPrevPatternType)
+			int type = 2; //math::GetRandomNumber((int)eCarnationState::FaceAttack, (int)eCarnationState::End - 1);
+			/*while (type == mPrevPatternType)
 			{
 				type = math::GetRandomNumber((int)eCarnationState::FaceAttack, (int)eCarnationState::End - 1);
-			}
+			}*/
 
 			switch (type)
 			{
@@ -166,7 +181,7 @@ namespace kw
 		else
 			mAnimator->Play(L"FaceAttackLowStart", true);
 		
-		 mSFX = Resources::Load<Sound>(L"Carnation_FaceAttack", L"..\\Resources\\Sound\\SFX\\Carnation\\FaceAttack.wav");
+		 mSFX = Resources::Load<Sound>(L"FaceAttackStart", L"..\\Resources\\Sound\\SFX\\Carnation\\FaceAttackStart.wav");
 		 mSFX->Play(false);
 	}
 
@@ -194,6 +209,44 @@ namespace kw
 	{
 		mState = eCarnationState::Idle;
 		mAnimator->Play(L"CarnationIdle", true);
+	}
+
+	void Carnation::faceAttackHighStartCallback()
+	{
+		mAnimator->Play(L"FaceAttackHighLoop", true);
+		mSFX = Resources::Load<Sound>(L"FaceAttackLoop", L"..\\Resources\\Sound\\SFX\\Carnation\\FaceAttackLoop.wav");
+		mSFX->Play(false);
+
+		mFaceAttackCollision = object::Instantiate<AttackObject>(eLayerType::AttackObject, Vector2(400, 250));
+		mFaceAttackCollision->AddComponent<Collider>()->SetSize(Vector2(1000, 200));
+	}
+
+	void Carnation::faceAttackHighLoopCallback()
+	{
+		mAnimator->Play(L"FaceAttackHighEnd", true);
+		mSFX = Resources::Load<Sound>(L"FaceAttackEnd", L"..\\Resources\\Sound\\SFX\\Carnation\\FaceAttackEnd.wav");
+		mSFX->Play(false);
+
+		object::Destory(mFaceAttackCollision);
+	}
+
+	void Carnation::faceAttackLowStartCallback()
+	{
+		mAnimator->Play(L"FaceAttackLowLoop", true);
+		mSFX = Resources::Load<Sound>(L"FaceAttackLoop", L"..\\Resources\\Sound\\SFX\\Carnation\\FaceAttackLoop.wav");
+		mSFX->Play(false);
+
+		mFaceAttackCollision = object::Instantiate<AttackObject>(eLayerType::AttackObject, Vector2(400, 600));
+		mFaceAttackCollision->AddComponent<Collider>()->SetSize(Vector2(1000, 200));
+	}
+
+	void Carnation::faceAttackLowLoopCallback()
+	{
+		mAnimator->Play(L"FaceAttackLowEnd", true);
+		mSFX = Resources::Load<Sound>(L"FaceAttackEnd", L"..\\Resources\\Sound\\SFX\\Carnation\\FaceAttackEnd.wav");
+		mSFX->Play(false);
+
+		object::Destory(mFaceAttackCollision);
 	}
 
 	void Carnation::creatingStartCallback()

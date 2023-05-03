@@ -1,8 +1,9 @@
 #include "kwBulletFireEffect.h"
-#include "kwTransform.h"
-#include "kwTime.h"
+
+#include "kwSceneManager.h"
 #include "kwObject.h"
-#include "kwCollider.h"
+
+#include "kwCuphead.h"
 
 namespace kw
 {
@@ -18,21 +19,28 @@ namespace kw
 
 	void BulletFireEffect::Initialize()
 	{
+		SetPivot(ePivot::MiddleCenter);
+
 		mAnimator = AddComponent<Animator>();
 		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Bullet\\Spawn", Vector2::Zero, 0.05f);
-		mAnimator->GetEndEvent(L"BulletSpawn") = std::bind(&BulletFireEffect::BulletFireEnd, this);
-		mAnimator->Play(L"BulletSpawn", true);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\SpreadShot\\Spawn", Vector2::Zero, 0.05f);
+
+		Cuphead::eBulletType bulletType = SceneManager::GetPlayer()->GetBulletType();
+		switch (bulletType)
+		{
+			case Cuphead::eBulletType::PeaShot:
+				mAnimator->Play(L"BulletSpawn", false);
+				break;
+			case Cuphead::eBulletType::SpreadShot:
+				mAnimator->Play(L"SpreadShotSpawn", false);
+				break;
+		}
 
 		GameObject::Initialize();
 	}
 
 	void BulletFireEffect::Update()
 	{
-		mTime += Time::DeltaTime();
-		if (mTime > 0.2f)
-		{
-			BulletFireEnd();
-		}
 		GameObject::Update();
 	}
 	void BulletFireEffect::Render(HDC hdc)
@@ -43,10 +51,5 @@ namespace kw
 	void BulletFireEffect::Release()
 	{
 		GameObject::Release();
-	}
-
-	void BulletFireEffect::BulletFireEnd()
-	{
-		object::Destory(this);
 	}
 }

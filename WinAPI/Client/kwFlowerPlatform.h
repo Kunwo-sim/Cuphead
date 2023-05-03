@@ -1,9 +1,4 @@
 #pragma once
-class FlowerPlatform
-{
-};
-
-#pragma once
 #include "kwGameObject.h"
 
 namespace kw
