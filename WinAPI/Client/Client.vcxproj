@@ -130,6 +130,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="kwBossMonster.h" />
+    <ClInclude Include="kwDragon.h" />
+    <ClInclude Include="kwDragonEntrance.h" />
+    <ClInclude Include="kwDragonPlatform.h" />
+    <ClInclude Include="kwDragonScene.h" />
+    <ClInclude Include="kwFadeOutEffect.h" />
     <ClInclude Include="kwKnockOut.h" />
     <ClInclude Include="kwHpBar.h" />
     <ClInclude Include="kwAnimation.h" />
@@ -159,6 +164,7 @@
     <ClInclude Include="kwEndingScene.h" />
     <ClInclude Include="kwEngine.h" />
     <ClInclude Include="kwEntity.h" />
+    <ClInclude Include="kwMeteor.h" />
     <ClInclude Include="kwMonster.h" />
     <ClInclude Include="kwOverWorldEntrance.h" />
     <ClInclude Include="kwEnums.h" />
@@ -179,10 +185,12 @@
     <ClInclude Include="kwResource.h" />
     <ClInclude Include="kwResources.h" />
     <ClInclude Include="kwRigidbody.h" />
+    <ClInclude Include="kwRing.h" />
     <ClInclude Include="kwScene.h" />
     <ClInclude Include="kwSceneManager.h" />
     <ClInclude Include="kwSound.h" />
     <ClInclude Include="kwSoundManager.h" />
+    <ClInclude Include="kwSpreadShot.h" />
     <ClInclude Include="kwSpriteRenderer.h" />
     <ClInclude Include="kwTile.h" />
     <ClInclude Include="kwTilePalette.h" />
@@ -198,6 +206,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="kwBossMonster.cpp" />
+    <ClCompile Include="kwDragon.cpp" />
+    <ClCompile Include="kwDragonEntrance.cpp" />
+    <ClCompile Include="kwDragonPlatform.cpp" />
+    <ClCompile Include="kwDragonScene.cpp" />
+    <ClCompile Include="kwFadeOutEffect.cpp" />
     <ClCompile Include="kwKnockOut.cpp" />
     <ClCompile Include="kwHpBar.cpp" />
     <ClCompile Include="kwAnimation.cpp" />
@@ -223,6 +236,7 @@
     <ClCompile Include="kwDefaultGameObject.cpp" />
     <ClCompile Include="kwEndingScene.cpp" />
     <ClCompile Include="kwEntity.cpp" />
+    <ClCompile Include="kwMeteor.cpp" />
     <ClCompile Include="kwMonster.cpp" />
     <ClCompile Include="kwOverWorldEntrance.cpp" />
     <ClCompile Include="kwFlowerPlatform.cpp" />
@@ -241,10 +255,12 @@
     <ClCompile Include="kwResource.cpp" />
     <ClCompile Include="kwResources.cpp" />
     <ClCompile Include="kwRigidbody.cpp" />
+    <ClCompile Include="kwRing.cpp" />
     <ClCompile Include="kwScene.cpp" />
     <ClCompile Include="kwSceneManager.cpp" />
     <ClCompile Include="kwSound.cpp" />
     <ClCompile Include="kwSoundManager.cpp" />
+    <ClCompile Include="kwSpreadShot.cpp" />
     <ClCompile Include="kwSpriteRenderer.cpp" />
     <ClCompile Include="kwTile.cpp" />
     <ClCompile Include="kwTilePalette.cpp" />

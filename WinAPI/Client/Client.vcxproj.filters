@@ -119,6 +119,24 @@
     <Filter Include="Contents\UI">
       <UniqueIdentifier>{5bb96b0b-d901-444f-9b54-d648450b3cb2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Scene\Title">
+      <UniqueIdentifier>{2b15cf46-9d36-4310-8ddd-567626223cd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\Tool">
+      <UniqueIdentifier>{bdf21f02-ca17-42e7-8efa-9c28a906f75b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\OverWorld">
+      <UniqueIdentifier>{461a9236-8031-45f4-947f-4da1b4462399}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\InGame">
+      <UniqueIdentifier>{2109e687-15e6-4343-a4b9-6209d061a0c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Enemy\Dragon">
+      <UniqueIdentifier>{1eebeead-162c-4f3a-88b6-5a71c1d7daee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObjects\DragonScene">
+      <UniqueIdentifier>{50c023c4-2daa-43b7-9865-8f0ac6710705}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -169,9 +187,6 @@
     <ClInclude Include="kwScene.h">
       <Filter>Engine\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="kwPlayScene.h">
-      <Filter>Contents\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="kwInput.h">
       <Filter>Engine\Input</Filter>
     </ClInclude>
@@ -183,9 +198,6 @@
     </ClInclude>
     <ClInclude Include="kwResources.h">
       <Filter>Engine\Resource</Filter>
-    </ClInclude>
-    <ClInclude Include="kwTitleScene.h">
-      <Filter>Contents\Scene</Filter>
     </ClInclude>
     <ClInclude Include="kwEndingScene.h">
       <Filter>Contents\Scene</Filter>
@@ -226,17 +238,11 @@
     <ClInclude Include="kwRigidbody.h">
       <Filter>Engine\Component\Rigidbody</Filter>
     </ClInclude>
-    <ClInclude Include="kwToolScene.h">
-      <Filter>Contents\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="kwGround.h">
       <Filter>Contents\Object</Filter>
     </ClInclude>
     <ClInclude Include="kwBulletFireEffect.h">
       <Filter>Contents\Effect</Filter>
-    </ClInclude>
-    <ClInclude Include="kwOverWorldScene.h">
-      <Filter>Contents\Scene</Filter>
     </ClInclude>
     <ClInclude Include="kwOverWorldCuphead.h">
       <Filter>Contents\Player</Filter>
@@ -295,13 +301,9 @@
     <ClInclude Include="kwVenus.h">
       <Filter>Contents\Enemy\Carnation\CarnationObject\SeedObject</Filter>
     </ClInclude>
-    <ClInclude Include="kwChangeScene.h">
-      <Filter>Contents\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="kwBossExplosion.h">
       <Filter>Contents\Effect</Filter>
     </ClInclude>
-    <ClInclude Include="kwCarnationScene.h" />
     <ClInclude Include="kwHpBar.h">
       <Filter>Contents\UI</Filter>
     </ClInclude>
@@ -316,6 +318,48 @@
     </ClInclude>
     <ClInclude Include="kwBossMonster.h">
       <Filter>Contents\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="kwTitleScene.h">
+      <Filter>Contents\Scene\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="kwToolScene.h">
+      <Filter>Contents\Scene\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="kwOverWorldScene.h">
+      <Filter>Contents\Scene\OverWorld</Filter>
+    </ClInclude>
+    <ClInclude Include="kwChangeScene.h">
+      <Filter>Contents\Scene\OverWorld</Filter>
+    </ClInclude>
+    <ClInclude Include="kwCarnationScene.h">
+      <Filter>Contents\Scene\InGame</Filter>
+    </ClInclude>
+    <ClInclude Include="kwPlayScene.h">
+      <Filter>Contents\Scene\InGame</Filter>
+    </ClInclude>
+    <ClInclude Include="kwDragonScene.h">
+      <Filter>Contents\Scene\InGame</Filter>
+    </ClInclude>
+    <ClInclude Include="kwDragonEntrance.h">
+      <Filter>Contents\GameObjects\OverWorldScene</Filter>
+    </ClInclude>
+    <ClInclude Include="kwDragon.h">
+      <Filter>Contents\Enemy\Dragon</Filter>
+    </ClInclude>
+    <ClInclude Include="kwDragonPlatform.h">
+      <Filter>Contents\GameObjects\DragonScene</Filter>
+    </ClInclude>
+    <ClInclude Include="kwMeteor.h">
+      <Filter>Contents\Enemy\Dragon</Filter>
+    </ClInclude>
+    <ClInclude Include="kwRing.h">
+      <Filter>Contents\Enemy\Dragon</Filter>
+    </ClInclude>
+    <ClInclude Include="kwSpreadShot.h">
+      <Filter>Contents\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="kwFadeOutEffect.h">
+      <Filter>Contents\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -362,9 +406,6 @@
     <ClCompile Include="kwScene.cpp">
       <Filter>Engine\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="kwPlayScene.cpp">
-      <Filter>Contents\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="kwInput.cpp">
       <Filter>Engine\Input</Filter>
     </ClCompile>
@@ -376,9 +417,6 @@
     </ClCompile>
     <ClCompile Include="kwResources.cpp">
       <Filter>Engine\Resource</Filter>
-    </ClCompile>
-    <ClCompile Include="kwTitleScene.cpp">
-      <Filter>Contents\Scene</Filter>
     </ClCompile>
     <ClCompile Include="kwEndingScene.cpp">
       <Filter>Contents\Scene</Filter>
@@ -416,17 +454,11 @@
     <ClCompile Include="kwRigidbody.cpp">
       <Filter>Engine\Component\Rigidbody</Filter>
     </ClCompile>
-    <ClCompile Include="kwToolScene.cpp">
-      <Filter>Contents\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="kwGround.cpp">
       <Filter>Contents\Object</Filter>
     </ClCompile>
     <ClCompile Include="kwBulletFireEffect.cpp">
       <Filter>Contents\Effect</Filter>
-    </ClCompile>
-    <ClCompile Include="kwOverWorldScene.cpp">
-      <Filter>Contents\Scene</Filter>
     </ClCompile>
     <ClCompile Include="kwOverWorldCuphead.cpp">
       <Filter>Contents\Player</Filter>
@@ -485,13 +517,9 @@
     <ClCompile Include="kwVenus.cpp">
       <Filter>Contents\Enemy\Carnation\CarnationObject\SeedObject</Filter>
     </ClCompile>
-    <ClCompile Include="kwChangeScene.cpp">
-      <Filter>Contents\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="kwBossExplosion.cpp">
       <Filter>Contents\Effect</Filter>
     </ClCompile>
-    <ClCompile Include="kwCarnationScene.cpp" />
     <ClCompile Include="kwHpBar.cpp">
       <Filter>Contents\UI</Filter>
     </ClCompile>
@@ -506,6 +534,48 @@
     </ClCompile>
     <ClCompile Include="kwMonster.cpp">
       <Filter>Contents\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="kwTitleScene.cpp">
+      <Filter>Contents\Scene\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="kwToolScene.cpp">
+      <Filter>Contents\Scene\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="kwOverWorldScene.cpp">
+      <Filter>Contents\Scene\OverWorld</Filter>
+    </ClCompile>
+    <ClCompile Include="kwChangeScene.cpp">
+      <Filter>Contents\Scene\OverWorld</Filter>
+    </ClCompile>
+    <ClCompile Include="kwCarnationScene.cpp">
+      <Filter>Contents\Scene\InGame</Filter>
+    </ClCompile>
+    <ClCompile Include="kwPlayScene.cpp">
+      <Filter>Contents\Scene\InGame</Filter>
+    </ClCompile>
+    <ClCompile Include="kwDragonScene.cpp">
+      <Filter>Contents\Scene\InGame</Filter>
+    </ClCompile>
+    <ClCompile Include="kwDragonEntrance.cpp">
+      <Filter>Contents\GameObjects\OverWorldScene</Filter>
+    </ClCompile>
+    <ClCompile Include="kwDragon.cpp">
+      <Filter>Contents\Enemy\Dragon</Filter>
+    </ClCompile>
+    <ClCompile Include="kwDragonPlatform.cpp">
+      <Filter>Contents\GameObjects\DragonScene</Filter>
+    </ClCompile>
+    <ClCompile Include="kwMeteor.cpp">
+      <Filter>Contents\Enemy\Dragon</Filter>
+    </ClCompile>
+    <ClCompile Include="kwRing.cpp">
+      <Filter>Contents\Enemy\Dragon</Filter>
+    </ClCompile>
+    <ClCompile Include="kwSpreadShot.cpp">
+      <Filter>Contents\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="kwFadeOutEffect.cpp">
+      <Filter>Contents\UI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
