@@ -10,8 +10,7 @@
 namespace kw
 {
 	Ground::Ground()
-		: mCollider(nullptr)
-		, mPlayer(nullptr)
+		: mPlayer(nullptr)
 	{
 	}
 

@@ -59,6 +59,7 @@ namespace kw
 			UINT compType = (UINT)comp->GetType();
 			mComponents[compType] = comp;
 			comp->SetOwner(this);
+			comp->Initialize();
 
 			return comp;
 		}

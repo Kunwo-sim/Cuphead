@@ -45,17 +45,6 @@ namespace kw
 
 			gameObj->Update();
 		}
-
-		//for (GameObject* gameObj : mGameObjects)
-		//{
-		//	if (gameObj == nullptr)
-		//		continue;
-
-		//	if (gameObj->GetState() != GameObject::eState::Active)
-		//		continue;
-
-		//	gameObj->Update();
-		//}
 	}
 
 	void Layer::Render(HDC hdc)
@@ -83,5 +72,13 @@ namespace kw
 			return;
 
 		mGameObjects.push_back(gameObj);
+	}
+
+	void Layer::AddGameObjectFront(GameObject* gameObj)
+	{
+		if (gameObj == nullptr)
+			return;
+
+		mGameObjects.insert(mGameObjects.begin(), gameObj);
 	}
 }

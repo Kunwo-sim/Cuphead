@@ -3,11 +3,11 @@
 
 namespace kw
 {
-	class Ground : public GameObject
+	class Meteor : public GameObject
 	{
 	public:
-		Ground();
-		virtual ~Ground();
+		Meteor();
+		virtual ~Meteor();
 
 		virtual void Initialize();
 		virtual void Update();
@@ -18,10 +18,11 @@ namespace kw
 		virtual void OnCollisionStay(class Collider* other);
 		virtual void OnCollisionExit(class Collider* other);
 
-		void SetColliderSize(Vector2 size);
-		void SetPlayer(class Cuphead* player) { mPlayer = player; }
+		void SetDirection(int value) { mDirection = value; };
 
 	private:
-		class Cuphead* mPlayer;
+		float mSpeed;
+		double mTime;
+		int mDirection;
 	};
 }

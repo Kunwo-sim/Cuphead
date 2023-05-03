@@ -16,6 +16,7 @@ namespace kw
 		virtual void Release();
 
 		void AddGameObject(GameObject* gameObj);
+		void AddGameObjectFront(GameObject* gameObj);
 		std::vector<GameObject*>& GetGameObjects() { return mGameObjects; }
 
 	private:
