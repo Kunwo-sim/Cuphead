@@ -26,6 +26,7 @@ namespace kw
 		void Jump();
 
 	protected:
+		class Sound* mSFX;
 		eAttackFireMarcherState mState;
 		float mTime;
 		float mSpeed;		

@@ -21,7 +21,7 @@ namespace kw
 		mTransform = GetComponent<Transform>();
 
 		mAnimator = AddComponent<Animator>();
-		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Dragon\\SecondPhase\\Tounge\\Intro", Vector2::Zero, 0.06f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Dragon\\SecondPhase\\Tounge\\Intro", Vector2(-10.0f, -20.0f), 0.06f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Dragon\\SecondPhase\\Tounge\\Idle", Vector2::Zero, 0.06f);
 		mAnimator->Play(L"ToungeIntro", true);
 

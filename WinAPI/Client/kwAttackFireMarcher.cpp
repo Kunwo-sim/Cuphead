@@ -81,6 +81,10 @@ namespace kw
 		{
 			mState = eAttackFireMarcherState::Charge;
 			mAnimator->Play(L"AttackCharge", true);
+
+			mSFX = Resources::Load<Sound>(L"DragonFire_Charge", L"..\\Resources\\Sound\\SFX\\Dragon\\DragonFire_Charge.wav");
+			mSFX->Play(false);
+
 			mTime = 0.0f;
 		}
 	}
@@ -93,6 +97,9 @@ namespace kw
 		{
 			mState = eAttackFireMarcherState::Jump;
 			mAnimator->Play(L"AttackJump", true);
+
+			mSFX = Resources::Load<Sound>(L"DragonFire_Jump", L"..\\Resources\\Sound\\SFX\\Dragon\\DragonFire_Jump.wav");
+			mSFX->Play(false);
 		}
 
 	}
