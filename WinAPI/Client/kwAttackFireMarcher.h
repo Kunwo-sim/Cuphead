@@ -6,7 +6,7 @@ namespace kw
 	class AttackFireMarcher : public FireMarcher
 	{
 	public:
-		enum class eFireMarcherState
+		enum class eAttackFireMarcherState
 		{
 			Idle,
 			Charge,
@@ -21,6 +21,13 @@ namespace kw
 		virtual void Render(HDC hdc);
 		virtual void Release();
 
+		void Idle();
+		void Charge();
+		void Jump();
+
 	protected:
+		eAttackFireMarcherState mState;
+		float mTime;
+		float mSpeed;		
 	};
 }

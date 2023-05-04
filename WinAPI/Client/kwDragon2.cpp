@@ -13,6 +13,7 @@
 #include "kwCuphead.h"
 #include "kwTounge.h"
 #include "kwFireMarcher.h"
+#include "kwAttackFireMarcher.h"
 #include "kwBossExplosion.h"
 
 namespace kw
@@ -22,6 +23,7 @@ namespace kw
 		, mTime(0.0f)
 		, mSFX(nullptr)
 		, mSpeed(200.0f)
+		, mCnt(0)
 	{
 		SetHp(200.0f);
 	}
@@ -132,7 +134,17 @@ namespace kw
 		if (mTime > 0.7f)
 		{
 			mTime = 0.0f;
-			object::Instantiate<FireMarcher>(eLayerType::AttackObject, Vector2(200.0f, 680.0f));
+			if (mCnt == 3)
+			{
+				object::Instantiate<AttackFireMarcher>(eLayerType::AttackObject, Vector2(200.0f, 680.0f));
+				mCnt = 0;
+			}
+			else
+			{
+				object::Instantiate<FireMarcher>(eLayerType::AttackObject, Vector2(200.0f, 680.0f));
+				mCnt++;
+			}
+			
 		}
 	}
 

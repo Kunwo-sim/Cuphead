@@ -35,5 +35,6 @@ namespace kw
 
 		double mTime;
 		float mSpeed;
+		int mCnt;
 	};
 }
