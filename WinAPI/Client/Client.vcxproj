@@ -129,12 +129,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="kwAttackFireMarcher.h" />
     <ClInclude Include="kwBossMonster.h" />
     <ClInclude Include="kwDragon.h" />
+    <ClInclude Include="kwDragon2.h" />
     <ClInclude Include="kwDragonEntrance.h" />
     <ClInclude Include="kwDragonPlatform.h" />
     <ClInclude Include="kwDragonScene.h" />
     <ClInclude Include="kwFadeOutEffect.h" />
+    <ClInclude Include="kwFireMarcher.h" />
     <ClInclude Include="kwKnockOut.h" />
     <ClInclude Include="kwHpBar.h" />
     <ClInclude Include="kwAnimation.h" />
@@ -201,6 +204,7 @@
     <ClInclude Include="kwTitleCharacter.h" />
     <ClInclude Include="kwTitleScene.h" />
     <ClInclude Include="kwToolScene.h" />
+    <ClInclude Include="kwTounge.h" />
     <ClInclude Include="kwTransform.h" />
     <ClInclude Include="kwVenus.h" />
     <ClInclude Include="kwReadyWallop.h" />
@@ -208,12 +212,15 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="kwAttackFireMarcher.cpp" />
     <ClCompile Include="kwBossMonster.cpp" />
     <ClCompile Include="kwDragon.cpp" />
+    <ClCompile Include="kwDragon2.cpp" />
     <ClCompile Include="kwDragonEntrance.cpp" />
     <ClCompile Include="kwDragonPlatform.cpp" />
     <ClCompile Include="kwDragonScene.cpp" />
     <ClCompile Include="kwFadeOutEffect.cpp" />
+    <ClCompile Include="kwFireMarcher.cpp" />
     <ClCompile Include="kwKnockOut.cpp" />
     <ClCompile Include="kwHpBar.cpp" />
     <ClCompile Include="kwAnimation.cpp" />
@@ -274,6 +281,7 @@
     <ClCompile Include="kwTitleCharacter.cpp" />
     <ClCompile Include="kwTitleScene.cpp" />
     <ClCompile Include="kwToolScene.cpp" />
+    <ClCompile Include="kwTounge.cpp" />
     <ClCompile Include="kwTransform.cpp" />
     <ClCompile Include="kwVenus.cpp" />
     <ClCompile Include="main.cpp" />

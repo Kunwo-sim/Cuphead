@@ -43,7 +43,7 @@ namespace kw
 		sr->AddSprite(backGroundImage, Vector2(0 ,0), false);
 		sr->AddSprite(tower, Vector2(425, -100), true);
 
-		object::Instantiate<Ground>(eLayerType::Ground, Vector2(640, 720))->SetColliderSize(Vector2(1600.0f, 120.0f));
+		object::Instantiate<Ground>(eLayerType::Ground, Vector2(640, 720))->SetColliderSize(Vector2(1600.0f, 40.0f));
 
 		mPlayer = object::Instantiate<Cuphead>(eLayerType::Player, Vector2(300, 600));
 		mDragon = object::Instantiate<Dragon>(eLayerType::Monster, Vector2(1100, 900));
@@ -94,7 +94,13 @@ namespace kw
 	{
 		PlayScene::OnEnter();
 
-		object::Instantiate<DragonPlatform>(eLayerType::Ground, Vector2(300.0f, 500.0f))->SetPlatformType(DragonPlatform::PlatformType(DragonPlatform::PlatformType::A));
+		object::Instantiate<DragonPlatform>(eLayerType::Ground, Vector2(300.0f, 700.0f))->SetPlatformType(DragonPlatform::PlatformType(DragonPlatform::PlatformType::A));
+		object::Instantiate<DragonPlatform>(eLayerType::Ground, Vector2(400.0f, 500.0f))->SetPlatformType(DragonPlatform::PlatformType(DragonPlatform::PlatformType::A));
+		object::Instantiate<DragonPlatform>(eLayerType::Ground, Vector2(500.0f, 400.0f))->SetPlatformType(DragonPlatform::PlatformType(DragonPlatform::PlatformType::A));
+		object::Instantiate<DragonPlatform>(eLayerType::Ground, Vector2(700.0f, 300.0f))->SetPlatformType(DragonPlatform::PlatformType(DragonPlatform::PlatformType::A));
+		object::Instantiate<DragonPlatform>(eLayerType::Ground, Vector2(900.0f, 600.0f))->SetPlatformType(DragonPlatform::PlatformType(DragonPlatform::PlatformType::A));
+		object::Instantiate<DragonPlatform>(eLayerType::Ground, Vector2(1100.0f, 500.0f))->SetPlatformType(DragonPlatform::PlatformType(DragonPlatform::PlatformType::A));
+		object::Instantiate<DragonPlatform>(eLayerType::Ground, Vector2(1250.0f, 600.0f))->SetPlatformType(DragonPlatform::PlatformType(DragonPlatform::PlatformType::A));
 
 		mDragon->Intro();
 	}

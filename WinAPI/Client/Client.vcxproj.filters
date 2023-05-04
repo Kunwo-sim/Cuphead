@@ -137,6 +137,9 @@
     <Filter Include="Contents\GameObjects\DragonScene">
       <UniqueIdentifier>{50c023c4-2daa-43b7-9865-8f0ac6710705}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Enemy\Dragon\Fire">
+      <UniqueIdentifier>{9b8dbbcb-5be0-4cd3-ae55-cc69304d9be9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -370,6 +373,18 @@
     <ClInclude Include="kwPinkFlowerSeed.h">
       <Filter>Contents\Enemy\Carnation\CarnationObject\FlowerSeed</Filter>
     </ClInclude>
+    <ClInclude Include="kwDragon2.h">
+      <Filter>Contents\Enemy\Dragon</Filter>
+    </ClInclude>
+    <ClInclude Include="kwTounge.h">
+      <Filter>Contents\Enemy\Dragon</Filter>
+    </ClInclude>
+    <ClInclude Include="kwFireMarcher.h">
+      <Filter>Contents\Enemy\Dragon\Fire</Filter>
+    </ClInclude>
+    <ClInclude Include="kwAttackFireMarcher.h">
+      <Filter>Contents\Enemy\Dragon\Fire</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc">
@@ -594,6 +609,18 @@
     </ClCompile>
     <ClCompile Include="kwPinkFlowerSeed.cpp">
       <Filter>Contents\Enemy\Carnation\CarnationObject\FlowerSeed</Filter>
+    </ClCompile>
+    <ClCompile Include="kwDragon2.cpp">
+      <Filter>Contents\Enemy\Dragon</Filter>
+    </ClCompile>
+    <ClCompile Include="kwTounge.cpp">
+      <Filter>Contents\Enemy\Dragon</Filter>
+    </ClCompile>
+    <ClCompile Include="kwFireMarcher.cpp">
+      <Filter>Contents\Enemy\Dragon\Fire</Filter>
+    </ClCompile>
+    <ClCompile Include="kwAttackFireMarcher.cpp">
+      <Filter>Contents\Enemy\Dragon\Fire</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

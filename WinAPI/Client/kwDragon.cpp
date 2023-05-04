@@ -15,6 +15,7 @@
 #include "kwMeteor.h"
 #include "kwBossExplosion.h"
 #include "kwCuphead.h"
+#include "kwDragon2.h"
 
 namespace kw
 {
@@ -28,7 +29,7 @@ namespace kw
 		, mRingStartPos(Vector2(950, 200))
 		, mRingCount(0)
 	{
-		SetHp(5.0f);
+		SetHp(200.0f);
 	}
 
 	Dragon::~Dragon()
@@ -61,7 +62,7 @@ namespace kw
 		mAnimator->GetCompleteEvent(L"PeashotEnd") = std::bind(&Dragon::idleCallback, this);
 
 		mCollider = AddComponent<Collider>();
-		mCollider->SetSize(Vector2(200, 600));
+		mCollider->SetSize(Vector2(200, 1200));
 
 		BossMonster::Initialize();
 	}
@@ -104,23 +105,19 @@ namespace kw
 	{
 		if (mState == eDragonState::Die)
 		{
-			mTime += Time::DeltaTime();
-			if (mTime > 0.4f)
+			mTransform->AddPos(Vector2(Time::DeltaTime() * 200.0f, 0.0f));
+
+			if (mTransform->GetPos().x > 1500.0f)
 			{
-				mTime = 0.0f;
-				Vector2 effectPos = Vector2::Zero;
-				Vector2 bossPos = mTransform->GetPos();
-				effectPos.x = math::GetRandomNumber(bossPos.x - 200, bossPos.x + 200);
-				effectPos.y = math::GetRandomNumber(bossPos.y - 200, bossPos.y + 200);
-				object::Instantiate<BossExplosion>(eLayerType::Effect, effectPos);
+				object::Instantiate<Dragon2>(eLayerType::Monster, Vector2(-100.0f, 720.0f));
+				object::Destory(this);
 			}
 		}
 		else
 		{
 			mState = eDragonState::Die;
-			//mAnimator->Play(L"CarnationDeath", true);
+			mAnimator->Play(L"FirstPhaseIdle", true);
 			mCollider->SetSize(Vector2::Zero);
-			BossMonster::Die();
 		}
 	}
 
@@ -136,7 +133,7 @@ namespace kw
 
 		if (mTime > 2.0)
 		{
-			int type = math::GetRandomNumber(0, 0);
+			int type = math::GetRandomNumber(0, 1);
 			mTime = 0.0;
 
 			switch (type)
