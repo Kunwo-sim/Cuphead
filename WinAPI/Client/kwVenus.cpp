@@ -71,6 +71,9 @@ namespace kw
 
 	void Venus::Die()
 	{
+		if (mState == eVenusState::Die)
+			return;
+
 		mState = eVenusState::Die;
 		mCollider->SetSize(Vector2::Zero);
 		mAnimator->Play(L"VenusDie", false);

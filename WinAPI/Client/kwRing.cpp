@@ -3,14 +3,16 @@
 #include "kwSceneManager.h"
 #include "kwTime.h"
 #include "kwObject.h"
+#include "kwParryObject.h"
 
 #include "kwCuphead.h"
 
 namespace kw
 {
 	Ring::Ring()
-		: mSpeed(400.0f)
+		: mSpeed(600.0f)
 		, mDirection(Vector2::Zero)
+		, mParryObject(nullptr)
 	{
 
 	}
@@ -32,7 +34,7 @@ namespace kw
 		mAnimator->Play(L"ObjectGreenRing", true);
 
 		mCollider = AddComponent<Collider>();
-		mCollider->SetSize(Vector2(90, 140));
+		mCollider->SetSize(Vector2(70, 100));
 
 		GameObject::Initialize();
 	}
@@ -43,6 +45,15 @@ namespace kw
 		pos.x += mDirection.x * Time::DeltaTime() * mSpeed;
 		pos.y += mDirection.y * Time::DeltaTime() * mSpeed;
 		mTransform->SetPos(pos);
+
+		if (pos.x < -400.0f)
+		{
+			object::Destory(this);
+			if (mParryObject != nullptr)
+			{
+				object::Destory(mParryObject);
+			}
+		}
 
 		GameObject::Update();
 	}
@@ -66,13 +77,11 @@ namespace kw
 		cuphead->Hit();
 	}
 
-	void Ring::OnCollisionStay(Collider* other)
+	void Ring::SetPinkRing()
 	{
-
-	}
-
-	void Ring::OnCollisionExit(Collider* other)
-	{
-
+		mAnimator->Play(L"ObjectPinkRing", true);
+		mParryObject = object::Instantiate<ParryObject>(eLayerType::ParryObject, mTransform->GetPos());
+		mParryObject->SetOwner(this);
+		mParryObject->SetColliderSize(Vector2(200.0f, 300.0f));
 	}
 }

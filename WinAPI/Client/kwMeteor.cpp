@@ -32,6 +32,8 @@ namespace kw
 		mAnimator->Play(L"ObjectMeteor", true);
 
 		mCollider = AddComponent<Collider>();
+		mCollider->SetSize(Vector2(125, 125));
+		mCollider->SetOffset(Vector2(-25, 10));
 
 		GameObject::Initialize();
 	}
@@ -40,13 +42,14 @@ namespace kw
 	{
 		Vector2 pos = mTransform->GetPos();
 		pos.x += Time::DeltaTime() * -mSpeed;
+		
 		if (mDirection == 0)
 		{
-			pos.y = sin(pos.x / 140) * 250 + 350;
+			pos.y = sin((pos.x + mSpeed) / 140) * 300 + 350;
 		}
 		else
 		{
-			pos.y = sin(pos.x / 140) * 250 + 350;
+			pos.y = sin(pos.x / 140) * 300 + 350;
 		}
 		
 		mTransform->SetPos(Vector2(pos.x, pos.y));
@@ -58,7 +61,7 @@ namespace kw
 
 		mTime += Time::DeltaTime();
 
-		if (mTime > 0.2)
+		if (mTime > 0.15)
 		{
 			mTime = 0;
 			GameObject* SmokeEffect = object::Instantiate<GameObject>(eLayerType::MeteorEffect, Vector2(mTransform->GetPos()));
@@ -87,15 +90,5 @@ namespace kw
 			return;
 
 		cuphead->Hit();
-	}
-
-	void Meteor::OnCollisionStay(Collider* other)
-	{
-
-	}
-
-	void Meteor::OnCollisionExit(Collider* other)
-	{
-
 	}
 }

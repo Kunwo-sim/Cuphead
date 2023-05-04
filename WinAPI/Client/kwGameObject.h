@@ -78,7 +78,7 @@ namespace kw
 
 		eState GetState() { return mState; }
 		void SetState(eState state) { mState = state; }
-		ePivot GetPivot() { return mPivot; }
+		virtual ePivot GetPivot() { return mPivot; }
 		void SetPivot(ePivot pivot) { mPivot = pivot; }
 		eDirection GetDirection() { return mDirection; }
 		void SetDirection(eDirection direction) { mDirection = direction; }

@@ -18,6 +18,7 @@
 
 #include "kwOverWorldCuphead.h"
 #include "kwCarnationEntrance.h"
+#include "kwDragonEntrance.h"
 
 
 namespace kw
@@ -53,6 +54,8 @@ namespace kw
 		sr->AddSprite(backGroundImage, Vector2(0.0f, 0.0f), false);
 		
 		CarnationEntrance* carnationEntrance = object::Instantiate<CarnationEntrance>(eLayerType::Entrance, Vector2(1850.0f, 750.0f));
+
+		DragonEntrance* dragonEntrance = object::Instantiate<DragonEntrance>(eLayerType::Entrance, Vector2(3280.0f, 1200.0f));
 
 		OverWorldCuphead* player = object::Instantiate<OverWorldCuphead>(eLayerType::Player, mPlayerStartPos);
 		player->SetPixelMap(pixelMap);

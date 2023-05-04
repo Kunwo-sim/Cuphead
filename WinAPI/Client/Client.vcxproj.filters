@@ -361,6 +361,15 @@
     <ClInclude Include="kwFadeOutEffect.h">
       <Filter>Contents\UI</Filter>
     </ClInclude>
+    <ClInclude Include="kwParryObject.h">
+      <Filter>Contents\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="kwTimeStopObject.h">
+      <Filter>Contents\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="kwPinkFlowerSeed.h">
+      <Filter>Contents\Enemy\Carnation\CarnationObject\FlowerSeed</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc">
@@ -576,6 +585,15 @@
     </ClCompile>
     <ClCompile Include="kwFadeOutEffect.cpp">
       <Filter>Contents\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="kwParryObject.cpp">
+      <Filter>Contents\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="kwTimeStopObject.cpp">
+      <Filter>Contents\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="kwPinkFlowerSeed.cpp">
+      <Filter>Contents\Enemy\Carnation\CarnationObject\FlowerSeed</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

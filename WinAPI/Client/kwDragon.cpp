@@ -46,11 +46,11 @@ namespace kw
 		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Dragon\\FirstPhase\\Intro", Vector2(0, -100.0), 0.06f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Dragon\\FirstPhase\\Idle", Vector2::Zero, 0.06f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Dragon\\FirstPhase\\MeteorAttack\\Start", Vector2::Zero, 0.06f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Dragon\\FirstPhase\\MeteorAttack\\Loop", Vector2::Zero, 0.06f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Dragon\\FirstPhase\\MeteorAttack\\End", Vector2::Zero, 0.06f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Dragon\\FirstPhase\\Peashot\\Start", Vector2::Zero, 0.08f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Dragon\\FirstPhase\\Peashot\\Loop", Vector2::Zero, 0.08f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Dragon\\FirstPhase\\Peashot\\End", Vector2::Zero, 0.08f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Dragon\\FirstPhase\\MeteorAttack\\Loop", Vector2(-25, -15), 0.06f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Dragon\\FirstPhase\\MeteorAttack\\End", Vector2(-25, -15), 0.06f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Dragon\\FirstPhase\\Peashot\\Start", Vector2(30, -10), 0.06f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Dragon\\FirstPhase\\Peashot\\Loop", Vector2(30, -10), 0.06f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Stage\\Dragon\\FirstPhase\\Peashot\\End", Vector2(30, -10), 0.06f);
 
 		mAnimator->GetCompleteEvent(L"FirstPhaseIntro") = std::bind(&Dragon::idleCallback, this);
 		mAnimator->GetCompleteEvent(L"MeteorAttackStart") = std::bind(&Dragon::meteorStartCallback, this);
@@ -136,7 +136,7 @@ namespace kw
 
 		if (mTime > 2.0)
 		{
-			int type = math::GetRandomNumber(1, 1);
+			int type = math::GetRandomNumber(0, 0);
 			mTime = 0.0;
 
 			switch (type)
@@ -166,6 +166,7 @@ namespace kw
 			if (mRingDir == Vector2::Zero)
 			{
 				Vector2 playerPos = SceneManager::GetPlayer()->GetComponent<Transform>()->GetPos();
+				playerPos.y -= 100;
 				mRingDir = math::Direction(mRingStartPos, playerPos);
 			}
 
@@ -173,7 +174,16 @@ namespace kw
 			{
 				Ring* ring = object::Instantiate<Ring>(eLayerType::AttackObject, mRingStartPos);
 				ring->SetDir(mRingDir);
+
+				if (mRingCount == 3)
+				{
+					ring->SetPinkRing();
+				}
+
 				mRingCount++;
+
+				mSFX = Resources::Load<Sound>(L"Peashot_Shoot", L"..\\Resources\\Sound\\SFX\\Dragon\\Peashot_Shoot.wav");
+				mSFX->Play(false);
 			}
 		}
 	}
@@ -191,18 +201,27 @@ namespace kw
 	void Dragon::meteorStartCallback()
 	{
 		mAnimator->Play(L"MeteorAttackLoop", true);
+		mSFX = Resources::Load<Sound>(L"Meteor_Start", L"..\\Resources\\Sound\\SFX\\Dragon\\Meteor_Start.wav");
+		mSFX->Play(false);
 	}
 
 	void Dragon::meteorLoopCallback()
 	{
-		object::Instantiate<Meteor>(eLayerType::AttackObject, Vector2(mTransform->GetPos().x, mTransform->GetPos().y - 300));
+		object::Instantiate<Meteor>(eLayerType::AttackObject, Vector2(mTransform->GetPos().x - 200, mTransform->GetPos().y));
+		object::Instantiate<Meteor>(eLayerType::AttackObject, Vector2(mTransform->GetPos().x - 200, mTransform->GetPos().y))->SetDirection(1);
 		mAnimator->Play(L"MeteorAttackEnd", true);
+
+		mSFX = Resources::Load<Sound>(L"Meteor_Attack", L"..\\Resources\\Sound\\SFX\\Dragon\\Meteor_Attack.wav");
+		mSFX->Play(false);
 	}
 
 	void Dragon::peashotStartCallback()
 	{
 		mState = eDragonState::Peashot;
 		mAnimator->Play(L"PeashotLoop", true);
+
+		mSFX = Resources::Load<Sound>(L"Peashot_In", L"..\\Resources\\Sound\\SFX\\Dragon\\Peashot_In.wav");
+		mSFX->Play(false);
 	}
 
 	void Dragon::peashotLoopCallback()
@@ -213,6 +232,8 @@ namespace kw
 		}
 		else
 		{
+			mSFX = Resources::Load<Sound>(L"Peashot_Out", L"..\\Resources\\Sound\\SFX\\Dragon\\Peashot_Out.wav");
+			mSFX->Play(false);
 			mAnimator->Play(L"PeashotEnd", true);	
 			mLoopCount = 0;
 

@@ -2,6 +2,8 @@
 
 #include "kwTime.h"
 #include "kwObject.h"
+#include "kwResources.h"
+#include "kwSound.h"
 
 #include "kwMonster.h"
 
@@ -9,7 +11,6 @@ namespace kw
 {
 	BaseBullet::BaseBullet()
 		: mTime(0.0f)
-		, mAnimator(nullptr)
 		, mSpeed(1500.0f)
 		, mBulletDestoryEffect(nullptr)
 		, mAttackPower(4.0f)
@@ -82,6 +83,8 @@ namespace kw
 		if (monster != nullptr)
 		{
 			monster->ReceiveDamage(mAttackPower);
+			mSFX = Resources::Load<Sound>(L"Cuphead_BulletHit", L"..\\Resources\\Sound\\SFX\\Cuphead\\Cuphead_BulletHit.wav");
+			mSFX->Play(false);
 			BulletDestroy();
 		}
 	}

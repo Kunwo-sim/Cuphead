@@ -15,8 +15,6 @@ namespace kw
 		virtual void Release();
 
 		virtual void OnCollisionEnter(class Collider* other);
-		virtual void OnCollisionStay(class Collider* other);
-		virtual void OnCollisionExit(class Collider* other);
 
 		void SetDirection(int value) { mDirection = value; };
 

@@ -37,7 +37,10 @@ namespace kw
 	}
 
 	void Chomper::Die()
-	{		
+	{
+		if (GetIsDead())
+			return;
+
 		mCollider->SetSize(Vector2::Zero);
 		mAnimator->Play(L"ChomperDie", false);
 		Monster::Die();

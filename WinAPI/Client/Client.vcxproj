@@ -179,6 +179,8 @@
     <ClInclude Include="kwObject.h" />
     <ClInclude Include="kwOverWorldCuphead.h" />
     <ClInclude Include="kwOverWorldScene.h" />
+    <ClInclude Include="kwParryObject.h" />
+    <ClInclude Include="kwPinkFlowerSeed.h" />
     <ClInclude Include="kwPixelMap.h" />
     <ClInclude Include="kwPlayScene.h" />
     <ClInclude Include="kwPurpleFlowerSeed.h" />
@@ -195,6 +197,7 @@
     <ClInclude Include="kwTile.h" />
     <ClInclude Include="kwTilePalette.h" />
     <ClInclude Include="kwTime.h" />
+    <ClInclude Include="kwTimeStopObject.h" />
     <ClInclude Include="kwTitleCharacter.h" />
     <ClInclude Include="kwTitleScene.h" />
     <ClInclude Include="kwToolScene.h" />
@@ -249,6 +252,8 @@
     <ClCompile Include="kwMath.cpp" />
     <ClCompile Include="kwOverWorldCuphead.cpp" />
     <ClCompile Include="kwOverWorldScene.cpp" />
+    <ClCompile Include="kwParryObject.cpp" />
+    <ClCompile Include="kwPinkFlowerSeed.cpp" />
     <ClCompile Include="kwPixelMap.cpp" />
     <ClCompile Include="kwPlayScene.cpp" />
     <ClCompile Include="kwPurpleFlowerSeed.cpp" />
@@ -265,6 +270,7 @@
     <ClCompile Include="kwTile.cpp" />
     <ClCompile Include="kwTilePalette.cpp" />
     <ClCompile Include="kwTime.cpp" />
+    <ClCompile Include="kwTimeStopObject.cpp" />
     <ClCompile Include="kwTitleCharacter.cpp" />
     <ClCompile Include="kwTitleScene.cpp" />
     <ClCompile Include="kwToolScene.cpp" />

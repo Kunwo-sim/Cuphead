@@ -64,11 +64,11 @@ namespace kw
 		{
 			mTime = 0.0f;
 
-			int yPos = math::GetRandomNumber(200, 550);
+			int yPos = math::GetRandomNumber(250, 650);
 
 			while (abs(yPos - mPrevPlatformYpos) < 100.0f)
 			{
-				yPos = math::GetRandomNumber(200, 550);
+				yPos = math::GetRandomNumber(250, 650);
 			}
 
 			mPrevPlatformYpos = yPos;
@@ -93,6 +93,8 @@ namespace kw
 	void DragonScene::OnEnter()
 	{
 		PlayScene::OnEnter();
+
+		object::Instantiate<DragonPlatform>(eLayerType::Ground, Vector2(300.0f, 500.0f))->SetPlatformType(DragonPlatform::PlatformType(DragonPlatform::PlatformType::A));
 
 		mDragon->Intro();
 	}

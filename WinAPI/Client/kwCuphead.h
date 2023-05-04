@@ -34,6 +34,7 @@ namespace kw
 		virtual void Update() override;
 		virtual void Render(HDC hdc) override;
 		virtual void Release() override;
+		virtual void OnCollisionStay(Collider* other) override;
 
 		eBulletType GetBulletType() { return mBulletType; };
 		void Hit();
@@ -62,6 +63,7 @@ namespace kw
 		eBulletType mBulletType;
 		class Sound* mBulletSound;
 		class Sound* mSpreadSound;
+		class Sound* mSFX;
 
 		Vector2 mBulletOffset;
 

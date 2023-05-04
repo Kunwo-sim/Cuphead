@@ -3,10 +3,6 @@
 #include "kwTime.h"
 #include "kwObject.h"
 
-#include "kwTransform.h"
-#include "kwAnimator.h"
-#include "kwCollider.h"
-
 #include "kwVenus.h"
 
 namespace kw

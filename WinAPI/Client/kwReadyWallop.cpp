@@ -15,7 +15,7 @@ namespace kw
 		SetPivot(ePivot::MiddleCenter);
 
 		mAnimator = AddComponent<Animator>();
-		mAnimator->CreateAnimations(L"..\\Resources\\UI\\ReadyWallop", Vector2::Zero, 0.08f);
+		mAnimator->CreateAnimations(L"..\\Resources\\UI\\ReadyWallop", Vector2::Zero, 0.06f);
 		mAnimator->Play(L"UIReadyWallop", false);
 
 		GameObject::Initialize();

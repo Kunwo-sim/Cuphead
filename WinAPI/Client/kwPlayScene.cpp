@@ -64,6 +64,7 @@ namespace kw
 
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::AttackObject, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::ParryObject, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
 		CollisionManager::SetLayer(eLayerType::Bullet, eLayerType::Monster, true);
 

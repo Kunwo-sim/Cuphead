@@ -4,6 +4,8 @@
 #include "kwObject.h"
 
 #include "kwMonster.h"
+#include "kwResources.h"
+#include "kwSound.h"
 
 namespace kw
 {
@@ -82,6 +84,9 @@ namespace kw
 			destroyHitEffect->SetPivot(ePivot::MiddleCenter);
 			destroyHitEffect->AddComponent<Animator>()->CreateAnimations(L"..\\Resources\\Stage\\SpreadShot\\Hit", Vector2::Zero, 0.05f);
 			destroyHitEffect->GetComponent<Animator>()->Play(L"SpreadShotHit", false);
+
+			mSFX = Resources::Load<Sound>(L"Cuphead_BulletHit", L"..\\Resources\\Sound\\SFX\\Cuphead\\Cuphead_BulletHit.wav");
+			mSFX->Play(false);
 
 			object::Destory(this);
 		}

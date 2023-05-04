@@ -15,12 +15,13 @@ namespace kw
 		virtual void Release();
 
 		virtual void OnCollisionEnter(class Collider* other);
-		virtual void OnCollisionStay(class Collider* other);
-		virtual void OnCollisionExit(class Collider* other);
 
 		void SetDir(Vector2 dir) { mDirection = dir; };
+		void SetPinkRing();
 
 	private:
+		class ParryObject* mParryObject;
+
 		float mSpeed;
 		Vector2 mDirection;
 	};

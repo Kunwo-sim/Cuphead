@@ -22,6 +22,7 @@ enum class eLayerType
 	Ground,
 	Monster,
 	MeteorEffect,
+	ParryObject,
 	AttackObject,
 	Player,
 	FrontBG,

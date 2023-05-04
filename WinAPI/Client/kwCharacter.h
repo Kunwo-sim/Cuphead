@@ -14,8 +14,9 @@ namespace kw
 		virtual void ReceiveDamage(float value);
 		virtual void Die();
 
-		float GetHp() { return mHp; };
-		void SetHp(float value) { mHp = value; };
+		float GetHp() { return mHp; }
+		bool GetIsDead() { return mIsDead; }
+		void SetHp(float value) { mHp = value; }
 
 	public:
 		float mHp;

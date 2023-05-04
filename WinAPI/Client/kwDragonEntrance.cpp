@@ -15,9 +15,11 @@ namespace kw
 	{
 		OverWorldEntrance::Initialize();
 
-		mAnimator->CreateAnimations(L"..\\Resources\\OverWorld\\CarnationEntrance", Vector2::Zero, 0.1f);
-		mAnimator->Play(L"OverWorldCarnationEntrance", true);
-		mCollider->SetSize(Vector2(130.0f, 100.0f));
+		SetPivot(ePivot::LowCenter);
+
+		mAnimator->CreateAnimations(L"..\\Resources\\OverWorld\\DragonEntrance", Vector2::Zero, 0.1f);
+		mAnimator->Play(L"OverWorldDragonEntrance", true);
+		mCollider->SetSize(Vector2(80.0f, 140.0f));
 	}
 
 	void DragonEntrance::Update()

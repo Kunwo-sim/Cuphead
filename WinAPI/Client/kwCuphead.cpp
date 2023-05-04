@@ -12,6 +12,8 @@
 #include "kwSpreadShot.h"
 #include "kwBulletFireEffect.h"
 
+#include "kwParryObject.h"
+#include "kwTimeStopObject.h"
 
 namespace kw
 {
@@ -66,10 +68,6 @@ namespace kw
 		mCollider->SetSize(Vector2(100, 130));
 		mRigidbody->SetGround(false);
 		playCupheadAnim(L"Intro");
-
-		GameObject* Effect = object::Instantiate<GameObject>(eLayerType::Effect, Vector2(400, 400));
-		Effect->AddComponent<Animator>()->CreateAnimations(L"..\\Resources\\Stage\\StageCuphead\\Effect\\Spark", Vector2::Zero, 0.05f);
-		Effect->GetComponent<Animator>()->Play(L"EffectSpark", false);
 
 		mBulletSound = Resources::Load<Sound>(L"BulletFire", L"..\\Resources\\Sound\\SFX\\Cuphead\\Cuphead_BulletFire.wav");
 		mSpreadSound = Resources::Load<Sound>(L"SpreadFire", L"..\\Resources\\Sound\\SFX\\Cuphead\\Cuphead_SpreadShot.wav");
@@ -168,6 +166,31 @@ namespace kw
 	void Cuphead::Release()
 	{
 		GameObject::Release();
+	}
+
+	void Cuphead::OnCollisionStay(Collider* other)
+	{
+		// ÆÐ¸®
+		ParryObject* parryObject = dynamic_cast<ParryObject*>(other->GetOwner());
+		if (parryObject != nullptr)
+		{
+			if (Input::GetKeyDown(eKeyCode::SPACE) && mState != eCupheadState::Hit)
+			{
+ 				Vector2 parryPos = mTransform->GetPos();
+				parryPos.y -= 50.0f;
+
+				GameObject* Effect = object::Instantiate<GameObject>(eLayerType::Effect, Vector2(parryPos));
+				Effect->AddComponent<Animator>()->CreateAnimations(L"..\\Resources\\Stage\\StageCuphead\\Effect\\Spark", Vector2::Zero, 0.05f);
+				Effect->GetComponent<Animator>()->Play(L"EffectSpark", false);
+
+				mSFX = Resources::Load<Sound>(L"Cuphead_Parry", L"..\\Resources\\Sound\\SFX\\Cuphead\\Cuphead_Parry.wav");
+				mSFX->Play(false);
+
+				object::Destory(parryObject->GetOwner());
+				object::Destory(other->GetOwner());
+				object::Instantiate<TimeStopObject>(eLayerType::SceneEffect)->SetStopTime(0.4f);
+			}
+		}		
 	}
 
 	void Cuphead::idle()
@@ -370,6 +393,8 @@ namespace kw
 			mState = eCupheadState::Idle;
 			playCupheadAnim(L"Idle");
 			idle();
+			mSFX = Resources::Load<Sound>(L"Cuphead_Land", L"..\\Resources\\Sound\\SFX\\Cuphead\\Cuphead_Land.wav");
+			mSFX->Play(false);
 			return;
 		}
 
@@ -411,6 +436,9 @@ namespace kw
 		mState = eCupheadState::Dash;
 		mSpeed = 1000.0f;
 		mRigidbody->SetGround(true);
+
+		mSFX = Resources::Load<Sound>(L"Cuphead_Dash", L"..\\Resources\\Sound\\SFX\\Cuphead\\Cuphead_Dash.wav");
+		mSFX->Play(false);
 	}
 
 	void Cuphead::death()
@@ -459,6 +487,7 @@ namespace kw
 	void Cuphead::Hit()
 	{
 		move();
+
 		mHitBlinkCoolChecker -= Time::DeltaTime();
 		if (mHitBlinkCoolChecker < 0.0f)
 		{
@@ -477,6 +506,11 @@ namespace kw
 		SetHp((int)GetHp() - 1);
 		mState = eCupheadState::Hit;
 		playCupheadAnim(L"Hit");
+
+		mSFX = Resources::Load<Sound>(L"Cuphead_Crack", L"..\\Resources\\Sound\\SFX\\Cuphead\\Cuphead_Crack.wav");
+		mSFX->Play(false);
+		mSFX = Resources::Load<Sound>(L"Cuphead_Hit", L"..\\Resources\\Sound\\SFX\\Cuphead\\Cuphead_Hit.wav");
+		mSFX->Play(false);
 	}
 
 	void Cuphead::GroundExit()
@@ -552,6 +586,9 @@ namespace kw
 
 		mRigidbody->SetVelocity(velocity);
 		mRigidbody->SetGround(false);
+
+		mSFX = Resources::Load<Sound>(L"Cuphead_Jump", L"..\\Resources\\Sound\\SFX\\Cuphead\\Cuphead_Jump.wav");
+		mSFX->Play(false);
 	}
 
 	void Cuphead::IdleCallback()

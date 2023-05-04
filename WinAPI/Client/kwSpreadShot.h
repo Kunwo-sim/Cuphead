@@ -24,6 +24,7 @@ namespace kw
 	private:
 		GameObject* mBulletDestoryEffect;
 		GameObject* mBulletHitEffect;
+		class Sound* mSFX;
 
 		float mTime;
 		float mSpeed;

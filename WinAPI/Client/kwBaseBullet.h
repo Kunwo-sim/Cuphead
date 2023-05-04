@@ -23,7 +23,7 @@ namespace kw
 
 	private:
 		GameObject* mBulletDestoryEffect;
-		Animator* mAnimator;
+		class Sound* mSFX;
 
 		float mTime;
 		float mSpeed;

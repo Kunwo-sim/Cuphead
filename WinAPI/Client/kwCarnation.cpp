@@ -15,6 +15,7 @@
 #include "kwBoomerang.h"
 #include "kwBlueFlowerSeed.h"
 #include "kwPurpleFlowerSeed.h"
+#include "kwPinkFlowerSeed.h"
 #include "kwBossExplosion.h"
 
 namespace kw
@@ -138,23 +139,23 @@ namespace kw
 		if (mTime > 3.0f)
 		{
 			mTime = 0.0f;
-			int type = 2; //math::GetRandomNumber((int)eCarnationState::FaceAttack, (int)eCarnationState::End - 1);
-			/*while (type == mPrevPatternType)
+			int type = math::GetRandomNumber((int)eCarnationState::FaceAttack, 4);
+			while (type == mPrevPatternType)
 			{
-				type = math::GetRandomNumber((int)eCarnationState::FaceAttack, (int)eCarnationState::End - 1);
-			}*/
+				type = math::GetRandomNumber((int)eCarnationState::FaceAttack, 4);
+			}
 
 			switch (type)
 			{
 			case (int)eCarnationState::FaceAttack:
-					faceAttack();
-					break;
-			case (int)eCarnationState::Firing:
-					firing();
-					break;
+				faceAttack();
+				break;
 			case (int)eCarnationState::Creating:
-					creating();
-					break;
+				creating();
+				break;
+			case (int)eCarnationState::Firing:
+				firing();
+				break;
 			default:
 				break;
 			}
@@ -283,7 +284,7 @@ namespace kw
 
 		if (mLoopCount % 2 == 0)
 		{
-			int seedType = math::GetRandomNumber(0, 1);
+			int seedType = math::GetRandomNumber(0, 2);
 			GameObject* seed = nullptr;
 			switch (seedType)
 			{
@@ -292,6 +293,10 @@ namespace kw
 				break;
 			case 1:
 				seed = object::Instantiate<PurpleFlowerSeed>(eLayerType::AttackObject);
+				break;
+			case 2:
+				seed = object::Instantiate<PinkFlowerSeed>(eLayerType::AttackObject);
+				break;
 			default:
 				break;
 			}
