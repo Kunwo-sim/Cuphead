@@ -120,8 +120,6 @@ namespace kw
             , 0, 0
             , mSpriteSheet[mSpriteIndex].size.x, mSpriteSheet[mSpriteIndex].size.y,
             RGB(255, 0, 255));
-
-        // 알파 블렌드 코드.
     }
 
     void Animation::Create(Image* sheet, Vector2 leftTop
@@ -130,7 +128,6 @@ namespace kw
     {
         mSheetImage = sheet;
 
-        //UINT coulmn = mSheetImage->GetWidth() / size.x;
         Vector2 size = Vector2::One;
         size.x = mSheetImage->GetWidth() / (float)coulmn;
         size.y = mSheetImage->GetHeight() / (float)row;

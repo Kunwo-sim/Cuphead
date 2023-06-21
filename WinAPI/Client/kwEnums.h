@@ -3,6 +3,7 @@
 enum class eSceneType
 {
 	Title,
+	Tutorial,
 	OverWorld,
 	Change,
 	Play,

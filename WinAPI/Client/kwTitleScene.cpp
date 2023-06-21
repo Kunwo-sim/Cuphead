@@ -36,7 +36,7 @@ namespace kw
 
 		if (Input::GetKeyState(eKeyCode::N) == eKeyState::Down)
 		{
-			SceneManager::LoadScene(eSceneType::OverWorld);
+			SceneManager::LoadScene(eSceneType::Tutorial);
 		}
 	}
 

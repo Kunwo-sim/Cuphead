@@ -11,6 +11,7 @@ namespace kw
 		: mTime(0.0)
 		, mSpeed(300.0f)
 		, mState(eAttackFireMarcherState::Idle)
+		, mAttackStartTime(0.0f)
 	{
 
 	}
@@ -34,6 +35,9 @@ namespace kw
 
 		mCollider = AddComponent<Collider>();
 		mCollider->SetSize(Vector2(75, 75));
+
+		int randomAttackTime = math::GetRandomNumber(10, 20);
+		mAttackStartTime = randomAttackTime / 10.0f;
 
 		AttackObject::Initialize();
 	}
@@ -77,7 +81,7 @@ namespace kw
 
 		mTransform->AddPos(Vector2(mSpeed * Time::DeltaTime(), 0.0f));
 
-		if (mTime > 1.5f)
+		if (mTime > mAttackStartTime)
 		{
 			mState = eAttackFireMarcherState::Charge;
 			mAnimator->Play(L"AttackCharge", true);

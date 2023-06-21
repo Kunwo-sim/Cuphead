@@ -206,6 +206,7 @@
     <ClInclude Include="kwToolScene.h" />
     <ClInclude Include="kwTounge.h" />
     <ClInclude Include="kwTransform.h" />
+    <ClInclude Include="kwTutorialScene.h" />
     <ClInclude Include="kwVenus.h" />
     <ClInclude Include="kwReadyWallop.h" />
     <ClInclude Include="Resource.h" />
@@ -283,6 +284,7 @@
     <ClCompile Include="kwToolScene.cpp" />
     <ClCompile Include="kwTounge.cpp" />
     <ClCompile Include="kwTransform.cpp" />
+    <ClCompile Include="kwTutorialScene.cpp" />
     <ClCompile Include="kwVenus.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="kwReadyWallop.cpp" />

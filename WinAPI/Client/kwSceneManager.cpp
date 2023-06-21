@@ -5,6 +5,7 @@
 #include "kwCamera.h"
 
 #include "kwTitleScene.h"
+#include "kwTutorialScene.h"
 #include "kwOverWorldScene.h"
 #include "kwChangeScene.h"
 #include "kwPlayScene.h"
@@ -28,6 +29,7 @@ namespace kw
 
 		// 새로운 씬 추가하려면 아래에 작성 및 헤더 추가
 		mScenes[(UINT)eSceneType::Title] = new TitleScene();
+		mScenes[(UINT)eSceneType::Tutorial] = new TutorialScene();
 		mScenes[(UINT)eSceneType::OverWorld] = new OverWorldScene();
 		mScenes[(UINT)eSceneType::Change] = new ChangeScene();
 		mScenes[(UINT)eSceneType::Play] = new PlayScene();

@@ -385,6 +385,9 @@
     <ClInclude Include="kwAttackFireMarcher.h">
       <Filter>Contents\Enemy\Dragon\Fire</Filter>
     </ClInclude>
+    <ClInclude Include="kwTutorialScene.h">
+      <Filter>Contents\Scene\InGame</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc">
@@ -621,6 +624,9 @@
     </ClCompile>
     <ClCompile Include="kwAttackFireMarcher.cpp">
       <Filter>Contents\Enemy\Dragon\Fire</Filter>
+    </ClCompile>
+    <ClCompile Include="kwTutorialScene.cpp">
+      <Filter>Contents\Scene\InGame</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

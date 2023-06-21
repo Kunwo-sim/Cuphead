@@ -29,6 +29,7 @@ namespace kw
 		class Sound* mSFX;
 		eAttackFireMarcherState mState;
 		float mTime;
-		float mSpeed;		
+		float mSpeed;
+		float mAttackStartTime;
 	};
 }
